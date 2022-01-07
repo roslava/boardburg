@@ -16,5 +16,5 @@
 @endsection
 
 @section('footer')
-    <div class="container-md bg-light">Футер</div>
+    <div class="container-md">Футер</div>
 @endsection

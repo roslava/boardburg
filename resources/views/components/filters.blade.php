@@ -84,7 +84,7 @@
 
 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-Success">Фильтр</button>
+                        <button type="submit" class="btn btn-success">Фильтр</button>
                     </div>
                 </form>
 
