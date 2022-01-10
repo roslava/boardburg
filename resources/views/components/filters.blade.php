@@ -49,7 +49,7 @@
                             <input value="category_2" id="cat2" name="category" class="form-check-input"
                                    type="radio"
                                    style="background-color: #198754; border-color: #198754;"
-                                   @if(request()->input('category') == 'category_2') checked @endif>>
+                                   @if(request()->input('category') == 'category_2') checked @endif>
                             <label for="cat2" class="form-check-label text-white">Подвески</label>
                         </div>
 
@@ -66,7 +66,7 @@
                             <input value="category_4" id="cat4" name="category" class="form-check-input"
                                    type="radio"
                                    style="background-color: #198754; border-color: #198754;"
-                                   @if(request()->input('category') == 'category_4') checked @endif>>
+                                   @if(request()->input('category') == 'category_4') checked @endif>
                             <label for="cat4" class="form-check-label text-white">Подшипники</label>
                         </div>
 
