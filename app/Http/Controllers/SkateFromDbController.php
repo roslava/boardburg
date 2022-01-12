@@ -21,7 +21,7 @@ class SkateFromDbController extends Controller
     public function index()
     {
         $skatesFromBase = Skate::paginate(8);
-        return view('home', compact('skatesFromBase'));
+        return view('skates', compact('skatesFromBase'));
     }
 
 

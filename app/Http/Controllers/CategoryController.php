@@ -45,11 +45,9 @@ class CategoryController extends Controller
         }
 
 
-        $skatesFromBase = $skateQuery->paginate(1)->withQueryString();
+        $skatesFromBase = $skateQuery->paginate(8)->withQueryString();
 
-         return view('home', ['skatesFromBase'=>$skatesFromBase]);
-
-//return view('home', compact('skatesFromBase'))->withPath("?".$request->getQueryString());
+         return view('skates', ['skatesFromBase'=>$skatesFromBase]);
 
     }
 }
