@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SkateFromDbController;
 use App\Http\Controllers\SkateFromServerController;
 use App\Http\Controllers\SkateFromForm;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,12 +18,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::fallback(function (){
+    return 'Нет такой страницы';
+});
+
+
+
+
 //Route::get('/', function () {
 //    return view('welcome');
 //});
 Route::get('/', function () {
     return view('home');
 });
+
+
+Route::middleware(['auth'])->group(function () {
+
+
+
 
 Route::get('/skates-from-base/cat',[CategoryController::class, 'index'])->name('skates_base.cat');
 
@@ -41,13 +57,16 @@ Route::get('/skates-from-base', [SkateFromDbController::class, 'index'])->name('
 Route::get('/skates-from-base/{id}', [SkateFromDbController::class, 'show'])->name('skates_base.show');
 
 
+});
 
 
 
 
 
 
+//Auth::routes();
+Auth::routes(['register' => false, 'reset'=>false]);
 
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

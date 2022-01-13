@@ -18,5 +18,11 @@ class ForgotPasswordController extends Controller
     |
     */
 
+    //to disable path '/password/reset' I use redirect in showLinkRequestForm()
+//    public function showLinkRequestForm()
+//    {
+//        return redirect()->route('login');
+//    }
+
     use SendsPasswordResetEmails;
 }

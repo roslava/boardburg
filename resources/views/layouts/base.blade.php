@@ -5,7 +5,7 @@
 <div class="wrapper">
 
     <div class="content">
-
+        @include('components.nav')
         <header>
 
             <div class="header container-fluid p-0" style="min-height: 250px">
