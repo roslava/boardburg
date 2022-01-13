@@ -17,10 +17,11 @@ class CreateSkatesTable extends Migration
             $table->id();
             $table->string('external_id');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->string('img');
             $table->decimal('price');
             $table->integer('category_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

@@ -64,8 +64,8 @@ Route::get('/skates-from-base/{id}', [SkateFromDbController::class, 'show'])->na
 
 
 
-//Auth::routes();
-Auth::routes(['register' => false, 'reset'=>false]);
+Auth::routes();
+//Auth::routes(['register' => false, 'reset'=>false]);
 
 
 
