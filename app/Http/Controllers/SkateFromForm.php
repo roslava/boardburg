@@ -6,6 +6,7 @@ use App\Models\Skate;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class SkateFromForm extends Controller
 {
 
@@ -15,8 +16,9 @@ class SkateFromForm extends Controller
     }
 
 
-    public function store(Request $request, User $user)
+    public function store(Request $request)
     {
+        $user = auth()->user();//get current user
         $skates = new Skate;
         $skates::create([
             'external_id' => 'NULL',
@@ -25,11 +27,10 @@ class SkateFromForm extends Controller
             'img' => $request['img'],
             'price' => $request['price'],
             'category_id' => $request['category_id'],
-            'user_id' => 0,
-
+            'user_id' => $user->id,//current user id
         ]);
-
-//        dd($user->au);
+//        $user = auth()->user();
+//        dd($user->id);
         $created_name = $request['name'];
         return redirect('http://boardburg.xx/skates-from-base')->with('success', 'Был создан товар с названием: ' . $created_name);
     }

@@ -25,6 +25,8 @@
 
                 <div class="card-technical rounded bg-light mt-4 mb-4 p-2 shadow"
                      style="font-size: 11px; min-width: 100%">
+
+                    <div>Опубликовал менеджер: {{$skateFromBase->user_id}}</div>
                     <div>Категория: {{$skateFromBase->category_id}}</div>
                     <div>ID: {{$skateFromBase->id}} / Внешний ID: {{$skateFromBase->external_id}}</div>
                     <div>Дата создания: {{$skateFromBase->created_at}}</div>
