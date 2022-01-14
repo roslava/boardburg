@@ -17,7 +17,9 @@ class AdminPolicy
      */
     public function viewAny(User $user)
     {
-        //
+//        if ($model->role === 'admin'){
+//            return true;
+//        }
     }
 
     /**
@@ -29,8 +31,36 @@ class AdminPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        //User $model — это пользователь авторизованный в данном случае
+
+        if ($model->role === 'admin'){
+           return true;
+        }
+        if ($model->role === 'manager'){
+            return true;
+        }
     }
+
+
+    public function updateAll()
+    {
+        if ($model->role === 'admin'){
+            return true;
+        }
+        if ($model->role === 'manager'){
+            return false;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Determine whether the user can create models.
@@ -40,7 +70,9 @@ class AdminPolicy
      */
     public function create(User $user)
     {
-        //
+//        if ($model->role === 'admin'){
+//            return true;
+//        }
     }
 
     /**
@@ -52,7 +84,9 @@ class AdminPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+//        if ($model->role === 'admin'){
+//            return true;
+//        }
     }
 
     /**
@@ -64,7 +98,9 @@ class AdminPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+//        if ($model->role === 'admin'){
+//            return true;
+//        }
     }
 
     /**

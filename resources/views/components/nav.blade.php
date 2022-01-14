@@ -35,12 +35,28 @@
                                 {{ Auth::user()->name }}
                             </a>
 
+
+
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+
+
+                                <a class="dropdown-item" href="{{ route('skates_base.index') }}">{{ __('All skateboards') }}</a>
+                                <a class="dropdown-item" href="{{ route('registered_users.index') }}">{{ __('All users') }}</a>
+
+
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
+
+
+
+
+
+
+
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf

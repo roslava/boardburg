@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SkateFromDbController;
+use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SkateFromServerController;
 use App\Http\Controllers\SkateFromForm;
 use Illuminate\Support\Facades\Auth;
@@ -57,6 +58,14 @@ Route::get('/skates-from-base', [SkateFromDbController::class, 'index'])->name('
 Route::get('/skates-from-base/{id}', [SkateFromDbController::class, 'show'])->name('skates_base.show');
 
 
+Route::get('/registered-users',[RegisteredUserController::class,'index'])->name('registered_users.index');
+Route::get('/registered-users/create-registered-user',[RegisteredUserController::class,'create'])->name('registered_user.create');
+Route::get('/registered-users/store', [RegisteredUserController::class, 'store'])->name('registered_user.store');
+Route::get('/registered-users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('registered_user.edit');
+Route::put('/registered-users/{id}', [RegisteredUserController::class, 'update'])->name('registered_user.update');
+Route::delete('/registered-users/{id}', [RegisteredUserController::class, 'destroy'])->name('registered_user.destroy');
+
+
 });
 
 
@@ -64,8 +73,8 @@ Route::get('/skates-from-base/{id}', [SkateFromDbController::class, 'show'])->na
 
 
 
-Auth::routes();
-//Auth::routes(['register' => false, 'reset'=>false]);
+//Auth::routes();
+Auth::routes(['register' => false, 'reset'=>false]);
 
 
 

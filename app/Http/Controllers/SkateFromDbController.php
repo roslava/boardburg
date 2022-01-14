@@ -21,6 +21,7 @@ class SkateFromDbController extends Controller
     public function index()
     {
         $skatesFromBase = Skate::paginate(8);
+        $this->authorize('view', auth()->user());
         return view('skates', compact('skatesFromBase'));
     }
 
@@ -74,7 +75,7 @@ class SkateFromDbController extends Controller
     public function updateAll()
     {
 ////1
-
+        $this->authorize('view', auth()->user());
         $skatesFromServer = new SkateFromServerController();
         $skatesFromServer_all = $skatesFromServer->index();
 
