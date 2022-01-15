@@ -6,8 +6,9 @@
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne" aria-expanded="false"
                     aria-controls="flush-collapseOne">
+                <small>Количество наименований: &nbsp;{{$quantity}}. &nbsp; </small>
                 @if (session('success'))
-                    <p class="m-0">{{session('success')}}</p>
+                    <small class="m-0">{{session('success')}}</small>
                 @endif
             </button>
         </h2>
