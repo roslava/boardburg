@@ -39,6 +39,9 @@ class AdminPolicy
         if ($model->role === 'manager'){
             return true;
         }
+        if ($model->role === 'guest'){
+            return true;
+        }
     }
 
 
@@ -49,6 +52,9 @@ class AdminPolicy
         }
         if ($model->role === 'manager'){
             return false;
+        }
+        if ($model->role === 'guest'){
+            return true;
         }
     }
 

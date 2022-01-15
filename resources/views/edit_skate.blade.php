@@ -32,10 +32,6 @@
 
 
 
-{{--    <form action="{{ route('skates_base.index')}}">--}}
-{{--        <button class="btn btn-primary">Подробнее</button>--}}
-{{--    </form>--}}
-
 
     <h1>Редактировать</h1>
 
@@ -74,13 +70,6 @@
         <button class="btn btn-primary mt-4" style="margin-right: 1rem !important;"  type="submit">Сохранить</button>
 
         <a href="{{ route('skates_base.index')}}" class="btn btn-info mt-4" >Отменить</a>
-
-
-
-
-
-
-
     </form>
 
 

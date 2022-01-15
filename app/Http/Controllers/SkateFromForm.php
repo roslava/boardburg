@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Skate;
-use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 
@@ -29,8 +28,7 @@ class SkateFromForm extends Controller
             'category_id' => $request['category_id'],
             'user_id' => $user->id,//current user id
         ]);
-//        $user = auth()->user();
-//        dd($user->id);
+
         $created_name = $request['name'];
         return redirect('http://boardburg.xx/skates-from-base')->with('success', 'Был создан товар с названием: ' . $created_name);
     }
@@ -38,12 +36,12 @@ class SkateFromForm extends Controller
 
     public function edit($id)
     {
-        $skateFromBase = Skate::all()->where('id',$id)->first();
+        $skateFromBase = Skate::all()->where('id', $id)->first();
         return view('edit_skate',compact('skateFromBase'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id):RedirectResponse
     {
         $request->validate([
             'name' =>'required',
@@ -73,7 +71,7 @@ class SkateFromForm extends Controller
 //            'category_id'=>'required'
 //             ]);
 //
-//        $skate = Skate::find($id);
+//        $skate = Skate::all()->find($id);
 //        $skate->name = $request['name'];
 //        $skate->description = $request['description'];
 //        $skate->img = $request['img'];
