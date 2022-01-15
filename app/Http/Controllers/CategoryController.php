@@ -7,20 +7,18 @@ use App\Models\Skate;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
+        $quantity = count(Skate::all());
+
         $skateQuery = Skate::query(); // метод query()
 
         if ($request->filled('price_from')) {
-            $skateQuery->where('price', '>=', $request->price_from);
+            $skateQuery->where('price', '>=', $request['price_from']);
         }
         if ($request->filled('price_to')) {
-            $skateQuery->where('price', '<=', $request->price_to);
+            $skateQuery->where('price', '<=', $request['price_to']);
         }
 
         if ($request->input('category') == 'category_1') {
@@ -47,7 +45,7 @@ class CategoryController extends Controller
 
         $skatesFromBase = $skateQuery->paginate(8)->withQueryString();
 
-         return view('skates', ['skatesFromBase'=>$skatesFromBase]);
+        return view('skates', ['skatesFromBase' => $skatesFromBase, 'quantity' => $quantity]);
 
     }
 }

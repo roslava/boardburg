@@ -2,6 +2,7 @@
 
 
 @foreach($skatesFromBase as $skateFromBase)
+
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card" style="height: 100%">
             <div class="row pt-3" style="justify-content: center;margin:0">
@@ -39,7 +40,7 @@
                         @include('components.button_edit_svg')
                     </a>
 
-
+{{--                    @can('delete', $skateFromBase)--}}
                     <form class="p-0 m-0" style="display: inline; max-width: 30px"
                           action="{{ route('skates_base.destroy', $skateFromBase->id)}}" method="post">
                         @csrf
@@ -48,22 +49,12 @@
                             @include('components.button_delete_svg')
                         </button>
                     </form>
-
-
-
-
-
-
-
-
-
-
-
-
+{{--                    @endcan--}}
                 </div>
             </div>
         </div>
     </div>
+
 @endforeach
 
 @endsection

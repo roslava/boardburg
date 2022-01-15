@@ -5,6 +5,7 @@ use App\Http\Controllers\SkateFromDbController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SkateFromServerController;
 use App\Http\Controllers\SkateFromForm;
+use App\Http\Controllers\SkateAllUpdateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +48,8 @@ Route::get('/skates-from-base/cat',[CategoryController::class, 'index'])->name('
 Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
 Route::get('/skates-from-form/new_skate', [SkateFromForm::class, 'create'])->name('skates_form.create');
 Route::get('/skates-from-form/store', [SkateFromForm::class, 'store'])->name('skates_form.store');
-Route::get('/skates-from-base/update_all', [SkateFromDbController::class, 'updateAll'])->name('skates_base.update_all');
+//Route::get('/skates-from-base/update_all', [SkateFromDbController::class, 'updateAll'])->name('skates_base.update_all');
+Route::get('/skates-from-base/update_all', [SkateAllUpdateController::class, 'update'])->name('skates_base.update_all');
 
 Route::get('/skates-from-base/{id}/edit',[SkateFromForm::class,'edit'])->name('skates_base.edit');
 Route::put('/skates-from-base/{id}',[SkateFromForm::class,'update'])->name('skates_base.update');
