@@ -33,8 +33,33 @@
                     <div>Дата обновления: {{$skateFromBase->updated_at}}</div>
                 </div>
                 <div class="row" style="margin-right: 0.1rem">
-                    @include('components.button_edit')
-                    @include('components.button_delete')
+
+                    <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class="btn btn-edit"
+                       style="margin-right: 0.6rem">
+                        @include('components.button_edit_svg')
+                    </a>
+
+
+                    <form class="p-0 m-0" style="display: inline; max-width: 30px"
+                          action="{{ route('skates_base.destroy', $skateFromBase->id)}}" method="post">
+                        @csrf
+                        @method("DELETE")
+                        <button class="btn btn-dell">
+                            @include('components.button_delete_svg')
+                        </button>
+                    </form>
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
         </svg>
 
 @endsection
-@yield('button-delete')
+@yield('button-delete-svg')
 
 
 
