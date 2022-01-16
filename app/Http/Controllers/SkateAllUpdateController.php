@@ -17,7 +17,6 @@ class SkateAllUpdateController extends Controller
     {
         $skatesFromServer = new SkateFromServerController();
         $skatesFromServer_all = $skatesFromServer->index();
-        $skateFromDbController = new SkateFromDbController();
         $count_created = 0;
         $count_updated = 0;
 //2 $skatesFromServer_all перебираю циклом
@@ -30,13 +29,13 @@ class SkateAllUpdateController extends Controller
 //если элемент с ID равным $current_id в базе существует, то обновляю его, если нет создаю в базе новую запись
             if ($current === null) {
 // echo "Нет! Добавить. По идее тут метод Store?!";
-                $skateFromDbController->store($skateFromServer);
+                $skatesFromServer->store($skateFromServer);
                 $count_created++;
             } else {
 // $result = "Есть! Обновить. По идее тут метод Update?!";
 // echo $result . '<br>';
 // Неужели при аптейте надо создавать новый объект целой базы??
-                $skateFromDbController->update($skateFromServer, $current_id);
+                $skatesFromServer->update($skateFromServer, $current_id);
                 $count_updated++;
             }
         }

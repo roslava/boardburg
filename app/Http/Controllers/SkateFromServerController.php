@@ -27,16 +27,27 @@ class SkateFromServerController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store($skateFromServer)
     {
-        //
+        $skates = new Skate;
+        $skates::create([
+            'external_id' => $skateFromServer['id'],
+            'name' => $skateFromServer['name'],
+            'description' => $skateFromServer['description'],
+            'img' => $skateFromServer['img'],
+            'price' => $skateFromServer['price'],
+            'category_id' => $skateFromServer['category_id'],
+            'user_id' => 0,
+        ]);
     }
+
+
+
+
+
+
+
+
 
     /**
      * Display the specified resource.
@@ -59,19 +70,16 @@ class SkateFromServerController extends Controller
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update($skateFromServer, $id)
     {
-        //
+        Skate::where('external_id', $id)->update([
+            'name' => $skateFromServer['name'],
+            'description' => $skateFromServer['description'],
+            'img' => $skateFromServer['img'],
+            'price' => $skateFromServer['price'],
+            'category_id' => $skateFromServer['category_id'],
+        ]);
     }
-
     /**
      * Remove the specified resource from storage.
      *

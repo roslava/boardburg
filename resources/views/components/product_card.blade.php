@@ -35,12 +35,14 @@
                 </div>
                 <div class="row" style="margin-right: 0.1rem">
 
+
+{{--                    @can(['edit', 'delete'], $skateFromBase)--}}
                     <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class="btn btn-edit"
                        style="margin-right: 0.6rem">
                         @include('components.button_edit_svg')
                     </a>
 
-{{--                    @can('delete', $skateFromBase)--}}
+
                     <form class="p-0 m-0" style="display: inline; max-width: 30px"
                           action="{{ route('skates_base.destroy', $skateFromBase->id)}}" method="post">
                         @csrf
@@ -50,6 +52,8 @@
                         </button>
                     </form>
 {{--                    @endcan--}}
+
+
                 </div>
             </div>
         </div>

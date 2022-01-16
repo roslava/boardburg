@@ -12,30 +12,6 @@ class SkatePolicy
     use HandlesAuthorization;
 
 
-
-
-/**
-* Perform pre-authorization checks.
-*
-* @param  \App\Models\User  $user
-* @param  string  $ability
-* @return void|bool
-*/
-//    public function before(User $user, $ability)
-//    {
-//        if ($user->isAdministrator()) {
-//            return false;
-//        }
-//    }
-
-
-
-
-
-
-
-
-
     /**
      * Determine whether the user can view any models.
      *
@@ -60,29 +36,31 @@ class SkatePolicy
         return true;
     }
 
-//    /**
-//     * Determine whether the user can create models.
-//     *
-//     * @param  \App\Models\User  $user
-//     * @return \Illuminate\Auth\Access\Response|bool
-//     */
-//    public function create(User $user)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Determine whether the user can update the model.
-//     *
-//     * @param  \App\Models\User  $user
-//     * @param  \App\Models\Skate  $skate
-//     * @return \Illuminate\Auth\Access\Response|bool
-//     */
-//    public function update(User $user, Skate $skate)
-//    {
-//        //
-//    }
-//
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function create(User $user)
+    {
+        return $user->role == 'admin';
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Skate  $skate
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function update(User $user, Skate $skate)
+    {
+        return $user->id === $skate->user_id
+            ?Response::allow()
+            :Response::deny('You do not own this post.');
+    }
+
     /**
      * Determine whether the user can delete the model.
      *
@@ -95,27 +73,27 @@ class SkatePolicy
         return ($user['id'] === $skate['user_id']);
     }
 
-//    /**
-//     * Determine whether the user can restore the model.
-//     *
-//     * @param  \App\Models\User  $user
-//     * @param  \App\Models\Skate  $skate
-//     * @return \Illuminate\Auth\Access\Response|bool
-//     */
-//    public function restore(User $user, Skate $skate)
-//    {
-//        //
-//    }
-//
-//    /**
-//     * Determine whether the user can permanently delete the model.
-//     *
-//     * @param  \App\Models\User  $user
-//     * @param  \App\Models\Skate  $skate
-//     * @return \Illuminate\Auth\Access\Response|bool
-//     */
-//    public function forceDelete(User $user, Skate $skate)
-//    {
-//        //
-//    }
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Skate  $skate
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function restore(User $user, Skate $skate)
+    {
+        //
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Skate  $skate
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function forceDelete(User $user, Skate $skate)
+    {
+        //
+    }
 }
