@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Skate;
+use App\Models\User;
 
 //use Illuminate\Http\Request;
 //use App\Http\Controllers\SkateFromDbController;
@@ -13,8 +14,12 @@ class SkateAllUpdateController extends Controller
 // 1. Получаю json c сервера, записываю в переменную $skatesFromServer_all
 // 2. С помощью foreach перебираю массивы в массиве $skatesFromServer_all. На каждой итерации обращаюсь к $skatesFromBase для поиска...  как needle использую $skateFromServer['id]
 
-    public function update()
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
+    public function updateAll()
     {
+
         $skatesFromServer = new SkateFromServerController();
         $skatesFromServer_all = $skatesFromServer->index();
         $count_created = 0;

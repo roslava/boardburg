@@ -48,7 +48,7 @@ Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->
 Route::get('/skates-from-form/new_skate', [SkateFromDbController::class, 'create'])->name('skates_form.create');
 Route::get('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');
 //Route::get('/skates-from-base/update_all', [SkateFromDbController::class, 'updateAll'])->name('skates_base.update_all');
-Route::get('/skates-from-base/update_all', [SkateAllUpdateController::class, 'update'])->name('skates_base.update_all');
+Route::get('/skates-from-base/update_all', [SkateAllUpdateController::class, 'updateAll'])->name('skates_base.update_all');
 
 Route::get('/skates-from-base/{id}/edit',[SkateFromDbController::class,'edit'])->name('skates_base.edit');
 Route::put('/skates-from-base/{id}',[SkateFromDbController::class,'update'])->name('skates_base.update');
@@ -80,3 +80,6 @@ Auth::routes(['register' => false, 'reset'=>false]);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+

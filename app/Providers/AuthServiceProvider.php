@@ -5,7 +5,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use App\Models\Skate;
-use App\Policies\SkatePolicy;
+
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Skate' => 'App\Policies\SkatePolicy',
-        Skate::class => SkatePolicy::class,
+
+
     ];
 
     /**

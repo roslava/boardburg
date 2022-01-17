@@ -43,6 +43,7 @@ class SkateFromDbController extends Controller
 
     public function edit($id)
     {
+
         $skateFromBase = Skate::all()->where('id', $id)->first();
         return view('edit_skate',compact('skateFromBase'));
     }
@@ -80,7 +81,6 @@ class SkateFromDbController extends Controller
     public function destroy(Skate $skate, $id)
     {
         $skateFromBase = $skate::find($id);
-        $this->authorize('delete', $skateFromBase);
         if ($skateFromBase->delete()){
             return redirect('skates-from-base')->with('success', "Товар с ID $id был удален");
         }else{
