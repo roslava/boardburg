@@ -17,14 +17,13 @@
             <div class="accordion-body">
 
                 <div style="display: flex; flex-direction: row">
+
+                    @can('update-all', $skatesFromBase)
                     <form action="{{ route('skates_base.update_all')}}" method="get"
                           style="margin-right: 20px">
-
-
-                        {{--            @csrf--}}
                         <button class="btn btn-success" style="width:120px">Update All</button>
                     </form>
-
+                    @endcan
 
                     <a class="btn btn-warning" style="display: block; width:120px"
                        href="{{route('skates_form.create')}}">Create

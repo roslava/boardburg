@@ -3,6 +3,7 @@
 
 @foreach($skatesFromBase as $skateFromBase)
 
+
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card" style="height: 100%">
             <div class="row pt-3" style="justify-content: center;margin:0">
@@ -36,7 +37,7 @@
                 <div class="row" style="margin-right: 0.1rem">
 
 
-{{--                    @can(['edit', 'delete'], $skateFromBase)--}}
+                    @can(['update-skate', 'delete-skate'], $skateFromBase)
                     <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class="btn btn-edit"
                        style="margin-right: 0.6rem">
                         @include('components.button_edit_svg')
@@ -51,7 +52,7 @@
                             @include('components.button_delete_svg')
                         </button>
                     </form>
-{{--                    @endcan--}}
+                    @endcan
 
 
                 </div>

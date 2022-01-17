@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use  Illuminate\Http\RedirectResponse;
 
@@ -12,18 +13,21 @@ class RegisteredUserController extends Controller
     public function index()
     {
         $registered_users = User::all();
+        Gate::authorize('registered_user-allow');
         return view('registered_users', ['registered_users' => $registered_users]);
     }
 
 
     public function create()
     {
+        Gate::authorize('registered_user-allow');
         return view('create_registered_user');
     }
 
 
     public function store(Request $request)
     {
+        Gate::authorize('registered_user-allow');
         $users = new User;
         $users::create([
             'name' => $request['name'],
@@ -37,6 +41,7 @@ class RegisteredUserController extends Controller
 
     public function edit($id)
     {
+        Gate::authorize('registered_user-allow');
         $registered_users = User::all()->where('id', $id)->first();
         return view('registered_user_edit', compact('registered_users'));
 
@@ -47,6 +52,7 @@ class RegisteredUserController extends Controller
 
     public function update(Request $request, $id):RedirectResponse
     {
+        Gate::authorize('registered_user-allow');
         $request->validate([
             'name' => 'required',
              //'role' => 'required' — was my error
@@ -68,6 +74,7 @@ class RegisteredUserController extends Controller
 
     public function destroy($id):RedirectResponse
     {
+        Gate::authorize('registered_user-allow');
         $registered_users = User::all()->where('id', $id)->first();
         $registered_users->delete();
         return redirect()->route('registered_users.index');

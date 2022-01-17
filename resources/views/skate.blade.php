@@ -86,6 +86,10 @@
                 <nav><a class="btn btn-warning" href="{{$previous_url}}">Назад в каталог</a></nav>
             </div>
 
+
+
+
+            @can(['update-skate', 'delete-skate'], $skateFromBase)
 {{--Удалить и редактировать--}}
             <div class="col-lg-4 col-md-12 col-sm-12 p-lg-5 p-md-4 p-sm-3" style="padding-top: 0!important; display: flex; align-items: end; justify-content: end">
 
@@ -118,7 +122,9 @@
                         </svg>
                     </button>
                 </form>
+
             </div>
+            @endcan
         </div>
 
 

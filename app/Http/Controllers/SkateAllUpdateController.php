@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Skate;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Request;
 //use Illuminate\Http\Request;
 //use App\Http\Controllers\SkateFromDbController;
 
@@ -19,7 +20,7 @@ class SkateAllUpdateController extends Controller
      */
     public function updateAll()
     {
-
+        Gate::authorize('update-all');
         $skatesFromServer = new SkateFromServerController();
         $skatesFromServer_all = $skatesFromServer->index();
         $count_created = 0;

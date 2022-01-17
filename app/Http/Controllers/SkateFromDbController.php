@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Skate;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
@@ -13,6 +14,7 @@ class SkateFromDbController extends Controller
     public function index()
     {
         $skatesFromBase = Skate::paginate(8);
+
         $quantity = count(Skate::all());
         return view('skates', compact('skatesFromBase', 'quantity'));
     }
@@ -43,8 +45,9 @@ class SkateFromDbController extends Controller
 
     public function edit($id)
     {
-
-        $skateFromBase = Skate::all()->where('id', $id)->first();
+        $skateFromBase=Skate::all()->find($id);
+//        $skateFromBase = Skate::all()->where('id', $id)->first();
+        Gate::authorize('update-skate', [$skateFromBase]);
         return view('edit_skate',compact('skateFromBase'));
     }
 
@@ -59,8 +62,9 @@ class SkateFromDbController extends Controller
 
         ]);
 
-        $skate=Skate::all()->find($id);
-        $skate->update($request->all());
+        $skateFromBase=Skate::all()->find($id);
+        Gate::authorize('update-skate', [$skateFromBase]);
+        $skateFromBase->update($request->all());
 
         $created_name = $request['name'];
         return redirect()->route('skates_base.index')->with('success', "Обновлен товар: $created_name");
@@ -78,9 +82,10 @@ class SkateFromDbController extends Controller
 
 
 
-    public function destroy(Skate $skate, $id)
+    public function destroy($id)
     {
-        $skateFromBase = $skate::find($id);
+        $skateFromBase=Skate::all()->find($id);
+        Gate::authorize('delete-skate', [$skateFromBase]);
         if ($skateFromBase->delete()){
             return redirect('skates-from-base')->with('success', "Товар с ID $id был удален");
         }else{
