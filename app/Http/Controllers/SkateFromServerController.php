@@ -37,7 +37,7 @@ class SkateFromServerController extends Controller
             'img' => $skateFromServer['img'],
             'price' => $skateFromServer['price'],
             'category_id' => $skateFromServer['category_id'],
-            'user_id' => 0,
+            'user_id' => $skateFromServer['user_id'],
         ]);
     }
 
@@ -78,6 +78,7 @@ class SkateFromServerController extends Controller
             'img' => $skateFromServer['img'],
             'price' => $skateFromServer['price'],
             'category_id' => $skateFromServer['category_id'],
+            'user_id' => $skateFromServer['user_id'],
         ]);
     }
     /**

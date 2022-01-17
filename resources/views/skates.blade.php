@@ -9,7 +9,7 @@
         @include('components.filters')
         <div class="row mb-3 ">
             @include('components.product_card')
-            <div class="row mt-3"> {{ $skatesFromBase->links('pagination::bootstrap-4')}}</div>
+            <div class="row mt-3"> {{ $skatesFromBase->links()}}</div>
             @include('components.accordion')
         </div>
     </div>

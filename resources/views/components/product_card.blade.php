@@ -2,7 +2,7 @@
 
 
 @foreach($skatesFromBase as $skateFromBase)
-
+{{--@can('view',$skateFromBase)--}}
 
     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
         <div class="card" style="height: 100%">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-
+{{--@endcan--}}
 @endforeach
 
 @endsection

@@ -19,9 +19,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Skate' => 'App\Policies\SkatePolicy',
-
-
+        'App\Models\Skate' => 'App\Policies\SkatePolicy',
     ];
 
     /**
@@ -80,14 +78,5 @@ class AuthServiceProvider extends ServiceProvider
              }
             return Response::deny("Пользователь $user->name не имеет права ни на какие действия в разделе All Users");
         });
-
-
-
-
-
-
-
-
-
     }
 }

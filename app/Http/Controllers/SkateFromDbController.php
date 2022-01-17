@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Skate;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -11,13 +13,24 @@ class SkateFromDbController extends Controller
 
 
 {
-    public function index()
+    public function index(User $user, Skate $skate)
     {
-        $skatesFromBase = Skate::paginate(8);
-
         $quantity = count(Skate::all());
+
+        If(Auth::check() && Auth::user()->isAdmin()) {
+            $skatesFromBase = Skate::paginate(8);
+            return view('skates', compact('skatesFromBase', 'quantity'));
+        }elseif (Auth::check() && auth()->user()->role ==='guest'){
+            $skatesFromBase = Skate::paginate(8);
+            return view('skates', compact('skatesFromBase', 'quantity'));
+        }else{
+            $currentUserId = auth()->user()->id;
+            $skatesFromBase = $skate->where('user_id','=', $currentUserId )->paginate(8);
+        }
         return view('skates', compact('skatesFromBase', 'quantity'));
-    }
+     }
+
+
 
     public function create()
     {
