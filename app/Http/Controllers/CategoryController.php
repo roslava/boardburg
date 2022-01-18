@@ -17,25 +17,30 @@ class CategoryController extends Controller
 
         If(Auth::check() && Auth::user()->isAdmin()) {
             $skateQuery = Skate::query();
-            $quantity = count(Skate::all());
         }elseif (Auth::check() && auth()->user()->role ==='guest'){
             $skateQuery = Skate::query();
-            $quantity = count(Skate::all());
         }else{
             $skateQuery = Skate::query()->where('user_id','=', $currentUserId );
-            $quantity = $skateQuery->count();
         } // метод query()
 
 
 
-        if ($request->filled('price_from')) {
-            $skateQuery->where('price', '>=', $request['price_from']);
-            $quantity = $skateQuery->count();
-        }
-        if ($request->filled('price_to')) {
-            $skateQuery->where('price', '<=', $request['price_to']);
-            $quantity = $skateQuery->count();
-        }
+
+        function price($request, $skateQuery){
+            if ($request->filled('price_from')) {
+                $skateQuery->where('price', '>=', $request['price_from']);
+
+            }
+            if ($request->filled('price_to')) {
+                $skateQuery->where('price', '<=', $request['price_to']);
+            }
+    }
+
+
+        price($request, $skateQuery);
+
+        $quantity = $skateQuery->count();
+
 
         if ($request->input('category') == 'category_1') {
             $skateQuery->where('category_id', 1);
@@ -57,10 +62,14 @@ class CategoryController extends Controller
             $quantity = $skateQuery->count();
         }
 
+        //В фильтре могут быть выбраны все товары без фильрации по цене, тогда выхожу из фильтра, перенаправяю на главную со всеми товарами,
+        //если выбраны все товары с фильтрацией по цене запускаю функцию price() фильтрации по цене
         if ($request->input('category') == 'category_5') {
-            $skateQuery->where('category_id', '>', 0);
-
-
+            if ($request->filled('price_from')OR$request->filled('price_to')){
+                price($request, $skateQuery);
+            }else{
+                return redirect()->route('skates_base.index');
+            }
         }
 
 

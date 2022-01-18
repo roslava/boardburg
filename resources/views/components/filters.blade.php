@@ -75,7 +75,9 @@
                             <input value="category_5" id="cat5" name="category" class="form-check-input"
                                    type="radio"
                                    style="background-color: #198754; border-color: #198754;"
-                                   @if(request()->input('category') == 'category_5') checked @endif>
+                                   @if(request()->input('category') == 'category_5') checked @endif
+                                   @if(Route::is('skates_base.index')) checked @endif>
+
                             <label for="cat5" class="form-check-label text-white">Все</label>
                         </div>
 
