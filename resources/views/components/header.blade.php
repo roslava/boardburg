@@ -1,5 +1,5 @@
 @section('header')
-    <div class="header-bg container-fluid  p-0 m-0" style="background-color: #0a53be;display: flex;">
+    <div class="header-bg container-fluid  p-0 m-0" style="display: flex;">
 
         <div class="row  p-0 m-0 " style="min-width: 100%">
             <img class="  p-0 m-0" src="http://boardburg.xx/img/fence.png"

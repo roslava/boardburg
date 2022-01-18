@@ -18,7 +18,7 @@
                             <label class="visually-hidden " for="inlineFormInputCost1">От</label>
                             <div class="input-group">
                                 <div class="input-group-text">От</div>
-                                <input type="text" name="price_from" class="form-control" id="inlineFormInputCost1"
+                                <input type="text" name="price_from" class="live-input filter-cost-input" id="inlineFormInputCost1"
                                        placeholder="Цена" value="{{request()->price_from}}">
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                             <label class="visually-hidden" for="inlineFormInputCost2">До</label>
                             <div class="input-group">
                                 <div class="input-group-text">До</div>
-                                <input type="text" name="price_to" class="form-control" id="inlineFormInputCost2"
+                                <input type="text" name="price_to" class="live-input filter-cost-input" id="inlineFormInputCost2"
                                        placeholder="Цена" value="{{request()->price_to}}">
                             </div>
                         </div>

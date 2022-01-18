@@ -66,6 +66,7 @@ Route::get('/registered-users/{id}/edit', [RegisteredUserController::class, 'edi
 Route::put('/registered-users/{id}', [RegisteredUserController::class, 'update'])->name('registered_user.update');
 Route::delete('/registered-users/{id}', [RegisteredUserController::class, 'destroy'])->name('registered_user.destroy');
 
+Route::get('/search', [SearcController::class, 'search'])->name('search.index');
 
 });
 

@@ -1,0 +1,30 @@
+body, html{
+    background-color: #201824;
+}
+
+.live-input{
+    outline:none;
+    background-color:#766d7b
+}
+
+.live-input:focus{
+    background-color:#ffffff !important;
+}
+
+.live-input::-webkit-input-placeholder{
+    color: #ffffff;
+}
+
+.live-input::-moz-placeholder{
+    color: #ffffff;
+}
+
+
+.filter-cost-input{
+border: 0;
+    height: 37px;
+    width: 88px;
+    padding: 6px 12px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
