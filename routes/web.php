@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SkateFromDbController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SkateFromServerController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SkateAllUpdateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,7 +67,7 @@ Route::get('/registered-users/{id}/edit', [RegisteredUserController::class, 'edi
 Route::put('/registered-users/{id}', [RegisteredUserController::class, 'update'])->name('registered_user.update');
 Route::delete('/registered-users/{id}', [RegisteredUserController::class, 'destroy'])->name('registered_user.destroy');
 
-Route::get('/search', [SearcController::class, 'search'])->name('search.index');
+Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 
 });
 

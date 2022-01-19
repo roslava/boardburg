@@ -6,6 +6,7 @@
          <meta http-equiv="X-UA-Compatible" content="ie=edge">
          <link rel="stylesheet" href="{{ asset("css/index.css") }}">
         <script src="{{mix('/js/app.js')}}" defer></script>
+        <script src="{{mix('/js/button_disabled.js')}}" defer></script>
         <script
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
