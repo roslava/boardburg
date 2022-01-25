@@ -32,9 +32,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::before(function ($user, $ability){
-            if ($user->role === 'admin'){
+            if ($user->role === "admin"AND $ability !== 'show_message_send' ){
+                return true;
+           }elseif ($user->role === "guest"AND $ability === 'show_message_send'){
+                return true;
+            }elseif ($user->role === "manager"AND $ability === 'show_message_send'){
                 return true;
             }
+            return false;
         });
 
         Gate::define('update-skate', function (User $user, Skate $skate) {
@@ -63,6 +68,16 @@ class AuthServiceProvider extends ServiceProvider
                 return Response::allow();
               }
             return Response::deny("Пользователь $user->name не имеет права видеть раздел All Users");
+        });
+
+        Gate::define('show_message_send', function (User $user) {
+            if ($user->role === 'admin') {
+
+                return Response::allow('да');
+
+            }
+
+            return Response::deny('нет');
         });
 
 //----------------------------------------------------------------------------------------------//

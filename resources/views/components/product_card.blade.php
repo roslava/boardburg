@@ -61,10 +61,10 @@
     </div>
 {{--@endcan--}}
 @endforeach
-<i class="bi-alarm"></i>
+
 @if(count($skatesFromBase)==0)
     <div class="d-flex" style="font-size: 16px">
-    <p class="light" style="color: #198754"> По запросу <span style="font-weight: bold !important; color: #2BE891">{{$search}}</span> не найдено ни одного товара.&nbsp;</p>
+         <p class="light" style="color: #198754"><i style="color: #2BE891" class="bi bi-emoji-frown"></i> По запросу <span style="font-weight: bold !important; color: #2BE891">{{$search}}</span> не найдено ни одного товара.&nbsp;</p>
     <a href="{{route('skates_base.index')}}">Вернуться ко всем товарам.</a>
     </div>
 @endif
