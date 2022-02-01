@@ -14,7 +14,6 @@ class SkateFromServerController extends Controller
     public function index()
     {
         return $skates_from_server = Http::get('http://boardburger-api-v1.com/skates.json')->json();
-
     }
 
     /**
@@ -41,18 +40,10 @@ class SkateFromServerController extends Controller
         ]);
     }
 
-
-
-
-
-
-
-
-
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,13 +54,14 @@ class SkateFromServerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
     }
+
     public function update($skateFromServer, $id)
     {
         Skate::where('external_id', $id)->update([
@@ -81,10 +73,11 @@ class SkateFromServerController extends Controller
             'user_id' => $skateFromServer['user_id'],
         ]);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

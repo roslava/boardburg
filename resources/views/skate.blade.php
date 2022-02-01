@@ -14,10 +14,6 @@
     <div class="container-md bg-light mt-3">
         <div class="row">
 
-
-
-
-
             {{--Информация--}}
             <div class="col-lg-8 col-md-12 col-sm-12 p-0">
 <div class=" m-lg-5 m-md-4  m-sm-3">
@@ -30,21 +26,10 @@
         </ol>
     </nav>
 
-
-
     <h1 class="mt-4">{{$skateFromBase['name'] ?? '0'}}</h1>
-
-
-
     <p>{{$skateFromBase['description'] ?? '0'}}</p>
-
     <h4>Цена: {{$skateFromBase['price'] ?? '0'}} руб.</h4>
-
-
-
     </div>
-
-
             </div>
 
 
