@@ -1,6 +1,6 @@
 <?php
 
-function onlyThisManager(bool $check, $skates, $currentUser)
+function selectManagers(bool $check, $skates, $currentUser)
 {
     if ($check) {
         return $skates->where('user_id', '=', $currentUser->id)->paginate(8);

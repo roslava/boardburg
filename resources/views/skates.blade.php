@@ -1,9 +1,7 @@
 @extends('layouts.base')
-
 @section('header')
     @include('components.header')
 @endsection
-
 @section('main')
     <div class="container-md">
         @include('components.filters')
@@ -11,12 +9,14 @@
         <div class="row mb-3 ">
             @include('components.product_card')
             <div class="row mt-3"> {{ $skatesFromBase->links()}}</div>
-            @include('components.accordion')
+            @if (!Auth::guest() )
+                @include('components.accordion')
+            @else
+            @endif
             @include('components.mail_send')
-         </div>
+        </div>
     </div>
 @endsection
-
 @section('footer')
-    <div class="container-md">Футер</div>
+    @include('components.footer')
 @endsection

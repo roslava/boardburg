@@ -18,7 +18,7 @@
 @section('main')
 
 
-<div class="container-md bg-light mt-3 p-4">
+<div class="container-md bg-light mt-5 p-4 mb-5 rounded">
 
 
 {{--    breadcrumb--}}
@@ -36,7 +36,7 @@
     <h1>Редактировать</h1>
 
 
-    <form action="{{route('skates_base.update', $skateFromBase->id)}}" method="POST">
+    <form action="{{route('skates_base.update', $skateFromBase->id)}}" method="POST" class="rounded">
 
         @csrf
         @method('PUT')
@@ -74,35 +74,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </div>
 
 @endsection
 
 @section('footer')
-    <div class="container-md bg-light">Футер</div>
+    @include('components.footer')
 @endsection
