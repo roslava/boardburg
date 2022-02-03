@@ -7,17 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-
 use Illuminate\Support\Facades\URL;
 
 class SkateFromDbController extends Controller
 {
-    public function index(Skate $skate)
+    public function index(Skate $skate, Request $request, Session $session)
     {
-
+        if (Session::has('oldQuery')) {
+            Session::forget('oldQuery');
+        }
+        putQueryInSession($request, $session); //helper
         $authCheck = Auth::check();
         $skates = $skate::query();
         $quantity = $skates->count();
@@ -55,7 +55,7 @@ class SkateFromDbController extends Controller
         return view('edit_skate', compact('skateFromBase'));
     }
 
-    public function update(Request $request, Skate $skate, $id): RedirectResponse
+    public function update(Request $request, Skate $skate, $id, Session $session): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
@@ -67,22 +67,7 @@ class SkateFromDbController extends Controller
         $skateFromBase = $skate::all()->find($id);
         Gate::authorize('update-skate', [$skateFromBase]);
         $skateFromBase->update($request->all());
-        return redirect()->route('skates_base.index')->with('success', "Обновлен товар: {$request['name']}");
-
-
-//        $urls = array();
-//        if (Session::has('links')) {
-//            $urls[] = Session::get('links');
-//        }
-//
-//       $currentUrl = $_SERVER['REQUEST_URI'];
-//
-//        array_unshift($urls, $currentUrl);
-//        Session::flash('urls', $urls);
-//
-//        $links = Session::get('urls');
-//
-//        return Redirect::back()->with('success', "Обновлен товар: {$request['name']}");
+        return redirect()->route('skates_base.index', getOldQueryfromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
     public function show(Skate $skate, $id)
@@ -91,11 +76,11 @@ class SkateFromDbController extends Controller
         return view('skate', ['skateFromBase' => $skateFromBase, 'previous_url' => URL::previous()]);
     }
 
-    public function destroy(Skate $skate, $id)
+    public function destroy(Skate $skate, $id, Session $session): RedirectResponse
     {
         $skateFromBase = $skate->all()->find($id);
         Gate::authorize('delete-skate', [$skateFromBase]);
         $skateFromBase->delete();
-        return redirect('skates-from-base')->with('success', "Товар с ID $id был удален");
+        return redirect()->route('skates_base.index', getOldQueryfromSession($session))->with('success', "Товар с ID $id был удален");
     }
 }

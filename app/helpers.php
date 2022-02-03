@@ -15,3 +15,15 @@ function roleCheck($currentUser, $authCheck): bool
     }
     return false;
 }
+
+function putQueryInSession($request, $session)
+{
+    $requestQuery = $request->query;
+    $session::put('oldQuery', $requestQuery);
+}
+
+function getOldQueryfromSession($session)
+{
+    $value = $session::get('oldQuery');
+    return current($value);
+}
