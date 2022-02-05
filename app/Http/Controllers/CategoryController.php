@@ -8,65 +8,34 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-
-    public function index(Request $request)
+    public function index(Request $request, Auth $auth, Skate $skate )
     {
-        if (Auth::check() && Auth::user()->isAdmin()) {
-            $skateQuery = Skate::query();
-        } elseif (Auth::check() && auth()->user()->role === 'manager') {
-            $currentUserId = auth()->user()->id;
-            $skateQuery = Skate::query()->where('user_id', '=', $currentUserId);
-        } else {
-            $skateQuery = Skate::query();
-        } // метод query()
-
-        function price($request, $skateQuery)
-        {
-            if ($request->filled('price_from')) {
-                $skateQuery->where('price', '>=', $request['price_from']);
-
-            }
-            if ($request->filled('price_to')) {
-                $skateQuery->where('price', '<=', $request['price_to']);
-            }
+        $skateQuery = whoseRequest($auth, $skate);
+        priceFilter($request, $skateQuery);
+        switch ($request->input('category')) {
+            case 'category_1':
+                $skateQuery->where('category_id', 1);
+                break;
+            case 'category_2':
+                $skateQuery->where('category_id', 2);
+                break;
+            case 'category_3':
+                $skateQuery->where('category_id', 3);
+                break;
+            case 'category_4':
+                $skateQuery->where('category_id', 4);
+                break;
+            case 'category_5':
+                $skateQuery->where('category_id', '>', 0);
+                if ($request->filled('price_from') or $request->filled('price_to')) {
+                    priceFilter($request, $skateQuery);
+                } else {
+                    return redirect()->route('skates_base.index');
+                }
+                break;
         }
-
-        price($request, $skateQuery);
-
-        $quantity = $skateQuery->count();
-
-        if ($request->input('category') == 'category_1') {
-            $skateQuery->where('category_id', 1);
-            $quantity = $skateQuery->count();
-        }
-
-        if ($request->input('category') == 'category_2') {
-            $skateQuery->where('category_id', 2);
-            $quantity = $skateQuery->count();
-        }
-
-        if ($request->input('category') == 'category_3') {
-            $skateQuery->where('category_id', 3);
-            $quantity = $skateQuery->count();
-        }
-
-        if ($request->input('category') == 'category_4') {
-            $skateQuery->where('category_id', 4);
-            $quantity = $skateQuery->count();
-        }
-
-        //В фильтре могут быть выбраны все товары без фильрации по цене, тогда выхожу из фильтра, перенаправяю на главную со всеми товарами,
-        //если выбраны все товары с фильтрацией по цене запускаю функцию price() фильтрации по цене
-        if ($request->input('category') == 'category_5') {
-            if ($request->filled('price_from') or $request->filled('price_to')) {
-                price($request, $skateQuery);
-            } else {
-                return redirect()->route('skates_base.index');
-            }
-        }
-
+        $quantity = current_quantity($skateQuery);
         $skatesFromBase = $skateQuery->paginate(8)->withQueryString();
-        return view('skates', ['skatesFromBase' => $skatesFromBase, 'quantity' => $quantity]);
-
+        return view('home', ['skatesFromBase' => $skatesFromBase, 'quantity' => $quantity]);
     }
 }

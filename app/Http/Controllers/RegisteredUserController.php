@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -9,21 +10,18 @@ use  Illuminate\Http\RedirectResponse;
 
 class RegisteredUserController extends Controller
 {
-
     public function index()
     {
         $registered_users = User::all();
         Gate::authorize('registered_user-allow');
-        return view('registered_users', ['registered_users' => $registered_users]);
+        return view('registered_users.registered_users', ['registered_users' => $registered_users]);
     }
-
 
     public function create()
     {
         Gate::authorize('registered_user-allow');
-        return view('create_registered_user');
+        return view('registered_users.registered_user_create');
     }
-
 
     public function store(Request $request)
     {
@@ -35,28 +33,22 @@ class RegisteredUserController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect('registered-users');
+        return redirect('registered_users.registered-users');
     }
-
 
     public function edit($id)
     {
         Gate::authorize('registered_user-allow');
         $registered_users = User::all()->where('id', $id)->first();
-        return view('registered_user_edit', compact('registered_users'));
-
+        return view('registered_users.registered_user_edit', compact('registered_users'));
     }
 
-
-
-
-    public function update(Request $request, $id):RedirectResponse
+    public function update(Request $request, $id): RedirectResponse
     {
         Gate::authorize('registered_user-allow');
         $request->validate([
             'name' => 'required',
-             //'role' => 'required' — was my error
-             'RoleRadios' => 'required',
+            'RoleRadios' => 'required',
             'email' => 'required',
             'password' => 'required',
         ]);
@@ -68,11 +60,9 @@ class RegisteredUserController extends Controller
         $user['password'] = Hash::make($request['password']);
         $user->update();
         return redirect()->route('registered_users.index');
-
     }
 
-
-    public function destroy($id):RedirectResponse
+    public function destroy($id): RedirectResponse
     {
         Gate::authorize('registered_user-allow');
         $registered_users = User::all()->where('id', $id)->first();

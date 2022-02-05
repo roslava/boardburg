@@ -14,23 +14,24 @@ class SkateFromDbController extends Controller
 {
     public function index(Skate $skate, Request $request, Session $session)
     {
-        if (Session::has('oldQuery')) {
-            Session::forget('oldQuery');
+        removeOldVariablesFromSession($session); //helper — forget all variables in session
+        putQueryInSession($request, $session); //helper — puts current query in session
+        $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $skate::query(), auth()->user());
+        $quantity = $skatesFromBase->count();
+        $skatesFromBase = $skatesFromBase->paginate(8);
+        putLastPageInSession($skatesFromBase, $session); //helper — puts lastPage in session
+        if (!$skatesFromBase->count()) {
+            return redirect()->route('skates_base.index', ['page' => $skatesFromBase->lastPage()]);
         }
-        putQueryInSession($request, $session); //helper
-        $authCheck = Auth::check();
-        $skates = $skate::query();
-        $quantity = $skates->count();
-        $skatesFromBase = selectManagers(roleCheck(auth()->user(), $authCheck), $skates, auth()->user());
-        return view('skates', compact('skatesFromBase', 'quantity'));
+        return view('home', compact('skatesFromBase', 'quantity'));
     }
 
     public function create()
     {
-        return view('new_skate');
+        return view('skates.skate_new');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Session $session): RedirectResponse
     {
         $skates = new Skate;
         if (!empty(auth()->user()->id)) {
@@ -45,14 +46,17 @@ class SkateFromDbController extends Controller
             ));
         }
         $created_name = $request['name'];
-        return redirect('skates-from-base')->with('success', 'Был создан товар с названием: ' . $created_name);
+        $authCheck = Auth::check();
+        $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $skates, auth()->user())->paginate(8);
+        $quantity = count($skatesFromBase->all()) + 1;
+        return redirect()->route('skates_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
     public function edit(Skate $skate, $id)
     {
         $skateFromBase = $skate::all()->find($id);
         Gate::authorize('update-skate', [$skateFromBase]);
-        return view('edit_skate', compact('skateFromBase'));
+        return view('skates.skate_edit', compact('skateFromBase'));
     }
 
     public function update(Request $request, Skate $skate, $id, Session $session): RedirectResponse
@@ -67,20 +71,21 @@ class SkateFromDbController extends Controller
         $skateFromBase = $skate::all()->find($id);
         Gate::authorize('update-skate', [$skateFromBase]);
         $skateFromBase->update($request->all());
-        return redirect()->route('skates_base.index', getOldQueryfromSession($session))->with('success', "Обновлен товар: {$request['name']}");
+        return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
     public function show(Skate $skate, $id)
     {
         $skateFromBase = $skate::all()->where('id', $id)->first();
-        return view('skate', ['skateFromBase' => $skateFromBase, 'previous_url' => URL::previous()]);
+        return view('skates.skate', ['skateFromBase' => $skateFromBase, 'previous_url' => URL::previous()]);
     }
 
-    public function destroy(Skate $skate, $id, Session $session): RedirectResponse
+    public function destroy(Skate $skate, $id): RedirectResponse
     {
-        $skateFromBase = $skate->all()->find($id);
+        $skatesFromBase = $skate->all();
+        $skateFromBase = $skatesFromBase->find($id);
         Gate::authorize('delete-skate', [$skateFromBase]);
         $skateFromBase->delete();
-        return redirect()->route('skates_base.index', getOldQueryfromSession($session))->with('success', "Товар с ID $id был удален");
+        return redirect()->back()->with('success', "Товар с ID $id был удален");
     }
 }

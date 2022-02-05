@@ -11,5 +11,5 @@
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Document</title>
+        <title>BoardBurg</title>
     </head>

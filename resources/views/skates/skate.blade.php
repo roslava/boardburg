@@ -117,7 +117,7 @@
 @endsection
 
 @section('footer')
-    <div class="container-md bg-light">Футер</div>
+    @include('components.footer')
 @endsection
 
 

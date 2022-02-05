@@ -15,21 +15,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-
-
-
-
     function isAdmin(): bool
     {
         $admin_emails = config('settings.admin_emails');
         if(in_array($this->email, $admin_emails)) return true; else
         return false;
         }
-
-
-
-
-
 
     /**
      * The attributes that are mass assignable.

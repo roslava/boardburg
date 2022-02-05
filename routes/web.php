@@ -11,22 +11,23 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect('skates-from-base');
+    return redirect('skates');
 });
 
-Route::get('/skates-from-base', [SkateFromDbController::class, 'index'])->name('skates_base.index');
-Route::get('/skates-from-base/cat', [CategoryController::class, 'index'])->name('skates_base.cat');
-Route::get('/skates-from-base/{id}', [SkateFromDbController::class, 'show'])->name('skates_base.show');
+Route::get('/skates', [SkateFromDbController::class, 'index'])->name('skates_base.index');
+Route::get('/skates/cat', [CategoryController::class, 'index'])->name('skates_base.cat');
+
+Route::get('/skates/{id}', [SkateFromDbController::class, 'show'])->name('skates_base.show');
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
     Route::get('/skates-from-form/new_skate', [SkateFromDbController::class, 'create'])->name('skates_form.create');
     Route::get('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');
-    Route::get('/skates-from-base/update_all', [SkateAllUpdateController::class, 'updateAll'])->name('skates_base.update_all');
-    Route::get('/skates-from-base/{id}/edit', [SkateFromDbController::class, 'edit'])->name('skates_base.edit');
-    Route::put('/skates-from-base/{id}', [SkateFromDbController::class, 'update'])->name('skates_base.update');
-    Route::delete('/skates-from-base/{id}', [SkateFromDbController::class, 'destroy'])->name('skates_base.destroy');
+    Route::get('/update_all', [SkateAllUpdateController::class, 'updateAll'])->name('skates_base.update_all');
+    Route::get('/skates/{id}/edit', [SkateFromDbController::class, 'edit'])->name('skates_base.edit');
+    Route::put('/skates/{id}', [SkateFromDbController::class, 'update'])->name('skates_base.update');
+    Route::delete('/skates/{id}', [SkateFromDbController::class, 'destroy'])->name('skates_base.destroy');
     Route::get('/registered-users', [RegisteredUserController::class, 'index'])->name('registered_users.index');
     Route::get('/registered-users/create-registered-user', [RegisteredUserController::class, 'create'])->name('registered_user.create');
     Route::get('/registered-users/store', [RegisteredUserController::class, 'store'])->name('registered_user.store');

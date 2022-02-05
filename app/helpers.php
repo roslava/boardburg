@@ -1,11 +1,13 @@
 <?php
 
-function selectManagers(bool $check, $skates, $currentUser)
+
+function selectWhatShowToUser(bool $check, $skates, $currentUser)
 {
     if ($check) {
-        return $skates->where('user_id', '=', $currentUser->id)->paginate(8);
+        $queryResult = $skates->where('user_id', '=', $currentUser->id);
+        return $queryResult;
     }
-    return $skates->paginate(8);
+    return $skates;
 }
 
 function roleCheck($currentUser, $authCheck): bool
@@ -22,8 +24,60 @@ function putQueryInSession($request, $session)
     $session::put('oldQuery', $requestQuery);
 }
 
-function getOldQueryfromSession($session)
+function getOldQueryFromSession($session)
 {
     $value = $session::get('oldQuery');
     return current($value);
+}
+
+function putLastPageInSession($skatesFromBase, $session)
+{
+    $session::put('lastPageIs', $skatesFromBase->lastPage());
+}
+
+function removeOldVariablesFromSession($session)
+{
+    if ($session::has('oldQuery')) {
+        $session::forget('oldQuery');
+    }
+    if ($session::has('lastPageIs')) {
+        $session::forget('lastPageIs');
+    }
+}
+
+function getLastPageFromSession($session, $quantity): array
+{
+    if ($quantity % 8 === 1) {
+        $page = $session::get('lastPageIs') + 1;
+        return compact('page');
+    }
+    $page = $session::get('lastPageIs');
+    return compact('page');
+}
+
+function priceFilter($request, $skateQuery)
+{
+    if ($request->filled('price_from')) {
+        $skateQuery->where('price', '>=', $request['price_from']);
+    }
+    if ($request->filled('price_to')) {
+        $skateQuery->where('price', '<=', $request['price_to']);
+    }
+}
+
+function current_quantity($skateQuery)
+{
+    return $skateQuery->count();
+}
+
+function whoseRequest($auth, $skate)
+{
+    if ($auth::check() && $auth::user()->isAdmin()) {
+        return $skate::query();
+    } elseif ($auth::check() && $auth::user()['role'] === 'manager') {
+        $currentUserId = $auth::user()['id'];
+        return $skateQuery = $skate::query()->where('user_id', '=', $currentUserId);
+    } else {
+        return $skate::query();
+    }
 }
