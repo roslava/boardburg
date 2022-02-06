@@ -1,0 +1,52 @@
+body, html{
+    background-color: #24181d !important;
+}
+
+.header-bg {
+
+    -webkit-align-content: flex-end !important;
+    display: flex;
+    /*background-repeat: no-repeat;*/
+    background-position: bottom;
+    background-size: cover;
+    min-height: 300px;
+    background-attachment: fixed !important;
+}
+.live-input{
+    outline:none;
+    background-color:#766d7b
+}
+
+.live-input:focus{
+    background-color:#ffffff !important;
+}
+
+.live-input::-webkit-input-placeholder{
+    color: #ffffff;
+}
+
+.live-input::-moz-placeholder{
+    color: #ffffff;
+}
+
+
+.filter-cost-input{
+border: 0;
+    height: 37px;
+    width: 88px;
+    padding: 6px 12px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.accordion-button_custom_1{
+    background-color: #766d7b !important;
+}
+
+.accordion-button:focus{
+    outline: none !important;
+}
+
+.accordion-button_custom_1:focus{
+    outline: none !important;
+}

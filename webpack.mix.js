@@ -13,8 +13,19 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/button_disabled.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
+    .postCss('resources/css/app.css', 'public/css')
+    .postCss('resources/css/bootstrap.css', 'public/css')
+    // .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps()
+
+mix.browserSync({
+    proxy: 'boardburg.xx',
+    open: false,
+    watchOptions: {
+        usePolling: true,
+        interval: 1
+    }
+})
 
 
 .webpackConfig(require('./webpack.config'));

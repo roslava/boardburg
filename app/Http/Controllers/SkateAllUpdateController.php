@@ -26,6 +26,6 @@ class SkateAllUpdateController extends Controller
                 $count_updated++;
             }
         }
-        return redirect('/skates-from-base')->with('success', 'Добавлено: ' . $count_created . ' | Обновлено: ' . $count_updated);
+        return redirect('/skates')->with('success', 'Добавлено: ' . $count_created . ' | Обновлено: ' . $count_updated);
     }
 }

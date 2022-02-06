@@ -1,0 +1,48 @@
+.btn-dell {
+    display: flex;
+    color: #fff;
+    background-color: #053c5e;
+    border-color: #053c5e; /*set the color you want here*/
+    border-radius: 50%;
+    font-size: 0;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-dell > svg {
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.btn-dell:hover, .btn-dell:focus, .btn-dell:active, .btn-dell.active, .open > .dropdown-toggle.btn-dell {
+    color: #fff;
+    background-color: #ab2836;
+    border-color: #ab2836; /*set the color you want here*/
+}
+
+.btn-edit {
+    display: flex;
+    color: #fff;
+    background-color: #4d194d;
+    border-color: #4d194d; /*set the color you want here*/
+    border-radius: 50%;
+    font-size: 0;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.btn-edit > svg {
+    min-width: 19px;
+    min-height: 19px;
+}
+
+.btn-edit:hover, .btn-edit:focus, .btn-edit:active, .btn-edit.active, .open > .dropdown-toggle.btn-edit {
+    color: #fff;
+    background-color: #006466;
+    border-color: #006466; /*set the color you want here*/
+}

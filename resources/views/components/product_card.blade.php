@@ -22,16 +22,24 @@
                     </div>
                 </div>
                 <div class="card_bottom m-3" style="display: flex; flex-direction: column; align-items: end">
-                    <div class="card-technical rounded bg-light mt-4 mb-4 p-2 shadow"
-                         style="font-size: 11px; min-width: 100%">
-                        <div>Опубликовал менеджер: {{$skateFromBase->user_id}}</div>
-                        <div>Категория: {{$skateFromBase->category_id}}</div>
-                        <div>ID: {{$skateFromBase->id}} / Внешний ID: {{$skateFromBase->external_id}}</div>
-                        <div>Дата создания: {{$skateFromBase->created_at}}</div>
-                        <div>Дата обновления: {{$skateFromBase->updated_at}}</div>
-                    </div>
-                    <div class="row" style="margin-right: 0.1rem">
+                    @if (Auth::check())
+                        <div class="card-technical rounded bg-light mt-0 mb-4 p-2 shadow"
+                             style="font-size: 11px; min-width: 100%">
+                            <div>Опубликовал менеджер: {{$skateFromBase->user_id}}</div>
+                            <div>Категория: {{$skateFromBase->category_id}}</div>
+                            <div>ID: {{$skateFromBase->id}} / Внешний ID: {{$skateFromBase->external_id}}</div>
+                            <div>Дата создания: {{$skateFromBase->created_at}}</div>
+                            <div>Дата обновления: {{$skateFromBase->updated_at}}</div>
+                        </div>
+                    @else
+                        <div class="card-technical rounded bg-light mt-0 mb-0 p-2 shadow"
+                             style="font-size: 11px; min-width: 100%">
 
+                            <div>ID: {{$skateFromBase->id}}</div>
+
+                        </div>
+                    @endif
+                    <div class="row" style="margin-right: 0.1rem">
                         @can(['update-skate', 'delete-skate'], $skateFromBase)
                             <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class="btn btn-edit"
                                style="margin-right: 0.6rem">

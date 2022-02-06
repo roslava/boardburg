@@ -15,7 +15,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100%;
-
 }
 
 .content {
@@ -25,13 +24,4 @@ body {
 .footer_ {
     flex: 0 0 auto;
     background-color: #198754;
-}
-
-.header-bg{
-    background-image: url("../img/lave2.jpeg");
-    background-repeat: no-repeat;
-    background-position: bottom;
-   background-size: cover;
-    min-height: 300px;
-    background-attachment: fixed;
 }
