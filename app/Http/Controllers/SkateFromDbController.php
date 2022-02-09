@@ -14,6 +14,8 @@ class SkateFromDbController extends Controller
 {
     public function index(Skate $skate, Request $request, Session $session)
     {
+//        dd($request);
+
         removeOldVariablesFromSession($session); //helper — forget all variables in session
         putQueryInSession($request, $session); //helper — puts current query in session
         $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $skate::query(), auth()->user());

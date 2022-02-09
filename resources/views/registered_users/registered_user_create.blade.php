@@ -16,10 +16,9 @@
                            value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                     @error('name')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                    <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
                     @enderror
+
                 </div>
             </div>
 
@@ -31,15 +30,16 @@
                 <div class="col-md-6">
 
 
-
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoleRadios" id="role_admin" value="admin" checked>
+                        <input class="form-check-input" type="radio" name="RoleRadios" id="role_admin" value="admin"
+                               checked>
                         <label class="form-check-label" for="role_admin">
                             admin
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="RoleRadios" id="role_manager" value="manager">
+                        <input class="form-check-input" type="radio" name="RoleRadios" id="role_manager"
+                               value="manager">
                         <label class="form-check-label" for="role_manager">
                             manager
                         </label>
@@ -52,10 +52,6 @@
                     </div>
 
 
-
-
-
-
                     @error('role')
                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -63,10 +59,6 @@
                     @enderror
                 </div>
             </div>
-
-
-
-
 
 
             <div class="row mb-3">
@@ -79,9 +71,11 @@
                            value="{{ old('email') }}" required autocomplete="email">
 
                     @error('email')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                    <span
+                        class="invalid-feedback"
+                        role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
             </div>
@@ -114,6 +108,17 @@
             </div>
 
             <div class="row mb-0">
+
+
+{{--                @if ($errors->any())--}}
+{{--                    <div class="alert alert-danger">--}}
+{{--                        <ul>--}}
+{{--                            @foreach ($errors->all() as $error)--}}
+{{--                                <li>{{ $error }}</li>--}}
+{{--                            @endforeach--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                @endif--}}
 
 
                 <div class="col-md-6 offset-md-4">

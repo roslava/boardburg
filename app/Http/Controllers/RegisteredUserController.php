@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStore;
+use App\Http\Requests\UserUpdate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use  Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
+
 
 class RegisteredUserController extends Controller
 {
@@ -23,7 +27,7 @@ class RegisteredUserController extends Controller
         return view('registered_users.registered_user_create');
     }
 
-    public function store(Request $request)
+    public function store(UserStore $request)
     {
         Gate::authorize('registered_user-allow');
         $users = new User;
@@ -33,7 +37,7 @@ class RegisteredUserController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect('registered_users.registered-users');
+        return redirect('registered-users');
     }
 
     public function edit($id)
@@ -43,7 +47,7 @@ class RegisteredUserController extends Controller
         return view('registered_users.registered_user_edit', compact('registered_users'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(UserUpdate $request, $id): RedirectResponse
     {
         Gate::authorize('registered_user-allow');
         $request->validate([

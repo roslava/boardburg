@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GetInfoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SkateFromDbController;
 use App\Http\Controllers\RegisteredUserController;
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('skates');
 });
+
+
+Route::get('/get_info/{name}/{price}/{info}', [GetInfoController::class, 'index'])->name('get_info.index');
+Route::post('/get_info/store', [GetInfoController::class, 'store'])->name('get_info.store');
+
 
 Route::get('/skates', [SkateFromDbController::class, 'index'])->name('skates_base.index');
 Route::get('/skates/cat', [CategoryController::class, 'index'])->name('skates_base.cat');
