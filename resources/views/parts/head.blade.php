@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="{{ URL::asset("css/bootstrap.css") }}">
          <link rel="stylesheet" href="{{ URL::asset("css/app.css") }}">
         <script src="{{mix('/js/app.js')}}" defer></script>
-        <script src="{{mix('/js/button_disabled.js')}}" defer></script>
+
         <script
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>

@@ -29,8 +29,8 @@ body {
 .btn-dell {
     display: flex;
     color: #fff;
-    background-color: #053c5e;
-    border-color: #053c5e; /*set the color you want here*/
+    background-color: #adaaad;
+    border-color: #adaaad; /*set the color you want here*/
     border-radius: 50%;
     font-size: 0;
     width: 30px;
@@ -53,8 +53,8 @@ body {
 .btn-edit {
     display: flex;
     color: #fff;
-    background-color: #4d194d;
-    border-color: #4d194d; /*set the color you want here*/
+    background-color: #adaaad;
+    border-color: #adaaad; /*set the color you want here*/
     border-radius: 50%;
     font-size: 0;
     width: 30px;
@@ -75,12 +75,11 @@ body {
     border-color: #006466; /*set the color you want here*/
 }
 
-body, html{
+body, html {
     background-color: #24181d !important;
 }
 
 .header-bg {
-
     -webkit-align-content: flex-end !important;
     display: flex;
     /*background-repeat: no-repeat;*/
@@ -89,43 +88,222 @@ body, html{
     min-height: 300px;
     background-attachment: fixed !important;
 }
-.live-input{
-    outline:none;
-    background-color:#766d7b
+
+.live-input {
+    outline: none;
+    background-color: #766d7b
 }
 
-.live-input:focus{
-    background-color:#ffffff !important;
+.live-input:focus {
+    background-color: #ffffff !important;
 }
 
-.live-input::-webkit-input-placeholder{
+.live-input::-webkit-input-placeholder {
     color: #ffffff;
 }
 
-.live-input::-moz-placeholder{
+.live-input::-moz-placeholder {
     color: #ffffff;
 }
 
 
-.filter-cost-input{
-border: 0;
-    height: 37px;
+.bb-filter{
+    border: #198754 solid 1px;
+    border-radius: 0.25rem;
+    background-color: #24181DFF
+}
+
+.bb-filter-form {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 0;
+
+
+}
+@media (max-width: 1200px) {
+    .bb-filter-form{
+        font-size: 0.9rem;
+    }
+}
+
+
+
+
+.bb-filter-form__price-input-group {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+}
+@media (max-width: 992px) {
+    .bb-filter-form__price-input-group {
+        flex-direction: column;
+        /*align-items: start;*/
+        max-width: 200px !important;
+    }
+}
+
+
+.bb-filter-form__price-input {
+    display: flex;
+      flex-direction: row;
+    margin-right: 1rem;
+    height: 2.4rem;
+}
+@media (max-width: 1200px) {
+    .bb-filter-form__price-input {
+        height: 2rem;
+    }
+}
+@media (max-width: 992px) {
+    .bb-filter-form__price-input {
+        height: 2rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.bb-filter-form__price-input-key {
+    display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+     font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+}
+
+.bb-filter-form__price-input-value {
+    border: 0;
     width: 88px;
     padding: 6px 12px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+@media (max-width: 1200px) {
+    .bb-filter-form__price-input-value {
+        max-width: 60px;
+    }
+}
 
-.accordion-button_custom_1{
+.bb-filter-form__check-group{
+    display: flex;
+    flex-direction: row;
+}
+
+@media (max-width: 992px) {
+    .bb-filter-form__check-group {
+        flex-direction: column;
+    }
+}
+
+.bb-form-check{
+    /*font-size: 16px;*/
+}
+@media (max-width: 1200px) {
+    .bb-form-check {
+        padding: 0px;
+        margin: 0px;
+        margin-left: 26px;
+    }
+}
+
+
+
+
+.bb-filter-form__check-input{
+    background-color: #198754;
+    border-color: #198754;
+}
+
+
+@media (max-width: 1200px) {
+    .bb-filter-form__check-input {
+       }
+}
+
+.bb-filter-form__check-input:checked {
+    background-color: #3FC24CFF;
+    border-color: #3FC24CFF;
+    outline: none !important;
+}
+
+.bb-filter-form__check-input:focus {
+    outline: none !important;
+    border-color: #3FC24CFF;
+}
+
+.bb-filter-form__check-input:active {
+    outline: none !important;
+    border-color: #3FC24CFF;
+}
+
+.bb-filter-form__btn{
+    height: 2.4rem;
+    width: 5.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media (max-width: 1200px) {
+    .bb-filter-form__btn {
+        height: 2rem;
+        width: 4.8rem;
+        padding: 8px;
+
+    }
+}
+
+
+
+
+
+
+
+.accordion-button_custom_1 {
     background-color: #766d7b !important;
 }
 
-.accordion-button:focus{
+.accordion-button:focus {
     outline: none !important;
 }
 
-.accordion-button_custom_1:focus{
+.accordion-button_custom_1:focus {
     outline: none !important;
+}
+
+
+.bb-inputs-grupper {
+    display: flex;
+    flex-direction: row;
+    padding: 1.5rem;
+    margin-right: 0;
+    margin-left: 0;
+    border: 1px #ced4da solid;
+    border-radius: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .bb-inputs-grupper {
+        flex-direction: column;
+    }
+}
+
+
+.bb-form-check {
+    margin-right: 1.5rem;
+    margin-left: 0 !important;
 }
 
 /*@import '~bootstrap-icons/font/bootstrap-icons.css';*/

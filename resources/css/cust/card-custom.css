@@ -1,8 +1,8 @@
 .btn-dell {
     display: flex;
     color: #fff;
-    background-color: #053c5e;
-    border-color: #053c5e; /*set the color you want here*/
+    background-color: #adaaad;
+    border-color: #adaaad; /*set the color you want here*/
     border-radius: 50%;
     font-size: 0;
     width: 30px;
@@ -25,8 +25,8 @@
 .btn-edit {
     display: flex;
     color: #fff;
-    background-color: #4d194d;
-    border-color: #4d194d; /*set the color you want here*/
+    background-color: #adaaad;
+    border-color: #adaaad; /*set the color you want here*/
     border-radius: 50%;
     font-size: 0;
     width: 30px;

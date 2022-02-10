@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserStore;
 use App\Http\Requests\UserUpdate;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use  Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
+
 
 
 class RegisteredUserController extends Controller

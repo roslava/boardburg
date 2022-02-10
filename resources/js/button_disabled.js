@@ -17,6 +17,7 @@ function updateValue(e) {
         search_input_button.disabled = true
     } else {
         search_input_button.disabled = false
+        search_input.value = 0
     }
 }
 

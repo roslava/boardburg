@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use App\Http\Requests\StoreSkateRequest;
 
 class SkateFromDbController extends Controller
 {
@@ -33,7 +34,7 @@ class SkateFromDbController extends Controller
         return view('skates.skate_new');
     }
 
-    public function store(Request $request, Session $session): RedirectResponse
+    public function store(StoreSkateRequest $request, Session $session): RedirectResponse
     {
         $skates = new Skate;
         if (!empty(auth()->user()->id)) {
@@ -51,6 +52,7 @@ class SkateFromDbController extends Controller
         $authCheck = Auth::check();
         $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $skates, auth()->user())->paginate(8);
         $quantity = count($skatesFromBase->all()) + 1;
+//       dd($request);
         return redirect()->route('skates_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
