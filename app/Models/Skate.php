@@ -12,6 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 class Skate extends Model
 {
     use HasFactory;
-    protected $fillable = ['external_id','name','description','img','price','category_id','user_id'];
+    protected $fillable = ['external_id','name','description','img','price','category_id','user_id','slug'];
 }
 

@@ -28,7 +28,7 @@
                 <div class="shadow bg-white rounded p-3  p-2"
                      style="display: flex; justify-content: center;box-sizing: border-box; width: 100%">
                     <div class="row" style="display: flex; align-items: center; padding: 0;  margin:0;">
-                        <img class="img-fluid max-width: 100% height: auto" src="{{$skateFromBase['img'] ?? '0'}}"
+                        <img class="img-fluid max-width: 100% height: auto" src="http://boardburg.xx/storage/{{$skateFromBase['img'] ?? '0'}}"
                              style="max-height: 400px;" alt="">
                     </div>
                 </div>

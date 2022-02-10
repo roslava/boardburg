@@ -10,13 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use App\Http\Requests\StoreSkateRequest;
+use Intervention\Image\Facades\Image;
 
 class SkateFromDbController extends Controller
 {
     public function index(Skate $skate, Request $request, Session $session)
     {
-//        dd($request);
-
         removeOldVariablesFromSession($session); //helper — forget all variables in session
         putQueryInSession($request, $session); //helper — puts current query in session
         $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $skate::query(), auth()->user());
@@ -34,25 +33,33 @@ class SkateFromDbController extends Controller
         return view('skates.skate_new');
     }
 
-    public function store(StoreSkateRequest $request, Session $session): RedirectResponse
+    public function store(Image $image, StoreSkateRequest $request, Session $session): RedirectResponse
     {
+
+
+
+
         $skates = new Skate;
         if (!empty(auth()->user()->id)) {
             $skates::create(array(
                 'external_id' => 'NULL',
                 'name' => $request['name'],
                 'description' => $request['description'],
-                'img' => $request['img'],
+                'img' => setImgPath($request, $image),
                 'price' => $request['price'],
                 'category_id' => $request['category_id'],
                 'user_id' => auth()->user()->id,
+                'slug' => slugDefining($request['category_id']),
             ));
         }
+
+
+
         $created_name = $request['name'];
         $authCheck = Auth::check();
         $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $skates, auth()->user())->paginate(8);
         $quantity = count($skatesFromBase->all()) + 1;
-//       dd($request);
+
         return redirect()->route('skates_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
@@ -63,14 +70,15 @@ class SkateFromDbController extends Controller
         return view('skates.skate_edit', compact('skateFromBase'));
     }
 
-    public function update(Request $request, Skate $skate, $id, Session $session): RedirectResponse
+    public function update(Image $image, Request $request, Skate $skate, $id, Session $session): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
             'description' => 'required',
-            'img' => 'required',
+            'img' => setImgPath($request, $image),
             'price' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'slug' => slugDefining($request),
         ]);
         $skateFromBase = $skate::all()->find($id);
         Gate::authorize('update-skate', [$skateFromBase]);

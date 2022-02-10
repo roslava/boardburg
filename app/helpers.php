@@ -81,3 +81,38 @@ function whoseRequest($auth, $skate)
         return $skate::query();
     }
 }
+
+
+function slugDefining($data)
+{
+
+    switch ($data) {
+        case 1:
+            return 'boards';
+
+        case 2:
+            return 'suspension';
+
+        case 3:
+            return 'wheels';
+
+        case 4:
+            return 'bearings';
+    }
+}
+
+
+function setImgPath($request, $image)
+{
+    if ($request->hasFile('image')) {
+        $imgFile = $request->file('image');
+        $filename = 'cover-' . time() . '.' . $imgFile->getClientOriginalExtension();
+        $imgBig = $image::make($imgFile);
+        $imgBig->resize(1200, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });
+        $imgBig->save($imgFile);
+        return $imgFile->storeAs('uploads/' . slugDefining($request['category_id']), $filename);
+    }
+}

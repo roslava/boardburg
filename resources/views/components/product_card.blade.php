@@ -6,7 +6,7 @@
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card" style="height: 100%">
                 <div class="row pt-3" style="justify-content: center;margin:0">
-                    <img src="{{$skateFromBase->img}}" class="card-img-top"
+                    <img src="http://boardburg.xx/storage/{{$skateFromBase->img}}" class="card-img-top"
                          style="max-height: 200px; width: fit-content;" alt="...">
                 </div>
                 <div class="card-body">

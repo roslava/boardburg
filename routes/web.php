@@ -29,7 +29,7 @@ Route::get('/search', [SearchController::class, 'search'])->name('search.index')
 Route::middleware(['auth'])->group(function () {
     Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
     Route::get('/skates-from-form/new_skate', [SkateFromDbController::class, 'create'])->name('skates_form.create');
-    Route::get('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');
+    Route::post('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');
     Route::get('/update_all', [SkateAllUpdateController::class, 'updateAll'])->name('skates_base.update_all');
     Route::get('/skates/{id}/edit', [SkateFromDbController::class, 'edit'])->name('skates_base.edit');
     Route::put('/skates/{id}', [SkateFromDbController::class, 'update'])->name('skates_base.update');

@@ -24,6 +24,7 @@ class SkateFromServerController extends Controller
             'price' => $skateFromServer['price'],
             'category_id' => $skateFromServer['category_id'],
             'user_id' => $skateFromServer['user_id'],
+            'slug' => slugDefining($skateFromServer['category_id'])
         ]);
     }
 
@@ -36,6 +37,7 @@ class SkateFromServerController extends Controller
             'price' => $skateFromServer['price'],
             'category_id' => $skateFromServer['category_id'],
             'user_id' => $skateFromServer['user_id'],
+            'slug' => slugDefining($skateFromServer['category_id'])
         ]);
     }
 }
