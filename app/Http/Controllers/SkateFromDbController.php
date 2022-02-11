@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use App\Http\Requests\StoreSkateRequest;
 use Intervention\Image\Facades\Image;
@@ -45,11 +46,11 @@ class SkateFromDbController extends Controller
                 'external_id' => 'NULL',
                 'name' => $request['name'],
                 'description' => $request['description'],
-                'img' => setImgPath($request, $image),
                 'price' => $request['price'],
                 'category_id' => $request['category_id'],
                 'user_id' => auth()->user()->id,
                 'slug' => slugDefining($request['category_id']),
+                'img' => setImgPath($request, $image, slugDefining($request['category_id'])),
             ));
         }
 
@@ -97,6 +98,8 @@ class SkateFromDbController extends Controller
         $skatesFromBase = $skate->all();
         $skateFromBase = $skatesFromBase->find($id);
         Gate::authorize('delete-skate', [$skateFromBase]);
+        $directory = cut_string_using_last('/', $skateFromBase['img'], 'left', true);
+        Storage::disk('public')->deleteDirectory($directory);
         $skateFromBase->delete();
         return redirect()->back()->with('success', "Товар с ID $id был удален");
     }

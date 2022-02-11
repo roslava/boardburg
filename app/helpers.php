@@ -91,7 +91,7 @@ function slugDefining($data)
             return 'boards';
 
         case 2:
-            return 'suspension';
+            return 'suspensions';
 
         case 3:
             return 'wheels';
@@ -102,17 +102,38 @@ function slugDefining($data)
 }
 
 
-function setImgPath($request, $image)
+function setImgPath($request, $image, $slug)
 {
     if ($request->hasFile('image')) {
         $imgFile = $request->file('image');
-        $filename = 'cover-' . time() . '.' . $imgFile->getClientOriginalExtension();
+        $filename = substr($slug, 0, -1) . '_' . time() . '.' . $imgFile->getClientOriginalExtension();
         $imgBig = $image::make($imgFile);
         $imgBig->resize(1200, null, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         });
         $imgBig->save($imgFile);
-        return $imgFile->storeAs('uploads/' . slugDefining($request['category_id']), $filename);
+        return $imgFile->storeAs('uploads/'.slugDefining($request['category_id']).'/'. substr($slug, 0, -1) . '_' . time(), $filename);
     }
+}
+
+// make directory name from img path
+function cut_string_using_last($character, $string, $side, $keep_character=true) {
+    $offset = ($keep_character ? 1 : 0);
+    $whole_length = strlen($string);
+    $right_length = (strlen(strrchr($string, $character)) - 1);
+    $left_length = ($whole_length - $right_length - 1);
+    switch($side) {
+        case 'left':
+            $piece = substr($string, 0, ($left_length + $offset));
+            break;
+        case 'right':
+            $start = (0 - ($right_length + $offset));
+            $piece = substr($string, $start);
+            break;
+        default:
+            $piece = false;
+            break;
+    }
+    return($piece);
 }
