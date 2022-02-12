@@ -6,8 +6,8 @@
          <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="{{ URL::asset("css/bootstrap.css") }}">
          <link rel="stylesheet" href="{{ URL::asset("css/app.css") }}">
+        <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
         <script src="{{mix('/js/app.js')}}" defer></script>
-
         <script
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
             crossorigin="anonymous"></script>

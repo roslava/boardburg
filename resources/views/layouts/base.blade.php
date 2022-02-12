@@ -1,6 +1,12 @@
 <!doctype html>
 <html lang="en">
 @include('parts.head')
+
+
+
+
+
+
 <body>
 <div class="wrapper">
     <div class="content">
@@ -28,5 +34,7 @@
         </div>
     </footer>
 </div>
+<script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+@yield('scripts')
 </body>
 </html>

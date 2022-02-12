@@ -37,9 +37,6 @@ class SkateFromDbController extends Controller
     public function store(Image $image, StoreSkateRequest $request, Session $session): RedirectResponse
     {
 
-
-
-
         $skates = new Skate;
         if (!empty(auth()->user()->id)) {
             $skates::create(array(
@@ -71,19 +68,41 @@ class SkateFromDbController extends Controller
         return view('skates.skate_edit', compact('skateFromBase'));
     }
 
-    public function update(Image $image, Request $request, Skate $skate, $id, Session $session): RedirectResponse
+    public function update(Image $image, StoreSkateRequest $request, Skate $skate, $id, Session $session): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'img' => setImgPath($request, $image),
-            'price' => 'required',
-            'category_id' => 'required',
-            'slug' => slugDefining($request),
-        ]);
+
+        dd($request);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         $skateFromBase = $skate::all()->find($id);
+
+
+        $skateFromBase->external_id = 'NULL';
+        $skateFromBase->name = $request->get('name');
+        $skateFromBase->description = $request->get('description');
+        $skateFromBase->price = $request->get('price');
+        $skateFromBase->category_id = $request->get('category_id');
+        $skateFromBase->user_id = auth()->user()->id;
+        $skateFromBase->slug = slugDefining($request['category_id']);
+        $skateFromBase->img = setImgPath($request, $image, slugDefining($request['category_id']));
+        $skateFromBase->save();
         Gate::authorize('update-skate', [$skateFromBase]);
-        $skateFromBase->update($request->all());
+//        $skateFromBase->update($request->all());
+//dd($skateFromBase->img);
         return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
@@ -104,3 +123,4 @@ class SkateFromDbController extends Controller
         return redirect()->back()->with('success', "Товар с ID $id был удален");
     }
 }
+

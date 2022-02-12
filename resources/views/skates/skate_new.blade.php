@@ -37,10 +37,6 @@
                     </span>
                 @enderror
             </div>
-            {{--            <div class="form-group mt-4">--}}
-            {{--                <label class="mb-1" for="img">Адрес изображения</label>--}}
-            {{--                <input type="text" name="img" class="form-control @error('img') is-invalid @enderror" id="img">--}}
-            {{--            </div>--}}
             <div class="form-group mt-4">
                 <label class="mb-1" for="price">Цена</label>
                 <input type="text" name="price" maxlength="6" class="form-control @error('price') is-invalid @enderror"
