@@ -35,6 +35,6 @@
     </footer>
 </div>
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-@yield('scripts')
+@yield('fp_scripts')
 </body>
 </html>

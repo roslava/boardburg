@@ -28,7 +28,7 @@ class StoreSkateRequest extends FormRequest
             'description' => 'required|min:10',
             'price' => 'required|numeric|max:999999',
             'category_id' => 'required',
-            'image' => 'required|mimes:jpeg,jpg,png,gif | max:1000',
+//            'image' => 'required|mimes:jpeg,jpg,png,gif | max:1000',
         ];
     }
 }

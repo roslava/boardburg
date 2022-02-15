@@ -79,16 +79,18 @@
             </div>
 
             <label class="mb-1" for="img">Загрузка изображения товара</label>
-            <div class="bb-inputs-grupper input-group ">
-                <input type="file" name="image" value="{{ old('image') }}" id="image" class="@error('image') is-invalid @enderror">
-                @error('image')
-                <span
-                    class="invalid-feedback"
-                    role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            </div>
+{{--            <div class="bb-inputs-grupper input-group ">--}}
+{{--                <input type="file" name="image" value="{{ old('image') }}" id="image" class="@error('image') is-invalid @enderror">--}}
+{{--                @error('image')--}}
+{{--                <span--}}
+{{--                    class="invalid-feedback"--}}
+{{--                    role="alert">--}}
+{{--                        <strong>{{ $message }}</strong>--}}
+{{--                    </span>--}}
+{{--                @enderror--}}
+{{--            </div>--}}
+
+            <input type="file" id="cover" name="cover">
             <button class="btn btn-primary mt-4" style="margin-right: 1rem !important;" type="submit">Создать</button>
             <a href="{{ route('skates_base.index')}}" class="btn btn-info mt-4">Отменить</a>
         </form>
@@ -96,4 +98,23 @@
 @endsection
 @section('footer')
     @include('components.footer')
+@endsection
+
+
+@section('fp_scripts')
+<script>
+    // Get a reference to the file input element
+    const inputElement = document.querySelector('input[id="cover"]');
+
+    // Create a FilePond instance
+    const pond = FilePond.create(inputElement);
+    FilePond.setOptions({
+        server: {
+          url:'/upload-file',
+            headers:{
+              'X-CSRF-TOKEN': '{{csrf_token()}}'
+            }
+        }
+    });
+</script>
 @endsection

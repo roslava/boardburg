@@ -137,3 +137,8 @@ function cut_string_using_last($character, $string, $side, $keep_character=true)
     }
     return($piece);
 }
+
+function getMime($fileName){
+    $parts = explode( '.', $fileName );
+    return end( $parts );
+}

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\GetInfoController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SkateFromDbController;
 use App\Http\Controllers\RegisteredUserController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\SkateFromServerController;
 use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SkateAllUpdateController;
+use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,9 +15,6 @@ Route::get('/', function () {
     return redirect('skates');
 });
 
-
-Route::get('/get_info/{name}/{price}/{info}', [GetInfoController::class, 'index'])->name('get_info.index');
-Route::post('/get_info/store', [GetInfoController::class, 'store'])->name('get_info.store');
 
 
 Route::get('/skates', [SkateFromDbController::class, 'index'])->name('skates_base.index');
@@ -27,6 +24,7 @@ Route::get('/skates/{id}', [SkateFromDbController::class, 'show'])->name('skates
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 
 Route::middleware(['auth'])->group(function () {
+    Route::post('/upload-file', [UploadController::class, 'store']);
     Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
     Route::get('/skates-from-form/new_skate', [SkateFromDbController::class, 'create'])->name('skates_form.create');
     Route::post('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');
