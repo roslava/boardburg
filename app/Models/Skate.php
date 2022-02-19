@@ -19,6 +19,9 @@ class Skate  extends Model implements HasMedia
 
     public function registerMediaConversions(Media $media = null): void
     {
+        $this
+            ->addMediaCollection('cover');
+
         $this->addMediaConversion('thumb')
             ->width(368)
             ->height(232)

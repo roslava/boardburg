@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use App\Http\Requests\StoreSkateRequest;
 use Intervention\Image\Facades\Image;
@@ -32,11 +31,6 @@ class SkateFromDbController extends Controller
     }
 
 
-
-
-
-
-
     public function create()
     {
         return view('skates.skate_new');
@@ -44,51 +38,9 @@ class SkateFromDbController extends Controller
 
     public function store(StoreSkateRequest $request, Session $session): RedirectResponse
     {
-        $skate = new Skate;
-
-
-        $temporaryFile = TemporaryFile::where('folder', $request->cover)->first();
-        if ($temporaryFile) {
-            $folder = 'app/public/tmp/' . $request->cover;
-//        dd($folder);
-            $slug = slugDefining($request['category_id']);
-            $singular_slug = substr($slug, 0, -1);
-            $unic = now()->timestamp;
-//            storage_path('app/public')
-//            dd(storage_path($folder . '/' . $temporaryFile->filename));
-
-//dd($skate->first());
-            $media = $skate->first()->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
-                ->usingFileName($singular_slug . '_' . $unic . '.jpg')
-                ->toMediaCollection('cover');
-
-
-            rmdir(storage_path($folder));
-            $temporaryFile->delete();
-//            dd(extensionRemoer($media->file_name).'/'.$media->file_name);
-//            dd(Storage::disk('public'));
-
-//            Storage::disk('public')->url('users/'. Auth::user()->image)
-//           $media = $skate   dd($media->getFullUrl());
-//        dd($media->getUrl());
-
-        } else {
-            dd('Нет темпфайла');
-        }
-
-//        /Users/sea/Documents/#WEBDEV/php_projects/boardburg/storage/app/public/uploads/bearing_1645184991/bearing_1645184991.jpg
-
-
-
-
-
-
-
-
-
 
         if (!empty(auth()->user()->id)) {
-            $skate::create(array(
+            $skate = Skate::create([
                 'external_id' => 'NULL',
                 'name' => $request['name'],
                 'description' => $request['description'],
@@ -96,18 +48,30 @@ class SkateFromDbController extends Controller
                 'category_id' => $request['category_id'],
                 'user_id' => auth()->user()->id,
                 'slug' => slugDefining($request['category_id']),
-                'img' => extensionRemoer($media->file_name).'/'.$media->file_name
-            ));
+                'img' => '_'
+            ]);
         }
 
-
-
-
+        $temporaryFile = TemporaryFile::where('folder', $request->cover)->first();
+        if ($temporaryFile) {
+            $folder = 'app/public/tmp/' . $request->cover;
+            $slug = slugDefining($request['category_id']);
+            $singular_slug = substr($slug, 0, -1);
+            $unic = now()->timestamp;
+            $media = $skate->first()->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
+                ->usingFileName($singular_slug . '_' . $unic . '.jpg')
+                ->toMediaCollection('cover');
+            $skate->img = extensionRemoer($media->file_name).'/'.$media->file_name;;
+            $skate->save();
+             rmdir(storage_path($folder)); //tmp
+            $temporaryFile->delete(); //tmp
+         } else {
+            dd('Нет темп-файла');
+        }
         $created_name = $request['name'];
         $authCheck = Auth::check();
         $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $skate, auth()->user())->paginate(8);
         $quantity = count($skatesFromBase->all()) + 1;
-
         return redirect()->route('skates_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
@@ -156,6 +120,7 @@ class SkateFromDbController extends Controller
         $shortImgNameWithoutExtension =  extensionRemoer($shortImgName);
         $getExtension = explode( '.', $shortImgName );
         $extension = end( $getExtension);
+
 
         // удаление конвертированного файла из папки conversions
         if (file_exists(storage_path('app/public/uploads/'. $directory . '/conversions/'. $shortImgNameWithoutExtension . '-thumb' .'.'.$extension)) AND $skateFromBase->id == $id){
