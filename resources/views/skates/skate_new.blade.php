@@ -90,7 +90,14 @@
 {{--                @enderror--}}
 {{--            </div>--}}
 
-            <input type="file" id="cover" name="cover">
+            <input type="file" id="cover" name="cover" class="@error('cover') is-invalid @enderror">
+                            @error('cover')
+                            <span
+                                class="invalid-feedback"
+                                role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
             <button class="btn btn-primary mt-4" style="margin-right: 1rem !important;" type="submit">Создать</button>
             <a href="{{ route('skates_base.index')}}" class="btn btn-info mt-4">Отменить</a>
         </form>
@@ -103,16 +110,32 @@
 
 @section('fp_scripts')
 <script>
+FilePond.registerPlugin(FilePondPluginFileValidateType);
+
     // Get a reference to the file input element
     const inputElement = document.querySelector('input[id="cover"]');
 
     // Create a FilePond instance
-    const pond = FilePond.create(inputElement);
+    // const pond = FilePond.create(inputElement);
+
+    const pond = FilePond.create(inputElement, {
+        allowFileTypeValidation:true,
+        acceptedFileTypes: ["image/jpg", "image/jpeg", "image/png"],
+        maxFiles: 1,
+        labelFileTypeNotAllowed:'File of invalid type',
+        fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
+    });
+
     FilePond.setOptions({
         server: {
-          url:'/upload-file',
             headers:{
-              'X-CSRF-TOKEN': '{{csrf_token()}}'
+                'X-CSRF-TOKEN': '{{csrf_token()}}'
+            },
+          process:{
+              url:'{{route('upload_file.store')}}'
+          },
+            revert: {
+                url: '{{ route('revert_tmp_file.revert')}}',
             }
         }
     });

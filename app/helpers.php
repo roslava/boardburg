@@ -142,3 +142,26 @@ function getMime($fileName){
     $parts = explode( '.', $fileName );
     return end( $parts );
 }
+
+
+function extensionRemoer($fileName){
+// Initializing a variable
+// with filename
+    $file = $fileName;
+
+// Using substr
+    $x = substr($file, 0, strrpos($file, '.'));
+
+// Display the filename
+    return $x;
+}
+
+
+function removeRecordInMediaTable($model, $shortImgName){
+    $mediaItems = $model->first()->getMedia('cover');
+    $mediaItem = $mediaItems->where('file_name','=', $shortImgName)->first();
+    if($mediaItem){
+        $mediaItem->delete();
+    }
+
+}

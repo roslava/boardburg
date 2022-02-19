@@ -3,8 +3,24 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Spatie\MediaLibraryPro\Rules\Concerns\ValidatesMedia;
 
-class StoreSkateRequest extends FormRequest
+class CoverUploadRequest extends FormRequest
+//{
+//
+//    use ValidatesMedia;
+//
+//    public function rules()
+//    {
+//        return [
+//            'cover' => $this
+//                ->validateSingleMedia()
+////                ->extension('png')
+////                ->maxItemSizeInKb(1024)
+//        ];
+//    }
+//
+//}
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +39,8 @@ class StoreSkateRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
-            'name' => 'required|max:255|min:3',
-            'description' => 'required|min:10',
-            'price' => 'required|numeric|max:999999',
-            'category_id' => 'required',
-//            'img' => 'required',
-            'cover' => 'required'
+//            'cover' => 'required',
         ];
     }
 }

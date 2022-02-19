@@ -24,7 +24,8 @@ Route::get('/skates/{id}', [SkateFromDbController::class, 'show'])->name('skates
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 
 Route::middleware(['auth'])->group(function () {
-    Route::post('/upload-file', [UploadController::class, 'store']);
+    Route::post('/upload-file', [UploadController::class, 'store'])->name('upload_file.store');
+    Route::delete('/revert-tmp-file', [UploadController::class, 'revertFiles'])->name('revert_tmp_file.revert');
     Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
     Route::get('/skates-from-form/new_skate', [SkateFromDbController::class, 'create'])->name('skates_form.create');
     Route::post('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');

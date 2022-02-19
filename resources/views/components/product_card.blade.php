@@ -1,12 +1,13 @@
 @section('product_card')
 
 
+    @if(!count($skatesFromBase)==0)
     @foreach($skatesFromBase as $skateFromBase)
         {{--@can('view',$skateFromBase)--}}
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card" style="height: 100%">
                 <div class="row pt-3" style="justify-content: center;margin:0">
-                    <img src="http://boardburg.xx/storage/{{$skateFromBase->img}}" class="card-img-top"
+                    <img src="{{asset('/storage/uploads/'.$skateFromBase->img)}}" class="card-img-top"
                          style="max-height: 200px; width: fit-content;" alt="...">
                 </div>
                 <div class="card-body">
@@ -61,6 +62,10 @@
         </div>
         {{--@endcan--}}
     @endforeach
+    @endif
+
+111
+
     @if(count($skatesFromBase)==0)
         <div class="d-flex" style="font-size: 16px">
             <p class="light" style="color: #198754"><i style="color: #2BE891" class="bi bi-emoji-frown"></i> По запросу
@@ -71,4 +76,7 @@
     @endif
 
 @endsection
+
+
 @yield('product_card')
+
