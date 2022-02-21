@@ -58,7 +58,7 @@ class SkateFromDbController extends Controller
             $slug = slugDefining($request['category_id']);
             $singular_slug = substr($slug, 0, -1);
             $unic = now()->timestamp;
-            $media = $skate->first()->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
+            $media = $skate->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
                 ->usingFileName($singular_slug . '_' . $unic . '.jpg')
                 ->toMediaCollection('cover');
             $skate->img = extensionRemoer($media->file_name).'/'.$media->file_name;;
