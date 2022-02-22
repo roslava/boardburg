@@ -18,18 +18,17 @@ class SkateFromDbController extends Controller
 {
     public function index(Skate $skate, Request $request, Session $session)
     {
-        removeOldVariablesFromSession($session); //helper — forget all variables in session
-        putQueryInSession($request, $session); //helper — puts current query in session
+        forgetOldVariablesFromSession($session);
+        putQueryInSession($request, $session);
         $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $skate::query(), auth()->user());
         $quantity = $skatesFromBase->count();
         $skatesFromBase = $skatesFromBase->paginate(8);
-        putLastPageInSession($skatesFromBase, $session); //helper — puts lastPage in session
+        putLastPageInSession($skatesFromBase, $session);
         if (!$skatesFromBase->count()) {
-                 return redirect()->route('skates_base.index', ['page' => $skatesFromBase->lastPage()]);
-            }
+            return redirect()->route('skates_base.index', ['page' => $skatesFromBase->lastPage()]);
+        }
         return view('home', compact('skatesFromBase', 'quantity'));
     }
-
 
     public function create()
     {
@@ -48,25 +47,13 @@ class SkateFromDbController extends Controller
                 'category_id' => $request['category_id'],
                 'user_id' => auth()->user()->id,
                 'slug' => slugDefining($request['category_id']),
-                'img' => '_'
+                'img' => ' '
             ]);
         }
-
         $temporaryFile = TemporaryFile::where('folder', $request->cover)->first();
+//        dd($temporaryFile);
         if ($temporaryFile) {
-            $folder = 'app/public/tmp/' . $request->cover;
-            $slug = slugDefining($request['category_id']);
-            $singular_slug = substr($slug, 0, -1);
-            $unic = now()->timestamp;
-            $media = $skate->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
-                ->usingFileName($singular_slug . '_' . $unic . '.jpg')
-                ->toMediaCollection('cover');
-            $skate->img = extensionRemoer($media->file_name).'/'.$media->file_name;;
-            $skate->save();
-             rmdir(storage_path($folder)); //tmp
-            $temporaryFile->delete(); //tmp
-         } else {
-            dd('Нет темп-файла');
+            tmpFileAddToMediaLibrary($request, $skate, $temporaryFile);
         }
         $created_name = $request['name'];
         $authCheck = Auth::check();
@@ -82,9 +69,8 @@ class SkateFromDbController extends Controller
         return view('skates.skate_edit', compact('skateFromBase'));
     }
 
-    public function update(Image $image, StoreSkateRequest $request, Skate $skate, $id, Session $session): RedirectResponse
+    public function update(StoreSkateRequest $request, Skate $skate, $id, Session $session): RedirectResponse
     {
-        dd($request);
         $skateFromBase = $skate::all()->find($id);
         $skateFromBase->external_id = 'NULL';
         $skateFromBase->name = $request->get('name');
@@ -93,9 +79,13 @@ class SkateFromDbController extends Controller
         $skateFromBase->category_id = $request->get('category_id');
         $skateFromBase->user_id = auth()->user()->id;
         $skateFromBase->slug = slugDefining($request['category_id']);
-        $skateFromBase->img = setImgPath($request, $image, slugDefining($request['category_id']));
-        $skateFromBase->save();
         Gate::authorize('update-skate', [$skateFromBase]);
+        $temporaryFile = TemporaryFile::where('folder', $request->cover)->first();// from tmp base
+        $baseFilename = cut_string_using_last('/', $skateFromBase->img, 'right', false); // from skate base
+        if ($temporaryFile != $baseFilename) {
+            tmpFileAddToMediaLibrary($request, $skateFromBase, $temporaryFile);
+        }
+        $skateFromBase->save();
         return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
@@ -107,46 +97,24 @@ class SkateFromDbController extends Controller
 
     public function destroy(Skate $skate, $id): RedirectResponse
     {
-        if($skate->count() > 1){
-
-        $skatesFromBase = $skate->all();
-        $skateFromBase = $skatesFromBase->find($id);
-        Gate::authorize('delete-skate', [$skateFromBase]);
-        $directory = cut_string_using_last('/', $skateFromBase['img'], 'left', false);
-//        Storage::exists('uploads/'.$directory)?'да': 'нет';
-        $shortImgName = cut_string_using_last('/', $skateFromBase['img'], 'right', false);
+        if ($skate->count() > 1) {
+            $skatesFromBase = $skate->all();
+            $skateFromBase = $skatesFromBase->find($id);
+            Gate::authorize('delete-skate', [$skateFromBase]);
+            $shortImgName = cut_string_using_last('/', $skateFromBase['img'], 'right', false);
+            $baseImgNameWithoutExtension = extensionRemover($shortImgName);
 
 
-        $shortImgNameWithoutExtension =  extensionRemoer($shortImgName);
-        $getExtension = explode( '.', $shortImgName );
-        $extension = end( $getExtension);
+            removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], '-thumb'); //converted file
+            removeFolderFromUploads($baseImgNameWithoutExtension, true); //folder with converted file
+            removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], null); //base file
+            removeFolderFromUploads($baseImgNameWithoutExtension, false);
+            removeRecordInMediaTable($skate, $shortImgName);
 
-
-        // удаление конвертированного файла из папки conversions
-        if (file_exists(storage_path('app/public/uploads/'. $directory . '/conversions/'. $shortImgNameWithoutExtension . '-thumb' .'.'.$extension)) AND $skateFromBase->id == $id){
-            unlink(storage_path('app/public/uploads/'. $directory . '/conversions/'. $shortImgNameWithoutExtension . '-thumb' .'.'.$extension ));
-        }
-        // удаление папки conversions
-        if(is_dir(storage_path('app/public/uploads/'.$directory.'/conversions')) AND $skateFromBase->id == $id){
-            rmdir(storage_path('app/public/uploads/'.$directory.'/conversions'));
-        }
-//        dd(storage_path('app/public/uploads/'. $skateFromBase['img']));
-// удаление файла
-if (file_exists(storage_path('app/public/uploads/'. $skateFromBase['img'])) AND $skateFromBase->id == $id){
-
-    unlink(storage_path('app/public/uploads/'. $skateFromBase['img'])); // удаление основного файла
-}
-
-// удаление папки
-        if(is_dir(storage_path('app/public/uploads/'.$directory)) AND $skateFromBase->id == $id){
-            rmdir(storage_path('app/public/uploads/'.$directory));
-        }
-        removeRecordInMediaTable($skate, $shortImgName);
-
-    if ($skateFromBase) {
-        $skateFromBase->delete();
-        return redirect()->back()->with('success', "Товар с ID $id был удален");
-    }
+            if ($skateFromBase) {
+                $skateFromBase->delete();
+                return redirect()->back()->with('success', "Товар с ID $id был удален");
+            }
         }
         return redirect()->back()->with('success', "Последний товар не может быть удален.");
     }

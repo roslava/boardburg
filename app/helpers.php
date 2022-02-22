@@ -35,7 +35,7 @@ function putLastPageInSession($skatesFromBase, $session)
     $session::put('lastPageIs', $skatesFromBase->lastPage());
 }
 
-function removeOldVariablesFromSession($session)
+function forgetOldVariablesFromSession($session)
 {
     if ($session::has('oldQuery')) {
         $session::forget('oldQuery');
@@ -113,17 +113,18 @@ function setImgPath($request, $image, $slug)
             $constraint->upsize();
         });
         $imgBig->save($imgFile);
-        return $imgFile->storeAs('uploads/'.slugDefining($request['category_id']).'/'. substr($slug, 0, -1) . '_' . time(), $filename);
+        return $imgFile->storeAs('uploads/' . slugDefining($request['category_id']) . '/' . substr($slug, 0, -1) . '_' . time(), $filename);
     }
 }
 
 // make directory name from img path
-function cut_string_using_last($character, $string, $side, $keep_character=true) {
+function cut_string_using_last($character, $string, $side, $keep_character = true)
+{
     $offset = ($keep_character ? 1 : 0);
     $whole_length = strlen($string);
     $right_length = (strlen(strrchr($string, $character)) - 1);
     $left_length = ($whole_length - $right_length - 1);
-    switch($side) {
+    switch ($side) {
         case 'left':
             $piece = substr($string, 0, ($left_length + $offset));
             break;
@@ -135,16 +136,18 @@ function cut_string_using_last($character, $string, $side, $keep_character=true)
             $piece = false;
             break;
     }
-    return($piece);
+    return ($piece);
 }
 
-function getMime($fileName){
-    $parts = explode( '.', $fileName );
-    return end( $parts );
+function getMime($fileName)
+{
+    $parts = explode('.', $fileName);
+    return end($parts);
 }
 
 
-function extensionRemoer($fileName){
+function extensionRemover($fileName)
+{
 // Initializing a variable
 // with filename
     $file = $fileName;
@@ -157,11 +160,59 @@ function extensionRemoer($fileName){
 }
 
 
-function removeRecordInMediaTable($model, $shortImgName){
+function removeRecordInMediaTable($model, $shortImgName)
+{
     $mediaItems = $model->first()->getMedia('cover');
-    $mediaItem = $mediaItems->where('file_name','=', $shortImgName)->first();
-    if($mediaItem){
+    $mediaItem = $mediaItems->where('file_name', '=', $shortImgName)->first();
+    if ($mediaItem) {
         $mediaItem->delete();
     }
 
+}
+
+function tmpFileAddToMediaLibrary($request, $currentProduct, $temporaryFile)
+{
+    $folder = 'app/public/tmp/' . $request->cover;
+    $slug = slugDefining($request['category_id']);
+    $singular_slug = substr($slug, 0, -1);
+    $unic = now()->timestamp;
+    $media = $currentProduct->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
+        ->usingFileName($singular_slug . '_' . $unic . '.jpg')
+        ->toMediaCollection('cover');
+    $currentProduct->img = extensionRemover($media->file_name) . '/' . $media->file_name;
+    $currentProduct->save();
+    rmdir(storage_path($folder)); //tmp
+    $temporaryFile->delete(); //tmp
+}
+
+function removeFileFromUploads($baseImgName, $conversionPostfix = null)
+{
+    if ($conversionPostfix !== null) {
+        $convertedFile = storage_path('app/public/uploads/' . $baseImgName[0] . '/conversions/' . $baseImgName[0] . $conversionPostfix . '.' . $baseImgName[1]);
+        if (file_exists($convertedFile)) unlink($convertedFile);
+    }
+    if ($conversionPostfix == null) {
+        $convertedFile = storage_path('app/public/uploads/' . $baseImgName[0] . '/' . $baseImgName[0] . '.' . $baseImgName[1]);
+        if (file_exists($convertedFile)) unlink($convertedFile);
+    }
+}
+
+function removeFolderFromUploads($baseImgNameWithoutExtension, $conversion)
+{
+    if ($conversion === true) {
+        if (is_dir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension . '/conversions'))) {
+            rmdir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension . '/conversions'));
+        }
+    }
+    if ($conversion === false) {
+        if (is_dir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension))) {
+            rmdir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension));
+        }
+    }
+}
+
+function getExtension($shortImgName)
+{
+    $getExtension = explode('.', $shortImgName);
+    return end($getExtension);
 }

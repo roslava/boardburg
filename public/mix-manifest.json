@@ -2,5 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/button_disabled.js": "/js/button_disabled.js",
     "/css/app.css": "/css/app.css",
+    "/css/cust/footer_to_bottom.css": "/css/cust/footer_to_bottom.css",
+    "/css/cust/custom.css": "/css/cust/custom.css",
+    "/css/cust/card-custom.css": "/css/cust/card-custom.css",
     "/css/bootstrap.css": "/css/bootstrap.css"
 }

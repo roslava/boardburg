@@ -60,6 +60,8 @@
                                 class="form-check-input @if($key == 3)@error('category_id') is-invalid  @enderror @endif"
                                 type="radio" name="category_id"
                                 id={{"checkCategory".$key++}} value={{$key}}>
+                            @if(request()->input('category_id') == $key) checked @endif
+
                             <label class="form-check-label" for={{"checkCategory".$key}}>
                                 {{$product[0]}}
                             </label>
@@ -79,25 +81,14 @@
             </div>
 
             <label class="mb-1" for="img">Загрузка изображения товара</label>
-{{--            <div class="bb-inputs-grupper input-group ">--}}
-{{--                <input type="file" name="image" value="{{ old('image') }}" id="image" class="@error('image') is-invalid @enderror">--}}
-{{--                @error('image')--}}
-{{--                <span--}}
-{{--                    class="invalid-feedback"--}}
-{{--                    role="alert">--}}
-{{--                        <strong>{{ $message }}</strong>--}}
-{{--                    </span>--}}
-{{--                @enderror--}}
-{{--            </div>--}}
-
             <input type="file" id="cover" name="cover" class="@error('cover') is-invalid @enderror">
-                            @error('cover')
-                            <span
-                                class="invalid-feedback"
-                                role="alert">
+            @error('cover')
+            <span
+                class="invalid-feedback"
+                role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror
+            @enderror
             <button class="btn btn-primary mt-4" style="margin-right: 1rem !important;" type="submit">Создать</button>
             <a href="{{ route('skates_base.index')}}" class="btn btn-info mt-4">Отменить</a>
         </form>
@@ -109,35 +100,34 @@
 
 
 @section('fp_scripts')
-<script>
-FilePond.registerPlugin(FilePondPluginFileValidateType);
+    <script>
+        FilePond.registerPlugin(FilePondPluginFileValidateType);
 
-    // Get a reference to the file input element
-    const inputElement = document.querySelector('input[id="cover"]');
+        // Get a reference to the file input element
+        const inputElement = document.querySelector('input[id="cover"]');
 
-    // Create a FilePond instance
-    // const pond = FilePond.create(inputElement);
+        // Create a FilePond instance
+        // const pond = FilePond.create(inputElement);
 
-    const pond = FilePond.create(inputElement, {
-        allowFileTypeValidation:true,
-        acceptedFileTypes: ["image/jpg", "image/jpeg", "image/png"],
-        maxFiles: 1,
-        labelFileTypeNotAllowed:'File of invalid type',
-        fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
-    });
-
-    FilePond.setOptions({
-        server: {
-            headers:{
-                'X-CSRF-TOKEN': '{{csrf_token()}}'
+        const pond = FilePond.create(inputElement, {
+            allowFileTypeValidation: true,
+            acceptedFileTypes: ["image/jpg", "image/jpeg", "image/png"],
+            maxFiles: 1,
+            labelFileTypeNotAllowed: 'File of invalid type',
+            fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
+        });
+        FilePond.setOptions({
+            server: {
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                },
+                process: {
+                    url: '{{route('upload_file.store')}}'
+                },
+                revert: {
+                    url: '{{ route('revert_tmp_file.revert')}}',
+                },
             },
-          process:{
-              url:'{{route('upload_file.store')}}'
-          },
-            revert: {
-                url: '{{ route('revert_tmp_file.revert')}}',
-            }
-        }
-    });
-</script>
+        });
+    </script>
 @endsection

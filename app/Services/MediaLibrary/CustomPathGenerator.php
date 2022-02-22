@@ -17,7 +17,7 @@ class CustomPathGenerator implements BasePathGenerator
      */
     public function getPath(Media $media): string
     {
-        return 'uploads/'.extensionRemoer($media->file_name) . '/';
+        return 'uploads/'.extensionRemover($media->file_name) . '/';
 
     }
 
@@ -30,7 +30,7 @@ class CustomPathGenerator implements BasePathGenerator
      */
     public function getPathForConversions(Media $media): string
     {
-        return 'uploads/'.extensionRemoer($media->file_name) . '/conversions/';
+        return 'uploads/'.extensionRemover($media->file_name) . '/conversions/';
 
     }
 
@@ -43,7 +43,7 @@ class CustomPathGenerator implements BasePathGenerator
      */
     public function getPathForResponsiveImages(Media $media): string
     {
-        return 'uploads/'.extensionRemoer($media->file_name) . '/responsive-images/';
+        return 'uploads/'.extensionRemover($media->file_name) . '/responsive-images/';
 
     }
 

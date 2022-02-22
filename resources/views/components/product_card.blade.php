@@ -11,15 +11,16 @@
                          style="max-height: 200px; width: fit-content;" alt="...">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{$skateFromBase->name}}</h5>
+                    <h5 class="bb-card-title">{{$skateFromBase->name}}</h5>
                     <p class="card-text">{{ substr($skateFromBase->description, 0, strpos(wordwrap($skateFromBase->description, 100), "\n")).'...'}}</p>
                     <div style=" display: flex; justify-content: space-between; align-items: center">
                         <form action="{{ route('skates_base.show', $skateFromBase->id)}}">
                             <button class="btn btn-primary">Подробнее</button>
                         </form>
 
-                        <span class="badge rounded-pill bg-warning text-dark pt-2"
-                              style="font-size: 13px; font-weight: bold">{{$skateFromBase->price}} руб.</span>
+{{--                        <span class="badge rounded-pill bg-warning text-dark pt-2 pb-2"--}}
+                        <div class="bb-product-card-price"
+                              >{{$skateFromBase->price}} <span class="rub">c</span></div>
                     </div>
                 </div>
                 <div class="card_bottom m-3" style="display: flex; flex-direction: column; align-items: end">

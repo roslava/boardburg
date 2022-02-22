@@ -4,12 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Models\Skate;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 
 class SkateFromServerController extends Controller
 {
     public function index()
     {
+        try {
+            $file = file_get_contents('http://boardburger-api-v1.com/skates.zip');
+            $file_path = 'uploads/skates.zip';
+            Storage::disk('public')->put('uploads/skates.zip', $file);
+            $zip = new  \ZipArchive();
+            if ($zip->open(Storage::path($file_path)) === TRUE) {
+                $zip->extractTo(storage_path('app/public/uploads/'));
+                $zip->close();
+                $storageImgPath = storage_path('app/public/uploads/skates.zip');
+                if ($storageImgPath) unlink($storageImgPath);
+                echo 'ok';
+            } else {
+                echo 'failed';
+            }
+        } catch (Throwable $exception) {
+            dd($exception->getMessage(), $exception->getFile(), $exception->getLine());
+        }
         return Http::get('http://boardburger-api-v1.com/skates.json')->json();
     }
 

@@ -26,6 +26,18 @@ body {
     background-color: #198754;
 }
 
+.footer-boardburg{
+    color: white;
+}
+
+.footer-boardburg-icons{
+    color: white;
+    font-size: 1.5rem;
+}
+
+
+
+
 .btn-dell {
     display: flex;
     color: #fff;
@@ -91,7 +103,7 @@ body, html {
 
 .live-input {
     outline: none;
-    background-color: #766d7b
+    background-color: #766d7b;
 }
 
 .live-input:focus {
@@ -107,7 +119,7 @@ body, html {
 }
 
 
-.bb-filter{
+.bb-filter {
     border: #198754 solid 1px;
     border-radius: 0.25rem;
     background-color: #24181DFF
@@ -125,13 +137,12 @@ body, html {
 
 
 }
+
 @media (max-width: 1200px) {
-    .bb-filter-form{
+    .bb-filter-form {
         font-size: 0.9rem;
     }
 }
-
-
 
 
 .bb-filter-form__price-input-group {
@@ -139,6 +150,7 @@ body, html {
     flex-direction: row;
     padding: 0;
 }
+
 @media (max-width: 992px) {
     .bb-filter-form__price-input-group {
         flex-direction: column;
@@ -150,15 +162,17 @@ body, html {
 
 .bb-filter-form__price-input {
     display: flex;
-      flex-direction: row;
+    flex-direction: row;
     margin-right: 1rem;
     height: 2.4rem;
 }
+
 @media (max-width: 1200px) {
     .bb-filter-form__price-input {
         height: 2rem;
     }
 }
+
 @media (max-width: 992px) {
     .bb-filter-form__price-input {
         height: 2rem;
@@ -170,7 +184,7 @@ body, html {
     display: flex;
     align-items: center;
     padding: 0.375rem 0.75rem;
-     font-weight: 400;
+    font-weight: 400;
     line-height: 1.5;
     color: #212529;
     text-align: center;
@@ -190,13 +204,14 @@ body, html {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
 @media (max-width: 1200px) {
     .bb-filter-form__price-input-value {
         max-width: 60px;
     }
 }
 
-.bb-filter-form__check-group{
+.bb-filter-form__check-group {
     display: flex;
     flex-direction: row;
 }
@@ -207,9 +222,10 @@ body, html {
     }
 }
 
-.bb-form-check{
+.bb-form-check {
     /*font-size: 16px;*/
 }
+
 @media (max-width: 1200px) {
     .bb-form-check {
         padding: 0px;
@@ -219,9 +235,7 @@ body, html {
 }
 
 
-
-
-.bb-filter-form__check-input{
+.bb-filter-form__check-input {
     background-color: #198754;
     border-color: #198754;
 }
@@ -229,7 +243,7 @@ body, html {
 
 @media (max-width: 1200px) {
     .bb-filter-form__check-input {
-       }
+    }
 }
 
 .bb-filter-form__check-input:checked {
@@ -248,13 +262,14 @@ body, html {
     border-color: #3FC24CFF;
 }
 
-.bb-filter-form__btn{
+.bb-filter-form__btn {
     height: 2.4rem;
     width: 5.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 @media (max-width: 1200px) {
     .bb-filter-form__btn {
         height: 2rem;
@@ -263,11 +278,6 @@ body, html {
 
     }
 }
-
-
-
-
-
 
 
 .accordion-button_custom_1 {
@@ -306,5 +316,41 @@ body, html {
     margin-left: 0 !important;
 }
 
+.bb-product-card-price{
+    box-sizing: border-box;
+    padding-left: 8px;
+    padding-right: 8px;
+    /*padding-bottom: 10px;*/
+    padding-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    border-radius: 15px;
+    display: block;
+    background: rgb(254,192,47);
+    background: linear-gradient(162deg, rgba(254,192,47,1) 0%, rgba(254,161,47,1) 68%, rgba(254,123,47,1) 100%);
+    /*cursor: pointer;*/
+
+}
+
+
+.rub {
+    font-family: "rouble";
+    font-size: 0.8rem;
+}
+
+.bb-card-title{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+
+
 /*@import '~bootstrap-icons/font/bootstrap-icons.css';*/
+
+@font-face {
+    font-family: "rouble";
+    src: url(/fonts/rouble.otf?b5a0c905109bbc63d2ed762255024eab) format("opentype");
+}
 
