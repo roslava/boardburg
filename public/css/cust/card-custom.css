@@ -2,19 +2,18 @@
     display: flex;
     color: #fff;
     background-color: #adaaad;
-    border-color: #adaaad; /*set the color you want here*/
+    /*border-color: #adaaad; !*set the color you want here*!*/
     border-radius: 50%;
-    font-size: 0;
+    /*font-size: 0;*/
     width: 30px;
     height: 30px;
     align-items: center;
     justify-content: center;
+    padding: 0 !important;
+    text-align: center;
 }
 
-.btn-dell > svg {
-    min-width: 20px;
-    min-height: 20px;
-}
+
 
 .btn-dell:hover, .btn-dell:focus, .btn-dell:active, .btn-dell.active, .open > .dropdown-toggle.btn-dell {
     color: #fff;
@@ -23,27 +22,65 @@
 }
 
 .btn-edit {
-    display: flex;
+    display: inline-block;
     color: #fff;
-    background-color: #adaaad;
+    background: rgb(176, 176, 176);
+    background: linear-gradient(18deg, rgb(176, 176, 176) 0%, rgb(176, 176, 176) 35%, rgb(176, 176, 176) 100%);
     border-color: #adaaad; /*set the color you want here*/
     border-radius: 50%;
     font-size: 0;
     width: 30px;
     height: 30px;
-    align-items: center;
-    justify-content: center;
-
+    position: relative;
+    transition: background 1.2s !important;
 }
 
-.btn-edit > svg {
-    min-width: 19px;
-    min-height: 19px;
+.btn-edit > i {
+    position: absolute;
+    left: 4px;
+    top:-1px;
+    font-size: 1.26rem
 }
+
 
 .btn-edit:hover, .btn-edit:focus, .btn-edit:active, .btn-edit.active, .open > .dropdown-toggle.btn-edit {
     color: #fff;
-    background-color: #006466;
-    border-color: #006466; /*set the color you want here*/
+    background: rgb(30,152,95);
+    background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(25,135,84,1) 100%);
+    border-color: rgb(28, 140, 88); /*set the color you want here*/
+}
+
+
+.rub {
+    font-family: "rouble";
+    font-size: 0.8rem;
+}
+
+.bb-card-title{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.product-card__btn-holder{
+    margin: 0px !important;
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+
+.product-card__detailes{
+    background: rgb(30,152,95);
+    background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(25,135,84,1) 100%);
+    color: white;
+    transition: background .6s;
+}
+
+.product-card__detailes:hover{
+    background: rgb(25,135,84);
+    background: linear-gradient(18deg, rgba(25,135,84,1) 0%, rgba(25,135,84,1) 28%, rgba(25,94,62,1) 100%);
+    color: white;
 }
 

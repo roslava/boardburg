@@ -2,6 +2,10 @@ body, html {
     background-color: #24181d !important;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 .header-bg {
     -webkit-align-content: flex-end !important;
     display: flex;
@@ -15,6 +19,7 @@ body, html {
 .live-input {
     outline: none;
     background-color: #766d7b;
+    transition: background-color .6s;
 }
 
 .live-input:focus {
@@ -36,6 +41,36 @@ body, html {
     background-color: #24181DFF
 }
 
+@media (max-width: 992px) {
+    .bb-filter {
+padding-left: 40px !important;
+        padding-right: 40px !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .bb-filter {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .bb-filter {
+        padding-left: 25px !important;
+        padding-right: 25px !important;
+    }
+}
+@media (max-width: 460px) {
+    .bb-filter {
+       width: fit-content;
+        margin: 0 auto;
+        padding: 20px !important;
+    }
+}
+
+
+
 .bb-filter-form {
     width: 100%;
     display: flex;
@@ -45,13 +80,18 @@ body, html {
     justify-content: space-between;
     box-sizing: border-box;
     margin: 0;
-
-
 }
 
 @media (max-width: 1200px) {
     .bb-filter-form {
         font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 460px) {
+    .bb-filter-form {
+        /*flex-direction: column;*/
+        display: block;
     }
 }
 
@@ -67,6 +107,13 @@ body, html {
         flex-direction: column;
         /*align-items: start;*/
         max-width: 200px !important;
+    }
+}
+
+@media (max-width: 460px) {
+    .bb-filter-form__price-input-group {
+       max-width: 230px !important;
+        padding: 0px !important;
     }
 }
 
@@ -91,6 +138,14 @@ body, html {
     }
 }
 
+@media (max-width: 460px) {
+    .bb-filter-form__price-input {
+width: 100%;
+        padding: 0px !important;
+        margin-right: 0px !important;
+    }
+}
+
 .bb-filter-form__price-input-key {
     display: flex;
     align-items: center;
@@ -106,6 +161,7 @@ body, html {
     border-top-right-radius: 0;
     border-bottom-left-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
+    width: 46px;
 }
 
 .bb-filter-form__price-input-value {
@@ -114,11 +170,21 @@ body, html {
     padding: 6px 12px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
+    margin: 0px;
 }
 
 @media (max-width: 1200px) {
     .bb-filter-form__price-input-value {
         max-width: 60px;
+
+    }
+}
+
+@media (max-width: 460px) {
+    .bb-filter-form__price-input-value {
+        max-width: 100%;
+        margin-right: 0px;
+
     }
 }
 
@@ -127,11 +193,33 @@ body, html {
     flex-direction: row;
 }
 
+
+
+@media (max-width: 1200px) {
+    .bb-filter-form__check-group {
+       margin-right: -60px;
+    }
+}
+
+
+
+
 @media (max-width: 992px) {
     .bb-filter-form__check-group {
         flex-direction: column;
     }
 }
+
+
+@media (max-width: 460px) {
+    .bb-filter-form__check-group {
+        margin-left: 35px;
+        margin-top: 12px;
+        margin-bottom: 20px;
+    }
+}
+
+
 
 .bb-form-check {
     /*font-size: 16px;*/
@@ -142,6 +230,8 @@ body, html {
         padding: 0px;
         margin: 0px;
         margin-left: 26px;
+        margin-right: 50px!important;
+        /*background-color: #6a1a21;*/
     }
 }
 
@@ -175,18 +265,26 @@ body, html {
 
 .bb-filter-form__btn {
     height: 2.4rem;
-    width: 5.4rem;
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 12px;
 }
 
 @media (max-width: 1200px) {
     .bb-filter-form__btn {
         height: 2rem;
-        width: 4.8rem;
+        width: fit-content;
         padding: 8px;
+    }
+}
 
+@media (max-width: 460px) {
+    .bb-filter-form__btn {
+        height: 2rem;
+        width: 100%;
+        padding: 8px;
     }
 }
 
@@ -245,13 +343,38 @@ body, html {
 }
 
 
-.rub {
-    font-family: "rouble";
-    font-size: 0.8rem;
-}
-
-.bb-card-title{
+.bb-product-title{
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: 2rem;
+}
+
+.modal__close-btn{
+    color: #818181;
+    transition: color .6s;
+}
+
+.modal__close-btn:hover{
+    color: #424242;
+}
+
+/*.page-link{*/
+/*    background-color: white !important;*/
+/*}*/
+/*span.page-link{*/
+/*    background-color: rgb(30,152,95) !important;*/
+/*}*/
+
+
+.page-item > a{
+    color: rgb(30,152,95) !important;
+}
+
+.page-item.active .page-link {
+    background-color: rgb(30,152,95) !important;
+    border-color:rgb(30,152,95) !important;
+}
+
+.card-technical{
+    border: #676977 dashed 1px;
 }

@@ -84,7 +84,7 @@
 
 
 
-                        <button type="submit" class="btn btn-success bb-filter-form__btn">Фильтр</button>
+                        <button type="submit" class="btn btn-success bb-filter-form__btn">Отфильтровать</button>
 
                 </form>
 

@@ -4,18 +4,19 @@
     @if(!count($skatesFromBase)==0)
     @foreach($skatesFromBase as $skateFromBase)
         {{--@can('view',$skateFromBase)--}}
+
         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
             <div class="card" style="height: 100%">
-                <div class="row pt-3" style="justify-content: center;margin:0">
-                    <img src="{{asset('/storage/uploads/'.$skateFromBase->img)}}" class="card-img-top"
-                         style="max-height: 200px; width: fit-content;" alt="...">
+                <div class="row pt-3" style="justify-content: center; margin:0">
+                    <a style="width: 100%; display: flex; justify-content: center; " href="{{ route('skates_base.show', $skateFromBase->id)}}"><img src="{{asset('/storage/uploads/'.$skateFromBase->img)}}" class="card-img-top"
+                         style="max-height: 200px; width: auto;" alt="{{$skateFromBase->name}}" title="{{$skateFromBase->name}}"></a>
                 </div>
                 <div class="card-body">
                     <h5 class="bb-card-title">{{$skateFromBase->name}}</h5>
                     <p class="card-text">{{ substr($skateFromBase->description, 0, strpos(wordwrap($skateFromBase->description, 100), "\n")).'...'}}</p>
                     <div style=" display: flex; justify-content: space-between; align-items: center">
                         <form action="{{ route('skates_base.show', $skateFromBase->id)}}">
-                            <button class="btn btn-primary">Подробнее</button>
+                            <button class="btn product-card__detailes">Подробнее</button>
                         </form>
 
 {{--                        <span class="badge rounded-pill bg-warning text-dark pt-2 pb-2"--}}
@@ -41,18 +42,17 @@
 
                         </div>
                     @endif
-                    <div class="row" style="margin-right: 0.1rem">
+                    <div class="row product-card__btn-holder">
                         @can(['update-skate', 'delete-skate'], $skateFromBase)
-                            <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class="btn btn-edit"
-                               style="margin-right: 0.6rem">
-                                @include('components.button_edit_svg')
+                            <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class=" btn btn-edit">
+                                <i class="bi bi-pencil-square"></i>
                             </a>
-                            <form class="p-0 m-0" style="display: inline; max-width: 30px"
+                            <form class="p-0 m-0 float-end " style="display: inline; max-width: 30px"
                                   action="{{ route('skates_base.destroy', $skateFromBase->id)}}" method="post">
                                 @csrf
                                 @method("DELETE")
                                 <button class="btn btn-dell">
-                                    @include('components.button_delete_svg')
+                                    <i style="font-size: 1.5rem;" class="bi bi-x-octagon"></i>
                                 </button>
                             </form>
                         @endcan
@@ -64,9 +64,6 @@
         {{--@endcan--}}
     @endforeach
     @endif
-
-111
-
     @if(count($skatesFromBase)==0)
         <div class="d-flex" style="font-size: 16px">
             <p class="light" style="color: #198754"><i style="color: #2BE891" class="bi bi-emoji-frown"></i> По запросу

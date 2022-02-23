@@ -8,8 +8,8 @@
         {{--    breadcrumb--}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('skates_base.index')}}">Каталог</a></li>
-                <li class="breadcrumb-item"><a
+                <li class="breadcrumb-item"><a style="color: rgb(30,152,95);" href="{{ route('skates_base.index')}}">Каталог</a></li>
+                <li class="breadcrumb-item"><a style="color: rgb(30,152,95);"
                         href="{{ route("skates_base.index")}}/{{$skateFromBase->id}}">{{$skateFromBase->name}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Редактирование товара</li>
             </ol>
