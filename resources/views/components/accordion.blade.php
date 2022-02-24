@@ -1,8 +1,8 @@
 @section('accordion')
     <div class="accordion accordion-flush mb-5" id="accordionFlushExample">
-        <div class="accordion-item">
+        <div class="accordion-item" >
             <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                <button class="accordion-button accordion-button-custom collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseOne" aria-expanded="false"
                         aria-controls="flush-collapseOne">
                     <small>Количество наименований: &nbsp;{{$quantity}}. &nbsp; </small>

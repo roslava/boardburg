@@ -511,6 +511,149 @@ width: 100%;
     border: #676977 dashed 1px;
 }
 
+.navbar__nav{
+    color: #ffffff;
+    background: rgb(30,152,95)!important;
+    background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(38,193,121,1) 100%)!important;
+}
+.navbar__nav a{
+    color: rgba(255, 255, 255, 0.7);
+    }
+.navbar__nav a:hover{
+    color: rgb(255, 255, 255);
+}
+
+button.navbar-toggler{
+
+
+    background-color: #1c8c58 !important;
+    padding: 0 !important;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    border: 0 !important;
+}
+
+.nav-link:hover, .nav-link:focus {
+    color: #a4cbc1;
+}
+
+button.navbar-toggler > i{
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 40px;
+    transition: color .5s;
+}
+button.navbar-toggler > i:hover{
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+}
+
+
+a.active.focus,
+a.active:focus,
+a.focus,
+a:active.focus,
+a:active:focus,
+a:focus,
+button.active.focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button:active:focus,
+button:focus,
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn:active:focus,
+.btn:focus {
+    outline: 0!important;
+    outline-color: transparent!important;
+    outline-width: 0!important;
+    outline-style: none!important;
+    box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+}
+
+
+.nav-item{
+    background: #187E4FFF!important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+    /*margin-top: 20px;*/
+    /*margin-bottom: 10px;*/
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+
+.ms-auto{
+
+}
+
+@media (max-width: 767px) {
+    .ms-auto{
+      margin-top: 20px;
+        margin-bottom: 6px;
+    }
+}
+
+
+.login-inp-button{
+    background: none;
+    border: 0;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 4px;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    transition: color .6s;
+}
+
+.login-inp-button:hover{
+    color: rgb(255, 255, 255);
+}
+
+
+
+
+
+.login-modal__btn{
+    background: rgb(30,152,95);
+    background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(25,135,84,1) 100%);
+    color: white;
+    transition: background .6s;
+}
+
+.login-modal__btn:hover{
+    background: rgb(25,135,84);
+    background: linear-gradient(18deg, rgba(25,135,84,1) 0%, rgba(25,135,84,1) 28%, rgba(25,94,62,1) 100%);
+    color: white;
+}
+
+
+.dropdown-item-custom{
+    color: rgb(25,135,84) !important;
+}
+
+.accordion-button-custom{
+   background-color: #7e867c;
+}
+
+.accordion-button-custom:active{
+    background-color: #bce7b3 !important;
+    color: #0f5132!important;
+}
+
+.accordion-button-custom:focus{
+    background-color: #bce7b3 !important;
+    color: #0f5132!important;
+}
+
+
+
 
 
 /*@import '~bootstrap-icons/font/bootstrap-icons.css';*/

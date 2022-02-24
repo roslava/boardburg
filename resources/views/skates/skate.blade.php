@@ -13,7 +13,8 @@
                     {{--breadcrumb  --}}
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a style="color: rgb(30,152,95);" href="{{ route('skates_base.index')}}">Каталог</a></li>
+                            <li class="breadcrumb-item"><a style="color: rgb(30,152,95);"
+                                                           href="{{ route('skates_base.index')}}">Каталог</a></li>
                             <li class="breadcrumb-item active"
                                 aria-current="page">{{$skateFromBase['name'] ?? '0'}}</li>
                         </ol>
@@ -29,9 +30,11 @@
                 <div class="shadow bg-white rounded p-3  p-2"
                      style="display: flex; justify-content: center;box-sizing: border-box; width: 100%">
                     <div class="row" style="display: flex; align-items: center; padding: 0;  margin:0;">
-                        <img   data-toggle="modal" data-target="#exampleModalCenter"    class="img-fluid" src="{{asset('/storage/uploads/'.$skateFromBase->img)?? '0'}}"
+                        <img data-toggle="modal" data-target="#exampleModalCenter" class="img-fluid"
+                             src="{{asset('/storage/uploads/'.$skateFromBase->img)?? '0'}}"
 
-                             style="cursor: pointer; max-height: 400px; width: auto" alt="{{$skateFromBase['name'] ?? '0'}}" title="{{$skateFromBase['name'] ?? '0'}}">
+                             style="cursor: pointer; max-height: 400px; width: auto"
+                             alt="{{$skateFromBase['name'] ?? '0'}}" title="{{$skateFromBase['name'] ?? '0'}}">
                     </div>
                 </div>
 
@@ -41,7 +44,8 @@
                          style="font-size: 11px; min-width: 100%">
                         <div>Опубликовал менеджер: {{$skateFromBase->user_id}}</div>
                         <div>Категория: {{$skateFromBase->category_id}}</div>
-                        <div>Идентификатор товара: {{$skateFromBase->id}} / Внешний ID: {{$skateFromBase->external_id}}</div>
+                        <div>Идентификатор товара: {{$skateFromBase->id}} / Внешний
+                            ID: {{$skateFromBase->external_id}}</div>
                         <div>Дата создания: {{$skateFromBase->created_at}}</div>
                         <div>Дата обновления: {{$skateFromBase->updated_at}}</div>
                     </div>
@@ -56,12 +60,9 @@
             </div>
 
 
-
-
-
-
             {{--ROW c кнопками--}}
-            <div class="row p-0 ps-lg-5 ps-md-4 ps-sm-3 pe-lg-5 pe-md-4 pe-sm-3 mt-sm-1 mt-4 mb-2 mb-md-0  " style="margin:0; display: flex; align-items: center; justify-content: space-between">
+            <div class="row p-0 ps-lg-5 ps-md-4 ps-sm-3 pe-lg-5 pe-md-4 pe-sm-3 mt-sm-1 mt-4 mb-2 mb-md-0  "
+                 style="margin:0; display: flex; align-items: center; justify-content: space-between">
                 {{--Назад в каталог--}}
                 <div class="col-lg-8 col-md-12 col-sm-12" style="display: inline-block; width: fit-content;padding: 0">
                     <nav><a class="btn btn-warning" href="{{$previous_url}}">Назад в каталог</a></nav>
@@ -85,8 +86,6 @@
                     </div>
                 @endcan
             </div>
-
-
 
 
         </div>
@@ -115,47 +114,31 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header" style="border: 0; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: start">
+                <div class="modal-header"
+                     style="border: 0; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: start">
                     <h5 class="modal-title" id="exampleModalLongTitle">{{$skateFromBase['name'] ?? '0'}}</h5>
-
-
-<div style="width: fit-content; padding: 0; margin-left: 10px ">
-
-
-        <i style="font-size: 1.4rem; cursor: pointer; " class="bi bi-x-square modal__close-btn" data-dismiss="modal" aria-label="Close"></i>
-
-
-</div>
-
-
+                    <div style="width: fit-content; padding: 0; margin-left: 10px ">
+                        <i style="font-size: 1.4rem; cursor: pointer; " class="bi bi-x-square modal__close-btn"
+                           data-dismiss="modal" aria-label="Close"></i>
+                    </div>
                 </div>
-
-
-
                 <div class="modal-body" style="display: flex; align-items: center; justify-content: center">
-                    <img class="img-fluid max-width: 100% height: auto" src="{{asset('/storage/uploads/'.$skateFromBase->img)?? '0'}}"
-                         style="max-height: 400px; width: auto" alt="{{$skateFromBase['name'] ?? '0'}}" title="{{$skateFromBase['name'] ?? '0'}}">
+                    <img class="img-fluid max-width: 100% height: auto"
+                         src="{{asset('/storage/uploads/'.$skateFromBase->img)?? '0'}}"
+                         style="max-height: 400px; width: auto" alt="{{$skateFromBase['name'] ?? '0'}}"
+                         title="{{$skateFromBase['name'] ?? '0'}}">
                 </div>
                 <div style="border: 0" class="modal-footer">
-                                   </div>
+                </div>
             </div>
         </div>
     </div>
 
 
-
-
-
-
-
-
-
-    <script>
-        $('#exampleModalCenter').modal(options)
-    </script>
 
 
 
