@@ -28,8 +28,8 @@
                     @if (Auth::check())
                         <div class="card-technical rounded bg-light mt-0 mb-4 p-2 shadow"
                              style="font-size: 11px; min-width: 100%">
-                            <div>Опубликовал менеджер: {{$skateFromBase->user_id}}</div>
-                            <div>Категория: {{$skateFromBase->category_id}}</div>
+                            <div>Менеджер: {{auth()->user()->name}}</div>
+                            <div>Категория товара: {{$skateFromBase->category_id}} ({{$skateFromBase->slug}})</div>
                             <div>ID: {{$skateFromBase->id}} / Внешний ID: {{$skateFromBase->external_id}}</div>
                             <div>Дата создания: {{$skateFromBase->created_at}}</div>
                             <div>Дата обновления: {{$skateFromBase->updated_at}}</div>

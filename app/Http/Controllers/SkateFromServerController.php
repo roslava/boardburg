@@ -12,7 +12,7 @@ class SkateFromServerController extends Controller
     public function index()
     {
         try {
-            $file = file_get_contents('http://boardburger-api-v1.com/skates.zip');
+            $file = file_get_contents('http://russianborsch.com/skates.zip');
             $file_path = 'uploads/skates.zip';
             Storage::disk('public')->put('uploads/skates.zip', $file);
             $zip = new  \ZipArchive();
@@ -28,7 +28,7 @@ class SkateFromServerController extends Controller
         } catch (Throwable $exception) {
             dd($exception->getMessage(), $exception->getFile(), $exception->getLine());
         }
-        return Http::get('http://boardburger-api-v1.com/skates.json')->json();
+        return Http::get('http://russianborsch.com/skates.json')->json();
     }
 
     public function store($skateFromServer)
