@@ -24,12 +24,12 @@
                     <td class="col-md-3">{{$registered_user->email}}</td>
                     <td class="col-md-5">
                         <div style="display: flex">
-                            <a class="btn btn-success m-1" style="min-width: 70px"
+                            <a class="btn btn-success @if($registered_user->role == 'admin') disabled @endif m-1" style="min-width: 70px"
                                href="{{route('registered_user.edit', $registered_user->id)}}">Редактировать</a>
                             <form action="{{route('registered_user.destroy', $registered_user->id )}}" method="post">
                                 @csrf
                                 @method("DELETE")
-                                <button class="btn btn-danger  m-1" style="min-width: 70px">Удалить</button>
+                                <button class="btn btn-danger @if($registered_user->role == 'admin') disabled @endif m-1" style="min-width: 70px">Удалить</button>
                             </form>
                         </div>
 
