@@ -1,10 +1,6 @@
-
-
 @import "cust/footer_to_bottom.css";
 @import "cust/card-custom.css";
 @import "cust/custom.css";
-/*@import '~bootstrap-icons/font/bootstrap-icons.css';*/
-
 @font-face {
     font-family: "rouble";
     src: url("../fonts/rouble.otf") format("opentype");

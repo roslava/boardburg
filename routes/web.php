@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\SkateFromDbController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SkateFromServerController;
-use App\Http\Controllers\MailSendController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SkateAllUpdateController;
 use App\Http\Controllers\UploadController;
@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('skates');
 });
 
-
+Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
 
 Route::get('/skates', [SkateFromDbController::class, 'index'])->name('skates_base.index');
 Route::get('/skates/cat', [CategoryController::class, 'index'])->name('skates_base.cat');
@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/registered-users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('registered_user.edit');
     Route::put('/registered-users/{id}', [RegisteredUserController::class, 'update'])->name('registered_user.update');
     Route::delete('/registered-users/{id}', [RegisteredUserController::class, 'destroy'])->name('registered_user.destroy');
-    Route::post('/message-send', [MailSendController::class, 'MailSend'])->name('message_send.index');
+
 });
 
 Route::fallback(function () {

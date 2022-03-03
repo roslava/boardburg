@@ -37,7 +37,6 @@ class SkateFromDbController extends Controller
 
     public function store(StoreSkateRequest $request, Session $session): RedirectResponse
     {
-
         if (!empty(auth()->user()->id)) {
             $skate = Skate::create([
                 'external_id' => 'NULL',
@@ -50,8 +49,7 @@ class SkateFromDbController extends Controller
                 'img' => ' '
             ]);
         }
-        $temporaryFile = TemporaryFile::where('folder', $request->cover)->first();
-//        dd($temporaryFile);
+        $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();
         if ($temporaryFile) {
             tmpFileAddToMediaLibrary($request, $skate, $temporaryFile);
         }
@@ -72,16 +70,16 @@ class SkateFromDbController extends Controller
     public function update(StoreSkateRequest $request, Skate $skate, $id, Session $session): RedirectResponse
     {
         $skateFromBase = $skate::all()->find($id);
-        $skateFromBase->external_id = 'NULL';
-        $skateFromBase->name = $request->get('name');
-        $skateFromBase->description = $request->get('description');
-        $skateFromBase->price = $request->get('price');
-        $skateFromBase->category_id = $request->get('category_id');
-        $skateFromBase->user_id = auth()->user()->id;
-        $skateFromBase->slug = slugDefining($request['category_id']);
+        $skateFromBase['external_id'] = 'NULL';
+        $skateFromBase['name'] = $request->get('name');
+        $skateFromBase['description'] = $request->get('description');
+        $skateFromBase['price'] = $request->get('price');
+        $skateFromBase['category_id'] = $request->get('category_id');
+        $skateFromBase['user_id'] = auth()->user()->id;
+        $skateFromBase['slug'] = slugDefining($request['category_id']);
         Gate::authorize('update-skate', [$skateFromBase]);
-        $temporaryFile = TemporaryFile::where('folder', $request->cover)->first();// from tmp base
-        $baseFilename = cut_string_using_last('/', $skateFromBase->img, 'right', false); // from skate base
+        $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();// from tmp base
+        $baseFilename = cut_string_using_last('/', $skateFromBase['img'], 'right', false); // from skate base
         if ($temporaryFile != $baseFilename) {
             tmpFileAddToMediaLibrary($request, $skateFromBase, $temporaryFile);
         }
@@ -95,7 +93,7 @@ class SkateFromDbController extends Controller
         return view('skates.skate', ['skateFromBase' => $skateFromBase, 'previous_url' => URL::previous()]);
     }
 
-    public function destroy(Skate $skate, $id): RedirectResponse
+    public function destroy(Skate $skate, $id, Session $session): RedirectResponse
     {
         if ($skate->count() > 1) {
             $skatesFromBase = $skate->all();
@@ -103,21 +101,15 @@ class SkateFromDbController extends Controller
             Gate::authorize('delete-skate', [$skateFromBase]);
             $shortImgName = cut_string_using_last('/', $skateFromBase['img'], 'right', false);
             $baseImgNameWithoutExtension = extensionRemover($shortImgName);
-
-
             removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], '-thumb'); //converted file
             removeFolderFromUploads($baseImgNameWithoutExtension, true); //folder with converted file
             removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], null); //base file
             removeFolderFromUploads($baseImgNameWithoutExtension, false);
             removeRecordInMediaTable($skate, $shortImgName);
-
-            if ($skateFromBase) {
                 $skateFromBase->delete();
-                return redirect()->back()->with('success', "Товар с ID $id был удален");
-            }
+            return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
+
         }
         return redirect()->back()->with('success', "Последний товар не может быть удален.");
     }
-
 }
-

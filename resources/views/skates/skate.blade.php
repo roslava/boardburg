@@ -7,7 +7,7 @@
 @section('main')
     <div class="container-md bg-light rounded">
         <div class="row p-3 pb-3 pb-lg-5 pb-md-4 pb-sm-3   mb-0 mt-0  mt-lg-4 mb-lg-4 mt-md-3 mb-md-3  ">
-            {{--Информация--}}
+            {{--info--}}
             <div class="col-lg-8 col-md-12 col-sm-12 p-0">
                 <div class=" m-lg-5 m-md-4  m-sm-3">
                     {{--breadcrumb  --}}
@@ -24,21 +24,17 @@
                     <h4 style="color: rgb(30,152,95)"> {{$skateFromBase['price'] ?? '0'}} руб.</h4>
                 </div>
             </div>
-            {{--Изображение--}}
-
+            {{--img--}}
             <div class="col-lg-4 col-md-12 col-sm-12 p-0 p-lg-5 p-md-4 p-sm-3 mt-3">
                 <div class="shadow bg-white rounded p-3  p-2"
                      style="display: flex; justify-content: center;box-sizing: border-box; width: 100%">
                     <div class="row" style="display: flex; align-items: center; padding: 0;  margin:0;">
                         <img data-toggle="modal" data-target="#exampleModalCenter" class="img-fluid"
-                             src="{{asset('/storage/uploads/'.$skateFromBase->img)?? '0'}}"
-
+                             src="{{asset('/storage/uploads/'.$skateFromBase['img'])?? ''}}"
                              style="cursor: pointer; max-height: 400px; width: auto"
                              alt="{{$skateFromBase['name'] ?? '0'}}" title="{{$skateFromBase['name'] ?? '0'}}">
                     </div>
                 </div>
-
-
                 @if (Auth::check())
                     <div class="card-technical rounded bg-light mt-0  mt-4  p-2"
                          style="font-size: 11px; min-width: 100%">
@@ -57,22 +53,19 @@
                     </div>
                 @endif
             </div>
-
-
-            {{--ROW c кнопками--}}
+            {{--ROW with buttons--}}
             <div class="row p-0 ps-lg-5 ps-md-4 ps-sm-3 pe-lg-5 pe-md-4 pe-sm-3 mt-sm-1 mt-4 mb-2 mb-md-0  "
                  style="margin:0; display: flex; align-items: center; justify-content: space-between">
-                {{--Назад в каталог--}}
+                {{--go back--}}
                 <div class="col-lg-8 col-md-12 col-sm-12" style="display: inline-block; width: fit-content;padding: 0">
                     <nav><a class="btn btn-warning" href="{{$previous_url}}">Назад в каталог</a></nav>
                 </div>
                 @can(['update-skate', 'delete-skate'], $skateFromBase)
-                    {{--Удалить и редактировать--}}
+                    {{--delete or edit--}}
                     <div class="col-lg-4 col-md-12 col-sm-12"
                          style="padding:0; display: flex; width: fit-content; height: fit-content; align-items: end; justify-content: end">
                         <a href="{{ route('skates_base.edit', $skateFromBase->id)}}" class="btn btn-edit"
                            style="margin-right: 0.6rem">
-
                             <i style="font-size: 1.3rem" class="bi bi-pencil-square"></i>
                         </a>
                         <form action="{{ route('skates_base.destroy', $skateFromBase->id)}}" method="post">
@@ -85,34 +78,9 @@
                     </div>
                 @endcan
             </div>
-
-
         </div>
-
-
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Modal -->
+{{--    <!-- Modal img -->--}}
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -136,14 +104,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-
 @endsection
 @section('footer')
     @include('components.footer')

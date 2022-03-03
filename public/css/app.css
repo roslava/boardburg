@@ -1,6 +1,5 @@
 /*Этот css-файл нужен для того чтобы футер прижимался к низу страницы*/
 
-
 * {
     margin: 0;
     padding: 0;
@@ -42,9 +41,7 @@ body {
     display: flex;
     color: #fff;
     background-color: #adaaad;
-    /*border-color: #adaaad; !*set the color you want here*!*/
     border-radius: 50%;
-    /*font-size: 0;*/
     width: 30px;
     height: 30px;
     align-items: center;
@@ -53,12 +50,10 @@ body {
     text-align: center;
 }
 
-
-
 .btn-dell:hover, .btn-dell:focus, .btn-dell:active, .btn-dell.active, .open > .dropdown-toggle.btn-dell {
     color: #fff;
     background-color: #ab2836;
-    border-color: #ab2836; /*set the color you want here*/
+    border-color: #ab2836;
 }
 
 .btn-edit {
@@ -66,7 +61,7 @@ body {
     color: #fff;
     background: rgb(176, 176, 176);
     background: linear-gradient(18deg, rgb(176, 176, 176) 0%, rgb(176, 176, 176) 35%, rgb(176, 176, 176) 100%);
-    border-color: #adaaad; /*set the color you want here*/
+    border-color: #adaaad;
     border-radius: 50%;
     font-size: 0;
     width: 30px;
@@ -82,14 +77,12 @@ body {
     font-size: 1.26rem
 }
 
-
 .btn-edit:hover, .btn-edit:focus, .btn-edit:active, .btn-edit.active, .open > .dropdown-toggle.btn-edit {
     color: #fff;
     background: rgb(30,152,95);
     background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(25,135,84,1) 100%);
-    border-color: rgb(28, 140, 88); /*set the color you want here*/
+    border-color: rgb(28, 140, 88);
 }
-
 
 .rub {
     font-family: "rouble";
@@ -103,13 +96,12 @@ body {
 }
 
 .product-card__btn-holder{
-    margin: 0px !important;
+    margin: 0 !important;
     display:flex;
     width: 100%;
     justify-content: space-between;
 
 }
-
 
 .product-card__detailes{
     background: rgb(30,152,95);
@@ -160,7 +152,6 @@ body.modal-open {
     color: #ffffff;
 }
 
-
 .bb-filter {
     border: #198754 solid 1px;
     border-radius: 0.25rem;
@@ -169,7 +160,7 @@ body.modal-open {
 
 @media (max-width: 992px) {
     .bb-filter {
-padding-left: 40px !important;
+        padding-left: 40px !important;
         padding-right: 40px !important;
     }
 }
@@ -187,17 +178,16 @@ padding-left: 40px !important;
         padding-right: 25px !important;
     }
 }
+
 @media (max-width: 460px) {
     .bb-filter {
-       width: -webkit-fit-content;
-       width: -moz-fit-content;
-       width: fit-content;
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
         margin: 0 auto;
         padding: 20px !important;
     }
 }
-
-
 
 .bb-filter-form {
     width: 100%;
@@ -223,7 +213,6 @@ padding-left: 40px !important;
     }
 }
 
-
 .bb-filter-form__price-input-group {
     display: flex;
     flex-direction: row;
@@ -240,7 +229,7 @@ padding-left: 40px !important;
 
 @media (max-width: 460px) {
     .bb-filter-form__price-input-group {
-       max-width: 230px !important;
+        max-width: 230px !important;
         padding: 0px !important;
     }
 }
@@ -268,7 +257,7 @@ padding-left: 40px !important;
 
 @media (max-width: 460px) {
     .bb-filter-form__price-input {
-width: 100%;
+        width: 100%;
         padding: 0px !important;
         margin-right: 0px !important;
     }
@@ -304,7 +293,6 @@ width: 100%;
 @media (max-width: 1200px) {
     .bb-filter-form__price-input-value {
         max-width: 60px;
-
     }
 }
 
@@ -312,7 +300,6 @@ width: 100%;
     .bb-filter-form__price-input-value {
         max-width: 100%;
         margin-right: 0px;
-
     }
 }
 
@@ -321,23 +308,17 @@ width: 100%;
     flex-direction: row;
 }
 
-
-
 @media (max-width: 1200px) {
     .bb-filter-form__check-group {
-       margin-right: -60px;
+        margin-right: -60px;
     }
 }
-
-
-
 
 @media (max-width: 992px) {
     .bb-filter-form__check-group {
         flex-direction: column;
     }
 }
-
 
 @media (max-width: 460px) {
     .bb-filter-form__check-group {
@@ -347,10 +328,7 @@ width: 100%;
     }
 }
 
-
-
 .bb-form-check {
-    /*font-size: 16px;*/
 }
 
 @media (max-width: 1200px) {
@@ -358,11 +336,9 @@ width: 100%;
         padding: 0px;
         margin: 0px;
         margin-left: 26px;
-        margin-right: 50px!important;
-        /*background-color: #6a1a21;*/
+        margin-right: 50px !important;
     }
 }
-
 
 .bb-filter-form__check-input {
     background-color: #198754;
@@ -420,7 +396,6 @@ width: 100%;
     }
 }
 
-
 .accordion-button_custom_1 {
     background-color: #766d7b !important;
 }
@@ -432,7 +407,6 @@ width: 100%;
 .accordion-button_custom_1:focus {
     outline: none !important;
 }
-
 
 .bb-inputs-grupper {
     display: flex;
@@ -451,13 +425,12 @@ width: 100%;
     }
 }
 
-
 .bb-form-check {
     margin-right: 1.5rem;
     margin-left: 0 !important;
 }
 
-.bb-product-card-price{
+.bb-product-card-price {
     box-sizing: border-box;
     padding-left: 8px;
     padding-right: 8px;
@@ -468,64 +441,53 @@ width: 100%;
     height: 30px;
     border-radius: 15px;
     display: block;
-    background: rgb(254,192,47);
-    background: linear-gradient(162deg, rgba(254,192,47,1) 0%, rgba(254,161,47,1) 68%, rgba(254,123,47,1) 100%);
-    /*cursor: pointer;*/
-
+    background: rgb(254, 192, 47);
+    background: linear-gradient(162deg, rgba(254, 192, 47, 1) 0%, rgba(254, 161, 47, 1) 68%, rgba(254, 123, 47, 1) 100%);
 }
 
-
-.bb-product-title{
+.bb-product-title {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
     font-size: 2rem;
 }
 
-.modal__close-btn{
+.modal__close-btn {
     color: #818181;
     transition: color .6s;
 }
 
-.modal__close-btn:hover{
+.modal__close-btn:hover {
     color: #424242;
 }
 
-/*.page-link{*/
-/*    background-color: white !important;*/
-/*}*/
-/*span.page-link{*/
-/*    background-color: rgb(30,152,95) !important;*/
-/*}*/
-
-
-.page-item > a{
-    color: rgb(30,152,95) !important;
+.page-item > a {
+    color: rgb(30, 152, 95) !important;
 }
 
 .page-item.active .page-link {
-    background-color: rgb(30,152,95) !important;
-    border-color:rgb(30,152,95) !important;
+    background-color: rgb(30, 152, 95) !important;
+    border-color: rgb(30, 152, 95) !important;
 }
 
-.card-technical{
+.card-technical {
     border: #676977 dashed 1px;
 }
 
-.navbar__nav{
+.navbar__nav {
     color: #ffffff;
-    background: rgb(30,152,95)!important;
-    background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(38,193,121,1) 100%)!important;
+    background: rgb(30, 152, 95) !important;
+    background: linear-gradient(18deg, rgba(30, 152, 95, 1) 0%, rgba(25, 135, 84, 1) 35%, rgba(38, 193, 121, 1) 100%) !important;
 }
-.navbar__nav a{
+
+.navbar__nav a {
     color: rgba(255, 255, 255, 0.7);
-    }
-.navbar__nav a:hover{
+}
+
+.navbar__nav a:hover {
     color: rgb(255, 255, 255);
 }
 
-button.navbar-toggler{
-
-
+button.navbar-toggler {
     background-color: #1c8c58 !important;
     padding: 0 !important;
     height: -webkit-fit-content;
@@ -538,16 +500,16 @@ button.navbar-toggler{
     color: #a4cbc1;
 }
 
-button.navbar-toggler > i{
+button.navbar-toggler > i {
     color: rgba(255, 255, 255, 0.7);
     font-size: 40px;
     transition: color .5s;
 }
-button.navbar-toggler > i:hover{
+
+button.navbar-toggler > i:hover {
     color: rgb(255, 255, 255);
     font-size: 40px;
 }
-
 
 a.active.focus,
 a.active:focus,
@@ -567,96 +529,98 @@ button:focus,
 .btn:active.focus,
 .btn:active:focus,
 .btn:focus {
-    outline: 0!important;
-    outline-color: transparent!important;
-    outline-width: 0!important;
-    outline-style: none!important;
-    box-shadow: 0 0 0 0 rgba(0,123,255,0)!important;
+    outline: 0 !important;
+    outline-color: transparent !important;
+    outline-width: 0 !important;
+    outline-style: none !important;
+    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
 }
 
-
-.nav-item{
-    background: #187E4FFF!important;
+.nav-item {
+    background: #187E4FFF !important;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 19px;
-    /*margin-top: 20px;*/
-    /*margin-bottom: 10px;*/
     padding-left: 5px;
     padding-right: 5px;
 }
 
-
-.ms-auto{
-
+.ms-auto {
 }
 
 @media (max-width: 767px) {
-    .ms-auto{
-      margin-top: 20px;
+    .ms-auto {
+        margin-top: 20px;
         margin-bottom: 6px;
     }
 }
 
-
-.login-inp-button{
+.login-inp-button {
     background: none;
     border: 0;
     color: rgba(255, 255, 255, 0.8);
-    padding: 4px;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 5px 10px;
     transition: color .6s;
 }
 
-.login-inp-button:hover{
+.login-inp-button:hover {
     color: rgb(255, 255, 255);
 }
 
-
-
-
-
-.login-modal__btn{
-    background: rgb(30,152,95);
-    background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(25,135,84,1) 100%);
+.login-modal__btn {
+    background: rgb(30, 152, 95);
+    background: linear-gradient(18deg, rgba(30, 152, 95, 1) 0%, rgba(25, 135, 84, 1) 35%, rgba(25, 135, 84, 1) 100%);
     color: white;
     transition: background .6s;
 }
 
-.login-modal__btn:hover{
-    background: rgb(25,135,84);
-    background: linear-gradient(18deg, rgba(25,135,84,1) 0%, rgba(25,135,84,1) 28%, rgba(25,94,62,1) 100%);
+.login-modal__btn:hover {
+    background: rgb(25, 135, 84);
+    background: linear-gradient(18deg, rgba(25, 135, 84, 1) 0%, rgba(25, 135, 84, 1) 28%, rgba(25, 94, 62, 1) 100%);
     color: white;
 }
 
-
-.dropdown-item-custom{
-    color: rgb(25,135,84) !important;
+.dropdown-item-custom {
+    color: rgb(25, 135, 84) !important;
 }
 
-.accordion-button-custom{
-   background-color: #7e867c;
+.accordion-button-custom {
+    background-color: #7e867c;
 }
 
-.accordion-button-custom:active{
+.accordion-button-custom:active {
     background-color: #bce7b3 !important;
-    color: #0f5132!important;
+    color: #0f5132 !important;
 }
 
-.accordion-button-custom:focus{
+.accordion-button-custom:focus {
     background-color: #bce7b3 !important;
-    color: #0f5132!important;
+    color: #0f5132 !important;
 }
 
+.contacts__btn {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black !important;
+    background: rgb(222, 169, 22);
+    background: linear-gradient(18deg, rgb(222, 169, 22) 0%, rgb(222, 169, 22) 35%, rgb(222, 169, 22) 100%);
+    transition: background .9s;
+    border-radius: 20px;
+    margin: 0 auto;
+    height: 40px;
+    width: 300px;
+    background-color: #ffc107
+}
 
-
-
-
-/*@import '~bootstrap-icons/font/bootstrap-icons.css';*/
+.contacts__btn:hover {
+    color: black !important;
+    background: rgb(222, 142, 22);
+    background: linear-gradient(18deg, rgb(222, 169, 22) 0%, rgb(222, 159, 22) 35%, rgb(222, 142, 22) 100%);
+    transition: background .6s;
+}
 
 @font-face {
     font-family: "rouble";

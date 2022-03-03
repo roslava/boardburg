@@ -1,6 +1,5 @@
 <?php
 
-
 function selectWhatShowToUser(bool $check, $skates, $currentUser)
 {
     if ($check) {

@@ -24,7 +24,6 @@ class UpdateSkateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
         ];
     }
 }

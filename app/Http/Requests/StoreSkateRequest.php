@@ -23,13 +23,11 @@ class StoreSkateRequest extends FormRequest
      */
     public function rules()
     {
-
         return [
             'name' => 'required|max:255|min:3',
             'description' => 'required|min:10',
             'price' => 'required|numeric|max:999999',
             'category_id' => 'required',
-//            'img' => 'required',
             'cover' => 'required'
         ];
     }

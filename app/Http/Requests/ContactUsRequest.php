@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Spatie\MediaLibraryPro\Rules\Concerns\ValidatesMedia;
 
-class CoverUploadRequest extends FormRequest
+class ContactUsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +24,10 @@ class CoverUploadRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'name' => 'required',
+            'email' => 'required|email',
+            'subject' => 'required',
+            'message' => 'required'
         ];
     }
 }

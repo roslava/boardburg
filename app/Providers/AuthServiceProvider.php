@@ -68,10 +68,10 @@ class AuthServiceProvider extends ServiceProvider
             return Response::deny("Пользователь {$user['name']} не имеет права видеть раздел All Users");
         });
 
-        Gate::define('show_message_send', function (User $user) {
-            $role = $user['role'];
-            if ($role === 'admin') return Response::deny(); elseif ($role === 'manager') return Response::allow();
-             });
+//        Gate::define('show_message_send', function (User $user) {
+//            $role = $user['role'];
+//            if ($role === 'admin') return Response::deny(); elseif ($role === 'manager') return Response::allow();
+//             });
 
 
         Gate::define('registered_user-allow', function (User $user) {

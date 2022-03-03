@@ -2,15 +2,12 @@
     <nav class="navbar navbar-expand-md navbar__nav bg-white shadow-sm">
         <div class="container"  >
             <a class="navbar-brand" href="{{ url('/') }}">
-{{--                {{ config('app.name', 'BoardBurg') }}--}}
                 BoardBurg
             </a>
 
             <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-
-{{--                <span class="navbar-toggler-icon-custom"><i class="bi bi-list"></i></span>--}}
                 <i class="bi bi-list"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,13 +20,10 @@
                     @guest
                         @if (Route::has('login'))
                             <li class="nav-item">
-{{--                                <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>--}}
                                 <button class="login-inp-button" data-toggle="modal" data-target="#logineModalCenter">
                                     Войти
                                 </button>
                              </li>
-
-
                         @endif
                         @if (Route::has('register'))
                             <li class="nav-item">
@@ -68,9 +62,6 @@
     </nav>
 @endsection
 @yield('nav')
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="logineModalCenter" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color: rgba(24,126,79,0.73)!important;">
@@ -89,7 +80,7 @@
                     @csrf
 
                     <div class="row mb-3">
-                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Адрес e-mail') }}</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -102,7 +93,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                        <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Пароль') }}</label>
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">

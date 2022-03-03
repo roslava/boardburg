@@ -2,9 +2,7 @@
     display: flex;
     color: #fff;
     background-color: #adaaad;
-    /*border-color: #adaaad; !*set the color you want here*!*/
     border-radius: 50%;
-    /*font-size: 0;*/
     width: 30px;
     height: 30px;
     align-items: center;
@@ -13,12 +11,10 @@
     text-align: center;
 }
 
-
-
 .btn-dell:hover, .btn-dell:focus, .btn-dell:active, .btn-dell.active, .open > .dropdown-toggle.btn-dell {
     color: #fff;
     background-color: #ab2836;
-    border-color: #ab2836; /*set the color you want here*/
+    border-color: #ab2836;
 }
 
 .btn-edit {
@@ -26,7 +22,7 @@
     color: #fff;
     background: rgb(176, 176, 176);
     background: linear-gradient(18deg, rgb(176, 176, 176) 0%, rgb(176, 176, 176) 35%, rgb(176, 176, 176) 100%);
-    border-color: #adaaad; /*set the color you want here*/
+    border-color: #adaaad;
     border-radius: 50%;
     font-size: 0;
     width: 30px;
@@ -42,14 +38,12 @@
     font-size: 1.26rem
 }
 
-
 .btn-edit:hover, .btn-edit:focus, .btn-edit:active, .btn-edit.active, .open > .dropdown-toggle.btn-edit {
     color: #fff;
     background: rgb(30,152,95);
     background: linear-gradient(18deg, rgba(30,152,95,1) 0%, rgba(25,135,84,1) 35%, rgba(25,135,84,1) 100%);
-    border-color: rgb(28, 140, 88); /*set the color you want here*/
+    border-color: rgb(28, 140, 88);
 }
-
 
 .rub {
     font-family: "rouble";
@@ -63,13 +57,12 @@
 }
 
 .product-card__btn-holder{
-    margin: 0px !important;
+    margin: 0 !important;
     display:flex;
     width: 100%;
     justify-content: space-between;
 
 }
-
 
 .product-card__detailes{
     background: rgb(30,152,95);
