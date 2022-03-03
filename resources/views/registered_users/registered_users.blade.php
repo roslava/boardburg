@@ -1,6 +1,4 @@
 @extends('layouts.base')
-
-
 @section('main')
     <div class="container-md bg-light mt-5 p-4 rounded" >
         <table class="table">
@@ -39,10 +37,7 @@
                 </tbody>
             </table>
         @endforeach
-
         <a class="btn btn-success" href="{{route('registered_user.create')}}">Создать нового пользователя</a>
-
-
     </div>
 @endsection
 

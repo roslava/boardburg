@@ -504,3 +504,46 @@ button:focus,
     transition: background .6s;
 }
 
+
+.intro-bb{
+    width: 100%;
+    padding:20px;
+    border-radius: 5px;
+    color: #a1907e;
+    background-color: #1a0606;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@media (max-width:690px) {
+    .intro-bb {
+        flex-direction: column;
+    }
+}
+
+
+.intro-bb__select{
+    color: #cea382;
+    display: inline;
+}
+
+.intro-bb__format{
+    display: inline;
+}
+
+
+/*.intro-bb > span{*/
+/*    color: #cea382*/
+/*}*/
+
+/*.if_screen_w_680px{*/
+/*    display: none !important;*/
+/*}*/
+
+
+
+

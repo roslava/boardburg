@@ -39,12 +39,10 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item dropdown-item-custom"
                                    href="{{ route('skates_base.index') }}">{{ __('Все товары') }}</a>
-
                                 @can('show-menu')
                                 <a class="dropdown-item  dropdown-item-custom"
                                    href="{{ route('registered_users.index') }}">{{ __('Все пользователи') }}</a>
                                  @endcan
-
                                 <a class="dropdown-item  dropdown-item-custom" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -62,6 +60,7 @@
     </nav>
 @endsection
 @yield('nav')
+
 <!-- Modal -->
 <div class="modal fade" id="logineModalCenter" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color: rgba(24,126,79,0.73)!important;">
@@ -78,13 +77,10 @@
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
-
                     <div class="row mb-3">
                         <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Адрес e-mail') }}</label>
-
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -94,10 +90,8 @@
                     </div>
                     <div class="row mb-3">
                         <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Пароль') }}</label>
-
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
