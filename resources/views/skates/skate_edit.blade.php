@@ -113,7 +113,6 @@
             labelFileTypeNotAllowed:'File of invalid type',
             fileValidateTypeLabelExpectedTypes: 'Expects {allButLastType} or {lastType}',
         });
-console.log("{{$skateFromBase->name}}");
         FilePond.setOptions({
             server: {
                 headers:{
@@ -127,8 +126,11 @@ console.log("{{$skateFromBase->name}}");
                 }
             },
             files: [{
- source: "http://boardburg.xx/storage/uploads/"+"{{$skateFromBase->img}}"
+ {{--source: "http://boardburg.xx/storage/uploads/"+"{{$skateFromBase->img}}"--}}
+ source: "http://"+"{{request()->getHttpHost()}}"+"/storage/uploads/"+"{{$skateFromBase->img}}"
             }]
         });
     </script>
 @endsection
+
+$host = request()->getHttpHost(); // returns dev.site.com
