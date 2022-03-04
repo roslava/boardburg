@@ -16,17 +16,17 @@
 
                             <div class="bb-filter-form__price-input">
                                 <div class="bb-filter-form__price-input-key">От</div>
-                                <input type="text" name="price_from"
+                                <input type="number" min="1" name="price_from"
                                        class="live-input bb-filter-form__price-input-value" id="inlineFormInputCost1"
-                                       placeholder="Цена" value="{{request()['price_from']}}">
+                                       value="{{request()['price_from']}}">
                             </div>
 
 
                             <div class="bb-filter-form__price-input">
                                 <div class="bb-filter-form__price-input-key">До</div>
-                                <input type="text" name="price_to" class="live-input bb-filter-form__price-input-value"
+                                <input type="number" min="1" name="price_to" class="live-input bb-filter-form__price-input-value"
                                        id="inlineFormInputCost2"
-                                       placeholder="Цена" value="{{request()['price_to']}}">
+                                       value="{{request()['price_to']}}">
 
                         </div>
                     </div>
