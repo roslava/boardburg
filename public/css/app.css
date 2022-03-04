@@ -643,7 +643,6 @@ button:focus,
     }
 }
 
-
 .intro-bb__select{
     color: #cea382;
     display: inline;
@@ -652,18 +651,6 @@ button:focus,
 .intro-bb__format{
     display: inline;
 }
-
-
-/*.intro-bb > span{*/
-/*    color: #cea382*/
-/*}*/
-
-/*.if_screen_w_680px{*/
-/*    display: none !important;*/
-/*}*/
-
-
-
 
 @font-face {
     font-family: "rouble";

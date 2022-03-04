@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
     public function search(Request $request, Skate $skate)
     {
-        $search = $request['search_input'];
+        $search = $request['search_input_bb'];
         if(!auth::check() || !Auth::user()->isAdmin()) if (Auth::check() && auth()->user()['role'] === 'manager') {
             $currentUserId = auth()->user()['id'];
             $skatesFromBaseQuery = $skate->query()->where('user_id', '=', $currentUserId)->where('name', 'LIKE', "%$search%");
