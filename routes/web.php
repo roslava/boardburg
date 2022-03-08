@@ -16,12 +16,14 @@ Route::get('/', function () {
 });
 
 Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
+Route::get('/reload-captcha', [ContactUsFormController::class, 'reloadCaptcha'])->name('reload-captcha');
 
 Route::get('/skates', [SkateFromDbController::class, 'index'])->name('skates_base.index');
 Route::get('/skates/cat', [CategoryController::class, 'index'])->name('skates_base.cat');
 
 Route::get('/skates/{id}', [SkateFromDbController::class, 'show'])->name('skates_base.show');
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/upload-file', [UploadController::class, 'store'])->name('upload_file.store');
