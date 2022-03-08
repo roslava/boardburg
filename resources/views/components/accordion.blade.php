@@ -15,7 +15,7 @@
                  data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                     <div style="display: flex; flex-direction: row">
-                        @can('update-all', $skatesFromBase)
+                        @can('update-all', $productsFromBase)
                             <form action="{{ route('skates_base.update_all')}}" method="GET"
                                   style="margin-right: 20px">
                                 @csrf

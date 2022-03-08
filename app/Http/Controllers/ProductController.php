@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skate;
+use App\Models\Product;
 use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -12,21 +12,33 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use App\Http\Requests\StoreSkateRequest;
 
-class SkateFromDbController extends Controller
+class ProductController extends Controller
 {
-    public function index(Skate $skate, Request $request, Session $session)
+    public function index(Product $product, Request $request, Session $session)
     {
         forgetOldVariablesFromSession($session);
         putQueryInSession($request, $session);
-        $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $skate::query(), auth()->user());
-        $quantity = $skatesFromBase->count();
-        $skatesFromBase = $skatesFromBase->paginate(8);
-        putLastPageInSession($skatesFromBase, $session);
-        if (!$skatesFromBase->count()) {
-            return redirect()->route('skates_base.index', ['page' => $skatesFromBase->lastPage()]);
+        $productFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $product::query(), auth()->user());
+        $quantity = $productFromBase->count();
+        $productsFromBase = $productFromBase->paginate(8);
+        putLastPageInSession($productsFromBase, $session);
+        if (!$productsFromBase->count()) {
+            return redirect()->route('skates_base.index', ['page' => $productsFromBase->lastPage()]);
         }
-        return view('home', compact('skatesFromBase', 'quantity'));
+        return view('home', compact('productsFromBase', 'quantity'));
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function create()
     {
@@ -36,7 +48,7 @@ class SkateFromDbController extends Controller
     public function store(StoreSkateRequest $request, Session $session): RedirectResponse
     {
         if (!empty(auth()->user()->id)) {
-            $skate = Skate::create([
+            $skate = Product::create([
                 'external_id' => 'NULL',
                 'name' => $request['name'],
                 'description' => $request['description'],
@@ -58,14 +70,14 @@ class SkateFromDbController extends Controller
         return redirect()->route('skates_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
-    public function edit(Skate $skate, $id)
+    public function edit(Product $skate, $id)
     {
         $skateFromBase = $skate::all()->find($id);
         Gate::authorize('update-skate', [$skateFromBase]);
         return view('skates.skate_edit', compact('skateFromBase'));
     }
 
-    public function update(StoreSkateRequest $request, Skate $skate, Session $session): RedirectResponse
+    public function update(StoreSkateRequest $request, Product $skate, Session $session): RedirectResponse
     {
         $inputs = $request->all();
         $inputs['slug'] = slugDefining($request['category_id']);
@@ -80,13 +92,13 @@ class SkateFromDbController extends Controller
         return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
-    public function show(Skate $skate, $id)
+    public function show(Product $skate, $id)
     {
         $skateFromBase = $skate::all()->where('id', $id)->first();
         return view('skates.skate', ['skateFromBase' => $skateFromBase, 'previous_url' => URL::previous()]);
     }
 
-    public function destroy(Skate $skate, $id, Session $session): RedirectResponse
+    public function destroy(Product $skate, $id, Session $session): RedirectResponse
     {
         if ($skate->count() > 1) {
             $skatesFromBase = $skate->all();
@@ -99,7 +111,7 @@ class SkateFromDbController extends Controller
             removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], null); //base file
             removeFolderFromUploads($baseImgNameWithoutExtension, false);
             removeRecordInMediaTable($skate, $shortImgName);
-                $skateFromBase->delete();
+            $skateFromBase->delete();
             return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
 
         }

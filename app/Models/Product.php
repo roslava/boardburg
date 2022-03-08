@@ -8,14 +8,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
 
-/**
- * @method static create(array $array)
- * @method static where(string $string, string $string1, mixed $current_id)
- */
-class Skate  extends Model implements HasMedia
+class Product extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
-
 
     /**
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
@@ -25,11 +20,10 @@ class Skate  extends Model implements HasMedia
         $this
             ->addMediaCollection('cover');
 
-        $this->addMediaConversion('thumb')->width(368)->height(232)->sharpen(10);
+        $this->addMediaConversion('thumb')
+            ->width(368)
+            ->height(232)
+            ->sharpen(10);
     }
-
-
-
-
     protected $fillable = ['external_id','name','description','img','price','category_id','user_id','slug'];
 }

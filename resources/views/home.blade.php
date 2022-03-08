@@ -13,7 +13,7 @@
         @endif
         <div class="row mb-3 " style="padding-top: 1.6rem">
             @include('components.product_card')
-            <div class="row mt-3"> {{ $skatesFromBase->links()}}</div>
+            <div class="row mt-3"> {{ $productsFromBase->links()}}</div>
             @if (!Auth::guest() )
                 @include('components.accordion')
                      @endif
