@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/skates-from-form/store', [SkateFromDbController::class, 'store'])->name('skates_form.store');
     Route::get('/update_all', [SkateAllUpdateController::class, 'updateAll'])->name('skates_base.update_all');
     Route::get('/skates/{id}/edit', [SkateFromDbController::class, 'edit'])->name('skates_base.edit');
-    Route::put('/skates/{id}', [SkateFromDbController::class, 'update'])->name('skates_base.update');
+    Route::put('/skates/{skate}', [SkateFromDbController::class, 'update'])->name('skates_base.update');
     Route::delete('/skates/{id}', [SkateFromDbController::class, 'destroy'])->name('skates_base.destroy');
     Route::get('/registered-users', [RegisteredUserController::class, 'index'])->name('registered_users.index');
     Route::get('/registered-users/create-registered-user', [RegisteredUserController::class, 'create'])->name('registered_user.create');

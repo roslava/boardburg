@@ -67,9 +67,9 @@ class SkateFromDbController extends Controller
         return view('skates.skate_edit', compact('skateFromBase'));
     }
 
-    public function update(StoreSkateRequest $request, Skate $skate, $id, Session $session): RedirectResponse
+    public function update(StoreSkateRequest $request, Skate $skate, Session $session): RedirectResponse
     {
-        $skateFromBase = $skate::all()->find($id);
+        $skateFromBase = $skate::all()->find($skate);
         $skateFromBase['external_id'] = 'NULL';
         $skateFromBase['name'] = $request->get('name');
         $skateFromBase['description'] = $request->get('description');
