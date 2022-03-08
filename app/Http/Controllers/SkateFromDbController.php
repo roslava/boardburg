@@ -69,21 +69,16 @@ class SkateFromDbController extends Controller
 
     public function update(StoreSkateRequest $request, Skate $skate, Session $session): RedirectResponse
     {
-        $skateFromBase = $skate::all()->find($skate);
-        $skateFromBase['external_id'] = 'NULL';
-        $skateFromBase['name'] = $request->get('name');
-        $skateFromBase['description'] = $request->get('description');
-        $skateFromBase['price'] = $request->get('price');
-        $skateFromBase['category_id'] = $request->get('category_id');
-        $skateFromBase['user_id'] = auth()->user()->id;
-        $skateFromBase['slug'] = slugDefining($request['category_id']);
-        Gate::authorize('update-skate', [$skateFromBase]);
+        $inputs = $request->all();
+        $inputs['slug'] = slugDefining($request['category_id']);
+        Gate::authorize('update-skate', [$skate]);
         $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();// from tmp base
-        $baseFilename = cut_string_using_last('/', $skateFromBase['img'], 'right', false); // from skate base
+        $baseFilename = cut_string_using_last('/', $skate['img'], 'right', false); // from skate base
         if ($temporaryFile != $baseFilename) {
-            tmpFileAddToMediaLibrary($request, $skateFromBase, $temporaryFile);
+            tmpFileAddToMediaLibrary($request, $skate, $temporaryFile);
         }
-        $skateFromBase->save();
+        $skate->fill($inputs);
+        $skate->save();
         return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
