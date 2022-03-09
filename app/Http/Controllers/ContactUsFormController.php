@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactUsRequest;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Config;
 
 class ContactUsFormController extends Controller
 {
@@ -20,8 +21,8 @@ class ContactUsFormController extends Controller
             'subject' => $request->get('subject'),
             'user_query' => $request->get('message'),
         ), function ($message) use ($request) {
-            $message->from('test@artnen.ru');
-            $message->to('roslav@icloud.com', 'Admin')->subject($request->get('subject'));
+            $message->from(Config::get('constants.EMAIL_FROM'));
+            $message->to(Config::get('constants.EMAIL_TO'), 'Admin')->subject($request->get('subject'));
         });
             return back()->with('success', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
      }

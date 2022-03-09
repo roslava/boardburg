@@ -2,27 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skate;
+use App\Models\Product;
 use Illuminate\Support\Facades\Gate;
+use App\Services\DataUpdater\DataUpdaterService;
 
-
-class SkateAllUpdateController extends Controller
+class ProductsSyncController extends Controller
 {
-    public function updateAll()
+    public function updateAll(DataUpdaterService $data)
     {
         Gate::authorize('update-all');
-        $skatesFromServer = new SkateFromServerController();
-        $skates = $skatesFromServer->index();
+        $skates = $data->index();
+
         $count_created = 0;
         $count_updated = 0;
         foreach ($skates as $skate) {
             $current_id = $skate['id'];
-            $current = Skate::where('external_id', '=', $current_id)->first();
+            $current = Product::where('external_id', '=', $current_id)->first();
             if ($current === null) {
-                $skatesFromServer->store($skate);
+                $data->store($skate);
                 $count_created++;
             } else {
-                $skatesFromServer->update($skate, $current_id);
+                $data->update($skate, $current_id);
                 $count_updated++;
             }
         }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Skate;
+use App\Models\Product;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
+
+
+//Это все перенести в сервис
 
 class SkateFromServerController extends Controller
 {
@@ -33,7 +36,7 @@ class SkateFromServerController extends Controller
 
     public function store($skateFromServer)
     {
-        $skates = new Skate;
+        $skates = new Product;
         $skates::create([
             'external_id' => $skateFromServer['id'],
             'name' => $skateFromServer['name'],
@@ -48,7 +51,7 @@ class SkateFromServerController extends Controller
 
     public function update($skateFromServer, $id)
     {
-        Skate::where('external_id', $id)->update([
+        Product::where('external_id', $id)->update([
             'name' => $skateFromServer['name'],
             'description' => $skateFromServer['description'],
             'img' => $skateFromServer['img'],

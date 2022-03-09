@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SkateFromServerController;
 use App\Http\Controllers\SearchController;
-use App\Http\Controllers\SkateAllUpdateController;
+use App\Http\Controllers\ProductsSyncController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
     Route::get('/skates-from-form/new_skate', [ProductController::class, 'create'])->name('skates_form.create');
     Route::post('/skates-from-form/store', [ProductController::class, 'store'])->name('skates_form.store');
-    Route::get('/update_all', [SkateAllUpdateController::class, 'updateAll'])->name('skates_base.update_all');
+    Route::get('/update_all', [ProductsSyncController::class, 'updateAll'])->name('skates_base.update_all');
     Route::get('/skates/{id}/edit', [ProductController::class, 'edit'])->name('skates_base.edit');
     Route::put('/skates/{skate}', [ProductController::class, 'update'])->name('skates_base.update');
     Route::delete('/skates/{id}', [ProductController::class, 'destroy'])->name('skates_base.destroy');
