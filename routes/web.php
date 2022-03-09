@@ -4,7 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactUsFormController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\SkateFromServerController;
+//use App\Http\Controllers\SkateFromServerController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductsSyncController;
 use App\Http\Controllers\UploadController;
@@ -28,7 +28,7 @@ Route::get('/search', [SearchController::class, 'search'])->name('search.index')
 Route::middleware(['auth'])->group(function () {
     Route::post('/upload-file', [UploadController::class, 'store'])->name('upload_file.store');
     Route::delete('/revert-tmp-file', [UploadController::class, 'revertFiles'])->name('revert_tmp_file.revert');
-    Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
+//    Route::get('/skates-from-server', [SkateFromServerController::class, 'index'])->name('skates_server.index');
     Route::get('/skates-from-form/new_skate', [ProductController::class, 'create'])->name('skates_form.create');
     Route::post('/skates-from-form/store', [ProductController::class, 'store'])->name('skates_form.store');
     Route::get('/update_all', [ProductsSyncController::class, 'updateAll'])->name('skates_base.update_all');
