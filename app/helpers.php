@@ -204,7 +204,7 @@ function removeFolderFromUploads($baseImgNameWithoutExtension, $conversion)
         }
     }
     if ($conversion === false) {
-        if (is_dir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension))) {
+        if (strlen($baseImgNameWithoutExtension) !== 0) {
             rmdir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension));
         }
     }
