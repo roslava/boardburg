@@ -7,7 +7,7 @@
 
 
                 <form class="bb-filter-form"
-                      action="{{route('skates_base.cat')}}"
+                      action="{{route('products_base.cat')}}"
                       method="get">
                     @method('get')
                     @csrf
@@ -74,7 +74,7 @@
                                    class="form-check-input bb-filter-form__check-input"
                                    type="radio"
                                    @if(request()->input('category') == 'category_5') checked @endif
-                                   @if(Route::is('skates_base.index')) checked @endif>
+                                   @if(Route::is('products_base.index')) checked @endif>
 
                             <label for="cat5" class="form-check-label text-white">Все</label>
                         </div>

@@ -6,7 +6,7 @@
                     <div class="row pt-3" style="justify-content: center; margin:0">
                         @if($productFromBase->img)
                             <a style="width: 100%; display: flex; justify-content: center; "
-                               href="{{ route('skates_base.show', $productFromBase->id)}}"><img
+                               href="{{ route('products_base.show', $productFromBase->id)}}"><img
                                     src="{{asset('/storage/uploads/'.$productFromBase->img)}}" class="card-img-top"
                                     style="max-height: 200px; width: auto;" alt="{{$productFromBase->name}}"
                                     title="{{$productFromBase->name}}"></a>
@@ -16,7 +16,7 @@
                         <h5 class="bb-card-title">{{$productFromBase->name}}</h5>
                         <p class="card-text">{{ substr($productFromBase->description, 0, strpos(wordwrap($productFromBase->description, 100), "\n")).'...'}}</p>
                         <div style=" display: flex; justify-content: space-between; align-items: center">
-                            <form action="{{ route('skates_base.show', $productFromBase->id)}}">
+                            <form action="{{ route('products_base.show', $productFromBase->id)}}">
                                 <button class="btn product-card__detailes">Подробнее</button>
                             </form>
                             <div class="bb-product-card-price">{{$productFromBase->price}} <span class="rub">c</span>
@@ -40,12 +40,12 @@
                             </div>
                         @endif
                         <div class="row product-card__btn-holder">
-                            @can(['update-skate', 'delete-skate'], $productFromBase)
-                                <a href="{{ route('skates_base.edit', $productFromBase->id)}}" class=" btn btn-edit" >
+                            @can(['update-product', 'delete-product'], $productFromBase)
+                                <a href="{{ route('products_base.edit', $productFromBase->id)}}" class=" btn btn-edit" >
                                     <i class="bi bi-pencil-square" style="margin-top: 5px" ></i>
                                 </a>
                                 <form class="p-0 m-0 float-end " style="display: inline; max-width: 30px"
-                                      action="{{ route('skates_base.destroy', $productFromBase->id)}}" method="post">
+                                      action="{{ route('products_base.destroy', $productFromBase->id)}}" method="post">
                                     @csrf
                                     @method("DELETE")
                                     <button class="btn btn-dell">
@@ -64,7 +64,7 @@
             <p class="light" style="color: #198754"><i style="color: #2BE891" class="bi bi-emoji-frown"></i> По запросу
                 <span style="font-weight: bold !important; color: #2BE891">{{ $search ?? '' }}</span> не найдено ни
                 одного товара.&nbsp;</p>
-            <a href="{{route('skates_base.index')}}">Вернуться ко всем товарам.</a>
+            <a href="{{route('products_base.index')}}">Вернуться ко всем товарам.</a>
         </div>
     @endif
 

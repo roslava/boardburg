@@ -11,21 +11,21 @@ class ProductsSyncController extends Controller
     public function updateAll(DataUpdaterService $data)
     {
         Gate::authorize('update-all');
-        $skates = $data->index();
+        $products = $data->index();
 
         $count_created = 0;
         $count_updated = 0;
-        foreach ($skates as $skate) {
-            $current_id = $skate['id'];
+        foreach ($products as $product) {
+            $current_id = $product['id'];
             $current = Product::where('external_id', '=', $current_id)->first();
             if ($current === null) {
-                $data->store($skate);
+                $data->store($product);
                 $count_created++;
             } else {
-                $data->update($skate, $current_id);
+                $data->update($product, $current_id);
                 $count_updated++;
             }
         }
-        return redirect('/skates')->with('success', 'Добавлено: ' . $count_created . ' | Обновлено: ' . $count_updated);
+        return redirect('/products')->with('success', 'Добавлено: ' . $count_created . ' | Обновлено: ' . $count_updated);
     }
 }

@@ -23,32 +23,20 @@ class ProductController extends Controller
         $productsFromBase = $productFromBase->paginate(8);
         putLastPageInSession($productsFromBase, $session);
         if (!$productsFromBase->count()) {
-            return redirect()->route('skates_base.index', ['page' => $productsFromBase->lastPage()]);
+            return redirect()->route('products_base.index', ['page' => $productsFromBase->lastPage()]);
         }
         return view('home', compact('productsFromBase', 'quantity'));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     public function create()
     {
-        return view('skates.skate_new');
+        return view('products.product_new');
     }
 
     public function store(StoreProductRequest $request, Session $session): RedirectResponse
     {
         if (!empty(auth()->user()->id)) {
-            $skate = Product::create([
+            $product = Product::create([
                 'external_id' => 'NULL',
                 'name' => $request['name'],
                 'description' => $request['description'],
@@ -61,41 +49,41 @@ class ProductController extends Controller
         }
         $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();
         if ($temporaryFile) {
-            tmpFileAddToMediaLibrary($request, $skate, $temporaryFile);
+            tmpFileAddToMediaLibrary($request, $product, $temporaryFile);
         }
         $created_name = $request['name'];
         $authCheck = Auth::check();
-        $skatesFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $skate, auth()->user())->paginate(8);
-        $quantity = count($skatesFromBase->all()) + 1;
-        return redirect()->route('skates_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
+        $productsFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $product, auth()->user())->paginate(8);
+        $quantity = count($productsFromBase->all()) + 1;
+        return redirect()->route('products_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
-    public function edit(Product $skate, $id)
+    public function edit(Product $product, $id)
     {
-        $skateFromBase = $skate::all()->find($id);
-        Gate::authorize('update-skate', [$skateFromBase]);
-        return view('skates.skate_edit', compact('skateFromBase'));
+        $productFromBase = $product::all()->find($id);
+        Gate::authorize('update-product', [$productFromBase]);
+        return view('products.product_edit', compact('productFromBase'));
     }
 
-    public function update(StoreProductRequest $request, Product $skate, Session $session): RedirectResponse
+    public function update(StoreProductRequest $request, Product $product, Session $session): RedirectResponse
     {
         $inputs = $request->all();
         $inputs['slug'] = slugDefining($request['category_id']);
-        Gate::authorize('update-skate', [$skate]);
+        Gate::authorize('update-product', [$product]);
         $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();// from tmp base
-        $baseFilename = cut_string_using_last('/', $skate['img'], 'right', false); // from skate base
+        $baseFilename = cut_string_using_last('/', $product['img'], 'right', false); // from product base
         if ($temporaryFile != $baseFilename) {
-            tmpFileAddToMediaLibrary($request, $skate, $temporaryFile);
+            tmpFileAddToMediaLibrary($request, $product, $temporaryFile);
         }
-        $skate->fill($inputs);
-        $skate->save();
-        return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
+        $product->fill($inputs);
+        $product->save();
+        return redirect()->route('products_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
     public function show(Product $product, $id)
     {
-        $skateFromBase = $product::all()->where('id', $id)->first();
-        return view('skates.skate', ['skateFromBase' => $skateFromBase, 'previous_url' => URL::previous()]);
+        $productFromBase = $product::all()->where('id', $id)->first();
+        return view('products.product', ['productFromBase' => $productFromBase, 'previous_url' => URL::previous()]);
     }
 
     public function destroy(Product $product, $id, Session $session): RedirectResponse
@@ -103,7 +91,7 @@ class ProductController extends Controller
         if ($product->count() > 1) {
             $productsFromBase = $product->all();
             $productFromBase = $productsFromBase->find($id);
-            Gate::authorize('delete-skate', [$productFromBase]);
+            Gate::authorize('delete-product', [$productFromBase]);
             $shortImgName = cut_string_using_last('/', $productFromBase['img'], 'right', false);
             $baseImgNameWithoutExtension = extensionRemover($shortImgName);
             removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], '-thumb'); //converted file
@@ -112,7 +100,7 @@ class ProductController extends Controller
             removeFolderFromUploads($baseImgNameWithoutExtension, false);
             removeRecordInMediaTable($product, $shortImgName);
             $productFromBase->delete();
-            return redirect()->route('skates_base.index', getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
+            return redirect()->route('products_base.index', getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
         }
         return redirect()->back()->with('success', "Последний товар не может быть удален.");
     }

@@ -38,7 +38,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item dropdown-item-custom"
-                                   href="{{ route('skates_base.index') }}">{{ __('Все товары') }}</a>
+                                   href="{{ route('products_base.index') }}">{{ __('Все товары') }}</a>
                                 @can('show-menu')
                                 <a class="dropdown-item  dropdown-item-custom"
                                    href="{{ route('registered_users.index') }}">{{ __('Все пользователи') }}</a>

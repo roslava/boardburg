@@ -1,12 +1,12 @@
 <?php
 
-function selectWhatShowToUser(bool $check, $skates, $currentUser)
+function selectWhatShowToUser(bool $check, $products, $currentUser)
 {
     if ($check) {
-        $queryResult = $skates->where('user_id', '=', $currentUser->id);
+        $queryResult = $products->where('user_id', '=', $currentUser->id);
         return $queryResult;
     }
-    return $skates;
+    return $products;
 }
 
 function roleCheck($currentUser, $authCheck): bool
@@ -29,9 +29,9 @@ function getOldQueryFromSession($session)
     return current($value);
 }
 
-function putLastPageInSession($skatesFromBase, $session)
+function putLastPageInSession($productsFromBase, $session)
 {
-    $session::put('lastPageIs', $skatesFromBase->lastPage());
+    $session::put('lastPageIs', $productsFromBase->lastPage());
 }
 
 function forgetOldVariablesFromSession($session)
@@ -54,30 +54,30 @@ function getLastPageFromSession($session, $quantity): array
     return compact('page');
 }
 
-function priceFilter($request, $skateQuery)
+function priceFilter($request, $productQuery)
 {
     if ($request->filled('price_from')) {
-        $skateQuery->where('price', '>=', $request['price_from']);
+        $productQuery->where('price', '>=', $request['price_from']);
     }
     if ($request->filled('price_to')) {
-        $skateQuery->where('price', '<=', $request['price_to']);
+        $productQuery->where('price', '<=', $request['price_to']);
     }
 }
 
-function current_quantity($skateQuery)
+function current_quantity($productQuery)
 {
-    return $skateQuery->count();
+    return $productQuery->count();
 }
 
-function whoseRequest($auth, $skate)
+function whoseRequest($auth, $product)
 {
     if ($auth::check() && $auth::user()->isAdmin()) {
-        return $skate::query();
+        return $product::query();
     } elseif ($auth::check() && $auth::user()['role'] === 'manager') {
         $currentUserId = $auth::user()['id'];
-        return $skateQuery = $skate::query()->where('user_id', '=', $currentUserId);
+        return $productQuery = $product::query()->where('user_id', '=', $currentUserId);
     } else {
-        return $skate::query();
+        return $product::query();
     }
 }
 

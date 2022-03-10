@@ -30,7 +30,7 @@ class CategoryController extends Controller
                 if ($request->filled('price_from') or $request->filled('price_to')) {
                     priceFilter($request, $productQuery);
                 } else {
-                    return redirect()->route('skates_base.index');
+                    return redirect()->route('products_base.index');
                 }
                 break;
         }

@@ -2,11 +2,8 @@
 
 namespace App\Providers;
 
-
 use App\Models\User;
-use App\Models\Skate;
-
-
+use App\Models\Product;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        'App\Models\Skate' => 'App\Policies\SkatePolicy',
+        'App\Models\Product' => 'App\Policies\ProductPolicy',
     ];
 
     /**
@@ -40,8 +37,8 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-        Gate::define('update-skate', function (User $user, Skate $skate) {
-            if ($user['id'] === $skate['user_id'] ) {
+        Gate::define('update-product', function (User $user, Product $product) {
+            if ($user['id'] === $product['user_id'] ) {
                 return Response::allow();
             }
             return Response::deny('Нельзя редактировать чужой пост');
@@ -54,8 +51,8 @@ class AuthServiceProvider extends ServiceProvider
             return Response::deny("Пользователь {$user['name']} не имеет права обновлять все посты");
         });
 
-        Gate::define('delete-skate', function (User $user, Skate $skate) {
-            if ($user['id'] == $skate['user_id']) {
+        Gate::define('delete-product', function (User $user, Product $product) {
+            if ($user['id'] == $product['user_id']) {
                 return Response::allow();
             }
             return Response::deny("Пользователь {$user['name']} не имеет права удалять чужой пост");
@@ -67,12 +64,6 @@ class AuthServiceProvider extends ServiceProvider
             }
             return Response::deny("Пользователь {$user['name']} не имеет права видеть раздел All Users");
         });
-
-//        Gate::define('show_message_send', function (User $user) {
-//            $role = $user['role'];
-//            if ($role === 'admin') return Response::deny(); elseif ($role === 'manager') return Response::allow();
-//             });
-
 
         Gate::define('registered_user-allow', function (User $user) {
             if ($user['role'] === 'admin') return Response::allow();

@@ -4,12 +4,12 @@
         {{--breadcrumb--}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('skates_base.index')}}">Каталог</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('products_base.index')}}">Каталог</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Создание нового товара</li>
             </ol>
         </nav>
         <h1>Создание нового товара</h1>
-        <form action="{{route('skates_form.store')}}" enctype="multipart/form-data" method="POST">
+        <form action="{{route('products_form.store')}}" enctype="multipart/form-data" method="POST">
 
             @csrf
             @method("POST")
@@ -90,7 +90,7 @@
                                 </span>
             @enderror
             <button class="btn btn-primary mt-4" style="margin-right: 1rem !important;" type="submit">Создать</button>
-            <a href="{{ route('skates_base.index')}}" class="btn btn-info mt-4">Отменить</a>
+            <a href="{{ route('products_base.index')}}" class="btn btn-info mt-4">Отменить</a>
         </form>
     </div>
 @endsection
