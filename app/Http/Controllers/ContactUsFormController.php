@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactUsRequest;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 
 class ContactUsFormController extends Controller
 {
-    // Store Contact Form data
-    public function ContactUsForm(ContactUsRequest $request): \Illuminate\Http\RedirectResponse
+    /**
+     * @param ContactUsRequest $request
+     * @return RedirectResponse
+     */
+    public function ContactUsForm(ContactUsRequest $request):RedirectResponse
     {
-        //  Store data in database
-        Contact::create($request->all());
+        $contact = new Contact;
+        $contact->fill($request->all());
+        $contact->save(); //Store data in database
 
         //  Send mail to admin
         \Mail::send('mail.mail', array(
@@ -26,9 +32,12 @@ class ContactUsFormController extends Controller
         });
             return back()->with('success', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
      }
-    public function reloadCaptcha()
+
+    /**
+     * @return JsonResponse
+     */
+    public function reloadCaptcha(): JsonResponse
     {
         return response()->json(['captcha'=> captcha_img()]);
     }
-
 }

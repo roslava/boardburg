@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Config;
 
 class ImgUploadService
 {
-    public function tmpFileAddToMediaLibrary($request, $product)
+
+    /**
+     * @param $request
+     * @param $product
+     * @return void
+     */
+    public static function tmpFileAddToMediaLibrary($request, $product)
     {
        $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();
-
-
         $baseFilename = cut_string_using_last('/', $product['img'], 'right', false);
 
         if ($temporaryFile AND $temporaryFile != $baseFilename) {
@@ -28,5 +32,41 @@ class ImgUploadService
             rmdir(storage_path($folder)); //tmp
             $temporaryFile->delete(); //tmp
           }
+    }
+
+    /**
+     * @param $baseImgName
+     * @param $conversionPostfix
+     * @return void
+     */
+    public static function removeFileFromUploads($baseImgName, $conversionPostfix = null)
+    {
+        if ($conversionPostfix !== null) {
+            $convertedFile = storage_path(Config::get('constants.EXTRACT_TO') . $baseImgName[0] . '/conversions/' . $baseImgName[0] . $conversionPostfix . '.' . $baseImgName[1]);
+            if (file_exists($convertedFile)) unlink($convertedFile);
+        }
+        if ($conversionPostfix == null) {
+            $convertedFile = storage_path(Config::get('constants.EXTRACT_TO') . $baseImgName[0] . '/' . $baseImgName[0] . '.' . $baseImgName[1]);
+            if (file_exists($convertedFile)) unlink($convertedFile);
+        }
+    }
+
+    /**
+     * @param $baseImgNameWithoutExtension
+     * @param $conversion
+     * @return void
+     */
+    public static function removeFolderFromUploads($baseImgNameWithoutExtension, $conversion)
+    {
+        if ($conversion === true) {
+            if (is_dir(storage_path(Config::get('constants.EXTRACT_TO') . $baseImgNameWithoutExtension . '/conversions'))) {
+                rmdir(storage_path(Config::get('constants.EXTRACT_TO') . $baseImgNameWithoutExtension . '/conversions'));
+            }
+        }
+        if ($conversion === false) {
+            if (strlen($baseImgNameWithoutExtension) !== 0) {
+                rmdir(storage_path(Config::get('constants.EXTRACT_TO') . $baseImgNameWithoutExtension));
+            }
+        }
     }
 }

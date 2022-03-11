@@ -7,31 +7,39 @@ use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 
-
 class UploadController extends Controller
 {
-    public function store(CoverUploadRequest $request){
+    /**
+     * @param CoverUploadRequest $request
+     * @return string
+     */
+    public function store(CoverUploadRequest $request): string
+    {
         if ($request->hasFile('cover')) {
             $file = $request->file('cover');
             $filename = $file->getClientOriginalName();
             $folder = uniqid().'-'.now()->timestamp;
             $file->storeAs('tmp/'.$folder, $filename);
-            TemporaryFile::create([
-                'folder' => $folder,
-                'filename' => $filename,
-            ]);
+            $temporaryFile = new TemporaryFile;
+            $temporaryFile['folder'] = $folder;
+            $temporaryFile['filename'] = $filename;
+            $temporaryFile->save();
             return $folder;
         }
         return '';
     }
 
+    /**
+     * @return void
+     */
     public function revertFiles(){
         $dir_ = storage_path(Config::get('constants.TMP_FOLDER'));
 
-        function dirToArray($dir) {
+        function dirToArray($dir): array
+        {
             $result = array();
             $cdir = scandir($dir);
-            foreach ($cdir as $key => $value)
+            foreach ($cdir as $value)
             {
                 if (!in_array($value,array(".","..")))
                 {

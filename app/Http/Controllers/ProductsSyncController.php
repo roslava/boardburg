@@ -12,12 +12,11 @@ class ProductsSyncController extends Controller
     {
         Gate::authorize('update-all');
         $products = $data->index();
-
         $count_created = 0;
         $count_updated = 0;
         foreach ($products as $product) {
             $current_id = $product['id'];
-            $current = Product::where('external_id', '=', $current_id)->first();
+            $current = Product::query()->where('external_id', '=', $current_id)->first();
             if ($current === null) {
                 $data->store($product);
                 $count_created++;

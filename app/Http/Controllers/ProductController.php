@@ -15,22 +15,22 @@ use App\Services\ImgUploadService;
 
 class ProductController extends Controller
 {
-    public function index(Product $product, Request $request, Session $session, User $user)
+    public function index(Product $product, Request $request, Session $session)
     {
-
         if ($session::has('oldQuery')) $session::forget('oldQuery');
         if ($session::has('lastPageIs')) $session::forget('lastPageIs');
         $session::put('oldQuery', $request->query);
 
         if (User::isManager(auth()->user(), Auth::check())) {
-            $productFromBase = $product::query()->where('user_id', '=', auth()->user()->id);
+            $productFromBase = $product::query()->where('user_id', '=', auth()->user()['id']);
         } else {
             $productFromBase = $product;
         }
 
         $quantity = $productFromBase->count();
         $productsFromBase = $productFromBase->paginate(8);
-        putLastPageInSession($productsFromBase, $session);
+        $session::put('lastPageIs', $productsFromBase->lastPage());
+
         if (!$productsFromBase->count()) {
             return redirect()->route('products_base.index', ['page' => $productsFromBase->lastPage()]);
         }
@@ -42,33 +42,42 @@ class ProductController extends Controller
         return view('products.product_new');
     }
 
-    public function store(StoreProductRequest $request, Session $session, ImgUploadService $imgUploadService, User $user): RedirectResponse
+    public function store(Product $product, StoreProductRequest $request, Session $session, ImgUploadService $imgUploadService): RedirectResponse
     {
-
-        if (!empty(auth()->user()->id)) {
-            $product = Product::create([
-                'external_id' => 'NULL',
-                'name' => $request['name'],
-                'description' => $request['description'],
-                'price' => $request['price'],
-                'category_id' => $request['category_id'],
-                'user_id' => auth()->user()->id,
-                'slug' => Product::getSlug($request['category_id']),
-                'img' => ' '
-            ]);
+        if (!empty(auth()->user()['id'])) {
+            $inputs = $request->all();
+            $inputs['external_id'] = 'NULL';
+            $inputs['slug'] = $product::getSlug($request['category_id']);
+            $inputs['user_id'] = auth()->user()['id'];
+            $inputs['img'] = ' ';
+            $product->fill($inputs);
+            $product->save();
         }
 
-        $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
+        $imgUploadService::tmpFileAddToMediaLibrary($request, $product);
         $created_name = $request['name'];
 
         if (User::isManager(auth()->user(), Auth::check())) {
-            $productsFromBase = $product->where('user_id', '=', auth()->user()->id)->paginate(8);
+            $productsFromBase = $product::query()->where('user_id', '=', auth()->user()['id'])->paginate(8);
         } else {
             $productsFromBase = $product;
         }
 
         $quantity = count($productsFromBase->all()) + 1;
-        return redirect()->route('products_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
+
+        function getLastPageFromSession($session, $quantity): array
+        {
+            if ($quantity % 8 === 1) {
+                $page = $session::get('lastPageIs') + 1;
+                return compact('page');
+            }
+            $page = $session::get('lastPageIs');
+            return compact('page');
+        }
+
+        return redirect()->route('products_base.index',
+            getLastPageFromSession($session, $quantity))
+            ->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
     public function edit(Product $product, $id)
@@ -97,17 +106,19 @@ class ProductController extends Controller
 
     public function destroy(Product $product, $id, Session $session): RedirectResponse
     {
-        if ($product->count() > 1) {
+        if ($product::query()->count() > 1) {
             $productsFromBase = $product->all();
             $productFromBase = $productsFromBase->find($id);
             Gate::authorize('delete-product', [$productFromBase]);
             $shortImgName = cut_string_using_last('/', $productFromBase['img'], 'right', false);
             $baseImgNameWithoutExtension = extensionRemover($shortImgName);
-            removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], '-thumb'); //converted file
-            removeFolderFromUploads($baseImgNameWithoutExtension, true); //folder with converted file
-            removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], null); //base file
-            removeFolderFromUploads($baseImgNameWithoutExtension, false);
-            removeRecordInMediaTable($product, $shortImgName);
+            ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], '-thumb'); //converted file
+            ImgUploadService::removeFolderFromUploads($baseImgNameWithoutExtension, true); //folder with converted file
+            ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)]); //base file
+            ImgUploadService::removeFolderFromUploads($baseImgNameWithoutExtension, false);
+            $mediaItems = $product::query()->first()->getMedia('cover');
+            $mediaItem = $mediaItems->where('file_name', '=', $shortImgName)->first();
+            if ($mediaItem) $mediaItem->delete();
             $productFromBase->delete();
             return redirect()->route('products_base.index', getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
         }

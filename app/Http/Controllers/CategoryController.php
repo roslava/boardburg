@@ -8,9 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request, Auth $auth, Product $product )
+    public function index(Request $request, Auth $auth, Product $product)
     {
-        $productQuery = whoseRequest($auth, $product);
+        if ($auth::check() && $auth::user()->isAdmin()) {
+            $productQuery = $product::query();
+        } elseif ($auth::check() && $auth::user()['role'] === 'manager') {
+            $currentUserId = $auth::user()['id'];
+            $productQuery = $product::query()->where('user_id', '=', $currentUserId);
+        } else {
+            $productQuery = $product::query();
+        }
         priceFilter($request, $productQuery);
         switch ($request->input('category')) {
             case 'category_1':
