@@ -3,17 +3,6 @@
 use App\Models\Product;
 use Illuminate\Support\Facades\Config;
 
-function selectWhatShowToUser(bool $check, $products, $currentUser)
-{
-    if ($check) {
-        $queryResult = $products->where('user_id', '=', $currentUser->id);
-        return $queryResult;
-    }
-    return $products;
-}
-
-
-
 function putQueryInSession($request, $session)
 {
     $requestQuery = $request->query;
@@ -73,10 +62,6 @@ function whoseRequest($auth, $product)
         return $product::query();
     }
 }
-
-
-
-
 
 function setImgPath($request, $image, $slug)
 {

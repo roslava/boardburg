@@ -19,7 +19,13 @@ class ProductController extends Controller
     {
         forgetOldVariablesFromSession($session);
         putQueryInSession($request, $session);
-        $productFromBase = selectWhatShowToUser($user::roleCheck(auth()->user(), Auth::check()), $product::query(), auth()->user());
+
+        if($user::roleCheck(auth()->user(), Auth::check())){
+            $productFromBase = $product::query()->where('user_id', '=', auth()->user()->id);
+        }else{
+            $productFromBase = $product;
+        }
+
         $quantity = $productFromBase->count();
         $productsFromBase = $productFromBase->paginate(8);
         putLastPageInSession($productsFromBase, $session);
@@ -52,8 +58,13 @@ class ProductController extends Controller
 
         $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
         $created_name = $request['name'];
-        $authCheck = Auth::check();
-        $productsFromBase = selectWhatShowToUser($user::roleCheck(auth()->user(), $authCheck), $product, auth()->user())->paginate(8);
+
+        if($user::roleCheck(auth()->user(), Auth::check())){
+            $productsFromBase = $product->where('user_id', '=', auth()->user()->id)->paginate(8);
+        }else{
+            $productsFromBase = $product;
+        }
+
         $quantity = count($productsFromBase->all()) + 1;
         return redirect()->route('products_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }
