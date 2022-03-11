@@ -155,21 +155,6 @@ function removeRecordInMediaTable($model, $shortImgName)
     }
 
 }
-//Config::get('constants.TMP_FOLDER')
-function tmpFileAddToMediaLibrary($request, $currentProduct, $temporaryFile)
-{
-    $folder = Config::get('constants.TMP_FOLDER') . $request->cover;
-    $slug = Product::getSlug($request['category_id']);
-    $singular_slug = substr($slug, 0, -1);
-    $unic = now()->timestamp;
-    $media = $currentProduct->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
-        ->usingFileName($singular_slug . '_' . $unic . '.jpg')
-        ->toMediaCollection('cover');
-    $currentProduct->img = extensionRemover($media->file_name) . '/' . $media->file_name;
-    $currentProduct->save();
-    rmdir(storage_path($folder)); //tmp
-    $temporaryFile->delete(); //tmp
-}
 
 function removeFileFromUploads($baseImgName, $conversionPostfix = null)
 {

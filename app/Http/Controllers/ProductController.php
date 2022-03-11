@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
@@ -36,7 +35,7 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request, Session $session, ImgUploadService $imgUploadService): RedirectResponse
     {
-        dd($imgUploadService->test());
+
         if (!empty(auth()->user()->id)) {
             $product = Product::create([
                 'external_id' => 'NULL',
@@ -49,10 +48,8 @@ class ProductController extends Controller
                 'img' => ' '
             ]);
         }
-        $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();
-        if ($temporaryFile) {
-            tmpFileAddToMediaLibrary($request, $product, $temporaryFile);
-        }
+
+        $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
         $created_name = $request['name'];
         $authCheck = Auth::check();
         $productsFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $product, auth()->user())->paginate(8);
@@ -67,16 +64,12 @@ class ProductController extends Controller
         return view('products.product_edit', compact('productFromBase'));
     }
 
-    public function update(StoreProductRequest $request, Product $product, Session $session): RedirectResponse
+    public function update(StoreProductRequest $request, Product $product, Session $session,  ImgUploadService $imgUploadService): RedirectResponse
     {
         $inputs = $request->all();
         $inputs['slug'] = $product::getSlug($request['category_id']);
         Gate::authorize('update-product', [$product]);
-        $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();// from tmp base
-        $baseFilename = cut_string_using_last('/', $product['img'], 'right', false); // from product base
-        if ($temporaryFile != $baseFilename) {
-            tmpFileAddToMediaLibrary($request, $product, $temporaryFile);
-        }
+        $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
         $product->fill($inputs);
         $product->save();
         return redirect()->route('products_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
