@@ -17,12 +17,14 @@ class ProductController extends Controller
 {
     public function index(Product $product, Request $request, Session $session, User $user)
     {
-        forgetOldVariablesFromSession($session);
-        putQueryInSession($request, $session);
 
-        if($user::roleCheck(auth()->user(), Auth::check())){
+        if ($session::has('oldQuery')) $session::forget('oldQuery');
+        if ($session::has('lastPageIs')) $session::forget('lastPageIs');
+        $session::put('oldQuery', $request->query);
+
+        if (User::isManager(auth()->user(), Auth::check())) {
             $productFromBase = $product::query()->where('user_id', '=', auth()->user()->id);
-        }else{
+        } else {
             $productFromBase = $product;
         }
 
@@ -59,9 +61,9 @@ class ProductController extends Controller
         $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
         $created_name = $request['name'];
 
-        if($user::roleCheck(auth()->user(), Auth::check())){
+        if (User::isManager(auth()->user(), Auth::check())) {
             $productsFromBase = $product->where('user_id', '=', auth()->user()->id)->paginate(8);
-        }else{
+        } else {
             $productsFromBase = $product;
         }
 
@@ -76,7 +78,7 @@ class ProductController extends Controller
         return view('products.product_edit', compact('productFromBase'));
     }
 
-    public function update(StoreProductRequest $request, Product $product, Session $session,  ImgUploadService $imgUploadService): RedirectResponse
+    public function update(StoreProductRequest $request, Product $product, Session $session, ImgUploadService $imgUploadService): RedirectResponse
     {
         $inputs = $request->all();
         $inputs['slug'] = $product::getSlug($request['category_id']);

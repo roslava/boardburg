@@ -3,11 +3,6 @@
 use App\Models\Product;
 use Illuminate\Support\Facades\Config;
 
-function putQueryInSession($request, $session)
-{
-    $requestQuery = $request->query;
-    $session::put('oldQuery', $requestQuery);
-}
 
 function getOldQueryFromSession($session)
 {
@@ -18,16 +13,6 @@ function getOldQueryFromSession($session)
 function putLastPageInSession($productsFromBase, $session)
 {
     $session::put('lastPageIs', $productsFromBase->lastPage());
-}
-
-function forgetOldVariablesFromSession($session)
-{
-    if ($session::has('oldQuery')) {
-        $session::forget('oldQuery');
-    }
-    if ($session::has('lastPageIs')) {
-        $session::forget('lastPageIs');
-    }
 }
 
 function getLastPageFromSession($session, $quantity): array

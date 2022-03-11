@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,24 +17,19 @@ class User extends Authenticatable
     function isAdmin(): bool
     {
         $admin_emails = config('settings.admin_emails');
-        if(in_array($this->email, $admin_emails)) return true; else
-        return false;
-        }
-
+        if (in_array($this['email'], $admin_emails)) return true; else
+            return false;
+    }
 
     /**
      * @param $currentUser
      * @param $authCheck
      * @return bool
      */
-    public static function roleCheck($currentUser, $authCheck): bool
+    public static function isManager($currentUser, $authCheck): bool
     {
-        if ($authCheck && $currentUser->role === 'manager') {
-            return true;
-        }
-        return false;
+        return $authCheck && (isset($currentUser->role) && $currentUser->role === 'manager');
     }
-
 
     /**
      * The attributes that are mass assignable.
