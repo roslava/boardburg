@@ -2,6 +2,7 @@
 
 namespace App\Services\MediaLibrary;
 
+use Illuminate\Support\Facades\Config;
 use \Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator as BasePathGenerator;
 
@@ -53,7 +54,7 @@ class CustomPathGenerator implements BasePathGenerator
  */
     protected function getBasePath(): string
     {
-        return 'app/public/uploads/';
+        return Config::get('constants.EXTRACT_TO');
     }
 
 

@@ -174,11 +174,11 @@ function tmpFileAddToMediaLibrary($request, $currentProduct, $temporaryFile)
 function removeFileFromUploads($baseImgName, $conversionPostfix = null)
 {
     if ($conversionPostfix !== null) {
-        $convertedFile = storage_path('app/public/uploads/' . $baseImgName[0] . '/conversions/' . $baseImgName[0] . $conversionPostfix . '.' . $baseImgName[1]);
+        $convertedFile = storage_path(Config::get('constants.EXTRACT_TO') . $baseImgName[0] . '/conversions/' . $baseImgName[0] . $conversionPostfix . '.' . $baseImgName[1]);
         if (file_exists($convertedFile)) unlink($convertedFile);
     }
     if ($conversionPostfix == null) {
-        $convertedFile = storage_path('app/public/uploads/' . $baseImgName[0] . '/' . $baseImgName[0] . '.' . $baseImgName[1]);
+        $convertedFile = storage_path(Config::get('constants.EXTRACT_TO') . $baseImgName[0] . '/' . $baseImgName[0] . '.' . $baseImgName[1]);
         if (file_exists($convertedFile)) unlink($convertedFile);
     }
 }
@@ -186,13 +186,13 @@ function removeFileFromUploads($baseImgName, $conversionPostfix = null)
 function removeFolderFromUploads($baseImgNameWithoutExtension, $conversion)
 {
     if ($conversion === true) {
-        if (is_dir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension . '/conversions'))) {
-            rmdir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension . '/conversions'));
+        if (is_dir(storage_path(Config::get('constants.EXTRACT_TO') . $baseImgNameWithoutExtension . '/conversions'))) {
+            rmdir(storage_path(Config::get('constants.EXTRACT_TO') . $baseImgNameWithoutExtension . '/conversions'));
         }
     }
     if ($conversion === false) {
         if (strlen($baseImgNameWithoutExtension) !== 0) {
-            rmdir(storage_path('app/public/uploads/' . $baseImgNameWithoutExtension));
+            rmdir(storage_path(Config::get('constants.EXTRACT_TO') . $baseImgNameWithoutExtension));
         }
     }
 }
