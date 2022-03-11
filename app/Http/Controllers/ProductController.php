@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use App\Http\Requests\StoreProductRequest;
+use App\Services\ImgUploadService;
 
 class ProductController extends Controller
 {
@@ -33,8 +34,9 @@ class ProductController extends Controller
         return view('products.product_new');
     }
 
-    public function store(StoreProductRequest $request, Session $session): RedirectResponse
+    public function store(StoreProductRequest $request, Session $session, ImgUploadService $imgUploadService): RedirectResponse
     {
+        dd($imgUploadService->test());
         if (!empty(auth()->user()->id)) {
             $product = Product::create([
                 'external_id' => 'NULL',
