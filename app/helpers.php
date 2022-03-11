@@ -1,13 +1,11 @@
 <?php
 
-
 //2 function calls
 function getOldQueryFromSession($session)
 {
     $value = $session::get('oldQuery');
     return current($value);
 }
-
 
 //2 function calls
 function priceFilter($request, $productQuery)
