@@ -22,6 +22,21 @@ class User extends Authenticatable
         return false;
         }
 
+
+    /**
+     * @param $currentUser
+     * @param $authCheck
+     * @return bool
+     */
+    public static function roleCheck($currentUser, $authCheck): bool
+    {
+        if ($authCheck && $currentUser->role === 'manager') {
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * The attributes that are mass assignable.
      *

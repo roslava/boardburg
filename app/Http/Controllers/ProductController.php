@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
@@ -14,11 +15,11 @@ use App\Services\ImgUploadService;
 
 class ProductController extends Controller
 {
-    public function index(Product $product, Request $request, Session $session)
+    public function index(Product $product, Request $request, Session $session, User $user)
     {
         forgetOldVariablesFromSession($session);
         putQueryInSession($request, $session);
-        $productFromBase = selectWhatShowToUser(roleCheck(auth()->user(), Auth::check()), $product::query(), auth()->user());
+        $productFromBase = selectWhatShowToUser($user::roleCheck(auth()->user(), Auth::check()), $product::query(), auth()->user());
         $quantity = $productFromBase->count();
         $productsFromBase = $productFromBase->paginate(8);
         putLastPageInSession($productsFromBase, $session);
@@ -33,7 +34,7 @@ class ProductController extends Controller
         return view('products.product_new');
     }
 
-    public function store(StoreProductRequest $request, Session $session, ImgUploadService $imgUploadService): RedirectResponse
+    public function store(StoreProductRequest $request, Session $session, ImgUploadService $imgUploadService, User $user): RedirectResponse
     {
 
         if (!empty(auth()->user()->id)) {
@@ -52,7 +53,7 @@ class ProductController extends Controller
         $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
         $created_name = $request['name'];
         $authCheck = Auth::check();
-        $productsFromBase = selectWhatShowToUser(roleCheck(auth()->user(), $authCheck), $product, auth()->user())->paginate(8);
+        $productsFromBase = selectWhatShowToUser($user::roleCheck(auth()->user(), $authCheck), $product, auth()->user())->paginate(8);
         $quantity = count($productsFromBase->all()) + 1;
         return redirect()->route('products_base.index', getLastPageFromSession($session, $quantity))->with('success', 'Был создан товар с названием: ' . $created_name);
     }

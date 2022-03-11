@@ -12,13 +12,7 @@ function selectWhatShowToUser(bool $check, $products, $currentUser)
     return $products;
 }
 
-function roleCheck($currentUser, $authCheck): bool
-{
-    if ($authCheck && $currentUser->role === 'manager') {
-        return true;
-    }
-    return false;
-}
+
 
 function putQueryInSession($request, $session)
 {
