@@ -25,5 +25,27 @@ class Product extends Model implements HasMedia
             ->height(232)
             ->sharpen(10);
     }
+
+    /**
+     * @param $data
+     * @return string|void
+     */
+    public static function getSlug($data)
+    {
+        switch ($data) {
+            case 1:
+                return 'boards';
+
+            case 2:
+                return 'suspensions';
+
+            case 3:
+                return 'wheels';
+
+            case 4:
+                return 'bearings';
+        }
+    }
+
     protected $fillable = ['external_id','name','description','img','price','category_id','user_id','slug'];
 }

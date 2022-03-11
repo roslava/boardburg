@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Product;
+use Illuminate\Support\Facades\Config;
+
 function selectWhatShowToUser(bool $check, $products, $currentUser)
 {
     if ($check) {
@@ -82,23 +85,7 @@ function whoseRequest($auth, $product)
 }
 
 
-function slugDefining($data)
-{
 
-    switch ($data) {
-        case 1:
-            return 'boards';
-
-        case 2:
-            return 'suspensions';
-
-        case 3:
-            return 'wheels';
-
-        case 4:
-            return 'bearings';
-    }
-}
 
 
 function setImgPath($request, $image, $slug)
@@ -112,7 +99,7 @@ function setImgPath($request, $image, $slug)
             $constraint->upsize();
         });
         $imgBig->save($imgFile);
-        return $imgFile->storeAs('uploads/' . slugDefining($request['category_id']) . '/' . substr($slug, 0, -1) . '_' . time(), $filename);
+        return $imgFile->storeAs('uploads/' . Product::getSlug($request['category_id']) . '/' . substr($slug, 0, -1) . '_' . time(), $filename);
     }
 }
 
@@ -168,11 +155,11 @@ function removeRecordInMediaTable($model, $shortImgName)
     }
 
 }
-
+//Config::get('constants.TMP_FOLDER')
 function tmpFileAddToMediaLibrary($request, $currentProduct, $temporaryFile)
 {
-    $folder = 'app/public/tmp/' . $request->cover;
-    $slug = slugDefining($request['category_id']);
+    $folder = Config::get('constants.TMP_FOLDER') . $request->cover;
+    $slug = Product::getSlug($request['category_id']);
     $singular_slug = substr($slug, 0, -1);
     $unic = now()->timestamp;
     $media = $currentProduct->addMedia(storage_path($folder . '/' . $temporaryFile->filename))

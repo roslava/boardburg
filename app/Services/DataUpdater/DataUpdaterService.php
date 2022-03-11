@@ -41,7 +41,7 @@ class DataUpdaterService
             'price' => $newestProduct['price'],
             'category_id' => $newestProduct['category_id'],
             'user_id' => $newestProduct['user_id'],
-            'slug' => slugDefining($newestProduct['category_id'])
+            'slug' => Product::getSlug($newestProduct['category_id'])
         ]);
     }
 
@@ -54,7 +54,7 @@ class DataUpdaterService
             'price' => $newestProduct['price'],
             'category_id' => $newestProduct['category_id'],
             'user_id' => $newestProduct['user_id'],
-            'slug' => slugDefining($newestProduct['category_id'])
+            'slug' => Product::getSlug($newestProduct['category_id'])
         ]);
     }
 }

@@ -39,7 +39,7 @@
             </div>
             <div class="form-group mt-4">
                 <label class="mb-1" for="price">Цена</label>
-                <input type="text" name="price" maxlength="6" class="form-control @error('price') is-invalid @enderror"
+                <input type="number" min="1" name="price" maxlength="6" class="form-control @error('price') is-invalid @enderror"
                        id="price" value="{{ old('price') }}">
                 @error('price')
                 <span

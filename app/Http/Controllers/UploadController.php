@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CoverUploadRequest;
 use App\Models\TemporaryFile;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -25,7 +26,7 @@ class UploadController extends Controller
     }
 
     public function revertFiles(){
-        $dir_ = storage_path("app/public/tmp");
+        $dir_ = storage_path(Config::get('constants.TMP_FOLDER'));
 
         function dirToArray($dir) {
             $result = array();
@@ -55,7 +56,7 @@ class UploadController extends Controller
                     $AllTmps = TemporaryFile::query();
                     $currenTmp = $AllTmps->where('folder','=', $key);
                     $currenTmp->delete();
-                    unlink("app/public/tmp/".$key.'/'.$item[0]);
+                    unlink(Config::get('constants.TMP_FOLDER').$key.'/'.$item[0]);
                     Storage::disk('public')->deleteDirectory('/tmp/'.$key);
                 }
             }

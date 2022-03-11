@@ -43,7 +43,7 @@ class ProductController extends Controller
                 'price' => $request['price'],
                 'category_id' => $request['category_id'],
                 'user_id' => auth()->user()->id,
-                'slug' => slugDefining($request['category_id']),
+                'slug' => Product::getSlug($request['category_id']),
                 'img' => ' '
             ]);
         }
@@ -68,7 +68,7 @@ class ProductController extends Controller
     public function update(StoreProductRequest $request, Product $product, Session $session): RedirectResponse
     {
         $inputs = $request->all();
-        $inputs['slug'] = slugDefining($request['category_id']);
+        $inputs['slug'] = $product::getSlug($request['category_id']);
         Gate::authorize('update-product', [$product]);
         $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();// from tmp base
         $baseFilename = cut_string_using_last('/', $product['img'], 'right', false); // from product base
