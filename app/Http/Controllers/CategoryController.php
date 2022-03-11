@@ -34,8 +34,7 @@ class CategoryController extends Controller
                 }
                 break;
         }
-        $quantity = current_quantity($productQuery);
         $productsFromBase = $productQuery->paginate(8)->withQueryString();
-        return view('home', ['productsFromBase' => $productsFromBase, 'quantity' => $quantity]);
+        return view('home', ['productsFromBase' => $productsFromBase, 'quantity' => $productQuery->count()]);
     }
 }

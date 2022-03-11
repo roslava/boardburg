@@ -61,10 +61,6 @@ function priceFilter($request, $productQuery)
     }
 }
 
-function current_quantity($productQuery)
-{
-    return $productQuery->count();
-}
 
 function whoseRequest($auth, $product)
 {
