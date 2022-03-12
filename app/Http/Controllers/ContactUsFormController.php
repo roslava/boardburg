@@ -16,7 +16,7 @@ class ContactUsFormController extends Controller
      * @param ContactUsRequest $request
      * @return RedirectResponse
      */
-    public function ContactUsForm(ContactUsRequest $request, MessageBag $errors):RedirectResponse
+    public function ContactUsForm(ContactUsRequest $request, MessageBag $errors): RedirectResponse
     {
         $contact = new Contact;
         $contact->fill($request->all());
@@ -32,24 +32,14 @@ class ContactUsFormController extends Controller
             $message->from(Config::get('constants.EMAIL_FROM'));
             $message->to(Config::get('constants.EMAIL_TO'), 'Admin')->subject($request->get('subject'));
         });
-
-
-
-
-
-            return back()->with('success', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
-
-
-
-
-
-     }
+        return back()->with('success', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
+    }
 
     /**
      * @return JsonResponse
      */
     public function reloadCaptcha(): JsonResponse
     {
-        return response()->json(['captcha'=> captcha_img()]);
+        return response()->json(['captcha' => captcha_img()]);
     }
 }
