@@ -24,11 +24,11 @@ class ContactUsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
+            'name' => 'bail | required',
+            'email' => 'required | email',
             'subject' => 'required',
             'message' => 'required',
-            'captcha' => 'required|captcha'
+            'captcha' => 'required | captcha'
         ];
     }
 

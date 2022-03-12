@@ -43,7 +43,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::fallback(function () {
-    return 'Нет такой страницы';
+    return 'Нет такой страницы!';
 });
 
 Auth::routes(['register' => false, 'reset' => false]);

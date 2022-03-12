@@ -7,6 +7,8 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\MessageBag;
+
 
 class ContactUsFormController extends Controller
 {
@@ -14,7 +16,7 @@ class ContactUsFormController extends Controller
      * @param ContactUsRequest $request
      * @return RedirectResponse
      */
-    public function ContactUsForm(ContactUsRequest $request):RedirectResponse
+    public function ContactUsForm(ContactUsRequest $request, MessageBag $errors):RedirectResponse
     {
         $contact = new Contact;
         $contact->fill($request->all());
@@ -30,7 +32,17 @@ class ContactUsFormController extends Controller
             $message->from(Config::get('constants.EMAIL_FROM'));
             $message->to(Config::get('constants.EMAIL_TO'), 'Admin')->subject($request->get('subject'));
         });
+
+
+
+
+
             return back()->with('success', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
+
+
+
+
+
      }
 
     /**

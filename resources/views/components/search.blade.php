@@ -11,7 +11,7 @@
             <button type="submit" class="btn btn-primary" id="search_input_button">Найти</button>
         </form>
     </div>
-    <script src="{{mix('/js/button_disabled.js')}}" defer></script>
+{{--    <script src="{{mix('/js/button_disabled.js')}}" defer></script>--}}
 @endsection
 @yield('search')
 

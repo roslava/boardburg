@@ -9,8 +9,12 @@
                  style="border: 0; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: start">
                 <h5 class="modal-title" id="exampleModalLongTitle">Задать вопрос</h5>
                 <div style="width: fit-content; padding: 0; margin-left: 10px ">
-                    <i style="font-size: 1.4rem; cursor: pointer; " class="bi bi-x-square modal__close-btn"
+
+{{--                    <a href="{{route('products_base.index')}}">--}}
+                    <i style="font-size: 1.4rem; cursor: pointer" id="modal_cl_btn" class="bi bi-x-square modal__close-btn"
                        data-dismiss="modal" aria-label="Close"></i>
+{{--                    </a>--}}
+
                 </div>
             </div>
             <div class="card-body">
@@ -96,7 +100,9 @@
 @yield('modal_send_mail')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
+
     $('#reload').click(function () {
         $.ajax({
             type: 'GET',
@@ -107,3 +113,21 @@
         });
     });
 </script>
+@if($errors->any())
+<script>
+    // console.log(Request);
+
+
+        $(document).ready(function(){
+            $('#mailModalCenter').modal('show');
+            $('#modal_cl_btn').click(function () {
+                $('#mailModalCenter').modal('hide');
+                // console.log(window.location.href)
+                // window.location.replace(window.location.href);
+                window.location.assign(window.location.href)
+            })
+
+        })
+
+</script>
+@endif
