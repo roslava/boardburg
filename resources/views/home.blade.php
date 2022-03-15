@@ -30,17 +30,3 @@
 @endsection
 
 @include('components.modal_send_mail')
-
-{{--@if ($errors->any())--}}
-
-
-{{--    <div class=" modal-dialog modal-dialog-centered">--}}
-{{--        <ul>--}}
-{{--            @foreach ($errors->all() as $error)--}}
-{{--                <li>{{ $error }}</li>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-
-
-{{--@endif--}}

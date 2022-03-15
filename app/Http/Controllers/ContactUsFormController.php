@@ -32,7 +32,7 @@ class ContactUsFormController extends Controller
             $message->from(Config::get('constants.EMAIL_FROM'));
             $message->to(Config::get('constants.EMAIL_TO'), 'Admin')->subject($request->get('subject'));
         });
-        return back()->with('success', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
+        return back()->with('success_mail_send', 'Мы получили ваше сообщение, и в скором времени свяжемся с вами.');
     }
 
     /**
