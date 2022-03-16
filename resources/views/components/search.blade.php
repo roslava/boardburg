@@ -1,23 +1,17 @@
 @section('search')
-    <div class="col-md-12 mb-4">
-        <form class="form-inline b0 col-md-12 d-flex justify-content-center" method="GET"
-              action="{{route('search.index')}}">
-            <div class="col-xl-6 col-lg-8 col-md-6 col-8 pe-xl-3 pe-lg-2 pe-md-3 pe-sm-3">
-                <input type="text" class="live-input border-0 ms-xl-2 ms-lg-0 mr-sm-2 rounded col-12 p-2"
-                       id="search_input_bb" name="search_input_bb" placeholder="Поиск среди товаров"
-                       value="{{request()->search_input_bb}}"
-                >
-            </div>
-            <button type="submit" class="btn btn-primary" id="search_input_button">Найти</button>
-        </form>
-    </div>
-{{--    <script src="{{mix('/js/button_disabled.js')}}" defer></script>--}}
+
+    <form class="bb-search__form" method="GET"
+          action="{{route('search.index')}}">
+
+        <input type="text" class="live-input bb-search__input"
+               id="search_input_bb" name="search_input_bb" placeholder="Что ищем?"
+               value="{{request()->search_input_bb}}">
+        <button type="submit" class="btn bb-search__button" id="search_input_button">Найти</button>
+    </form>
 @endsection
 @yield('search')
 
-
 <script>
-
     let search_input = document.getElementById('search_input_bb');
     let search_input_button = document.getElementById('search_input_button');
     window.onload = function () {
@@ -25,6 +19,7 @@
             search_input_button.disabled = true
     };
     search_input.addEventListener('input', updateValue);
+
     function updateValue(e) {
         function сheckSpaces(str) {
             return str.trim() !== '';
@@ -36,7 +31,4 @@
             // search_input.value = 0
         }
     }
-
-
-
 </script>

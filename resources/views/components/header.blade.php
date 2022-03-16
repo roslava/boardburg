@@ -5,7 +5,7 @@
         <div style="display: flex; flex-direction: column; justify-content: center;" class="container-md">
 
                         @include('components.filters')
-                        @include('components.search')
+
 
         </div>
 

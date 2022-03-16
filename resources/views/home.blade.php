@@ -6,8 +6,9 @@
     <div class="container-md">
         @if (Auth::guest() )
             <div class="intro-bb">
-               <div class="intro-bb__format"> Демонстрационный проект BoardBurg.&ensp;</div>
-                <div class="intro-bb__format">Логин:&thinsp;<span class="intro-bb__select">admin@bb.com</span>,&ensp;</div>
+                <div class="intro-bb__format"> Демонстрационный проект BoardBurg.&ensp;</div>
+                <div class="intro-bb__format">Логин:&thinsp;<span class="intro-bb__select">admin@bb.com</span>,&ensp;
+                </div>
                 <div class="intro-bb__format"> пароль:&thinsp;<span class="intro-bb__select">88888888</span>&ensp;</div>
             </div>
         @endif
@@ -16,12 +17,12 @@
             <div class="row mt-3"> {{ $productsFromBase->links()}}</div>
             @if (!Auth::guest() )
                 @include('components.accordion')
-                     @endif
+            @endif
             @if (Auth::guest() )
                 <div class="mb-3 contacts__btn" data-toggle="modal" data-target="#mailModalCenter">
                     Задать вопрос
                 </div>
-      @endif
+            @endif
         </div>
     </div>
 @endsection
@@ -30,3 +31,5 @@
 @endsection
 
 @include('components.modal_send_mail')
+
+

@@ -1,16 +1,33 @@
 @section('nav')
     <nav class="navbar navbar-expand-md navbar__nav bg-white shadow-sm">
-        <div class="container"  >
-            <a class="navbar-brand" href="{{ url('/') }}">
-                BoardBurg
-            </a>
+        <div class="container" >
+            <div class="navbar-items-holder">
+                <a class="navbar-brand" id="bb-top-logo"  href="{{ url('/') }}">
+                   <div class="navbar__top-logo" id="bb-top-logo"> BoardBurg</div>
+                </a>
+                <div style="display: flex;align-items: center">
 
-            <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <i class="bi bi-list"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="bb-search__container" id="bb-search__container">
+                        <div class="bb-search__wrapper">
+                            <i class="bi bi-x-circle bb-search__close-icon" id="bb-search__close-icon">
+                            </i>
+                            @include('components.search')
+                        </div>
+                    </div>
+
+                    <a class="navbar-brand bb-search__icon" id="bb-search__icon" href="{{ url('#') }}">
+                        <i class="bi bi-search"></i>
+                    </a>
+
+                    <span style="margin-right: 1rem; color: rgba(255,255,255,0.6)">|</span>
+                    <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="collapse navbar-collapse navbar-collapse-custom" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
                 </ul>
@@ -23,7 +40,7 @@
                                 <button class="login-inp-button" data-toggle="modal" data-target="#logineModalCenter">
                                     Войти
                                 </button>
-                             </li>
+                            </li>
                         @endif
                         @if (Route::has('register'))
                             <li class="nav-item">
@@ -40,9 +57,9 @@
                                 <a class="dropdown-item dropdown-item-custom"
                                    href="{{ route('products_base.index') }}">{{ __('Все товары') }}</a>
                                 @can('show-menu')
-                                <a class="dropdown-item  dropdown-item-custom"
-                                   href="{{ route('registered_users.index') }}">{{ __('Все пользователи') }}</a>
-                                 @endcan
+                                    <a class="dropdown-item  dropdown-item-custom"
+                                       href="{{ route('registered_users.index') }}">{{ __('Все пользователи') }}</a>
+                                @endcan
                                 <a class="dropdown-item  dropdown-item-custom" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -57,13 +74,16 @@
                 </ul>
             </div>
         </div>
+
+
     </nav>
 @endsection
 @yield('nav')
 
 <!-- Modal -->
 <div class="modal fade" id="logineModalCenter" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background-color: rgba(24,126,79,0.73)!important;">
+     aria-labelledby="exampleModalCenterTitle" aria-hidden="true"
+     style="background-color: rgba(24,126,79,0.73)!important;">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header"
@@ -80,7 +100,8 @@
                     <div class="row mb-3">
                         <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Адрес e-mail') }}</label>
                         <div class="col-md-6">
-                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                   name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -91,7 +112,9 @@
                     <div class="row mb-3">
                         <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Пароль') }}</label>
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <input id="password" type="password"
+                                   class="form-control @error('password') is-invalid @enderror" name="password" required
+                                   autocomplete="current-password">
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

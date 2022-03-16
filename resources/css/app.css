@@ -1,6 +1,7 @@
 @import "cust/footer_to_bottom.css";
 @import "cust/card-custom.css";
 @import "cust/custom.css";
+@import "cust/search.css";
 @font-face {
     font-family: "rouble";
     src: url("../fonts/rouble.otf") format("opentype");
