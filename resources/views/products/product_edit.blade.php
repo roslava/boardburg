@@ -133,4 +133,4 @@
     </script>
 @endsection
 
-$host = request()->getHttpHost(); // returns dev.site.com
+
