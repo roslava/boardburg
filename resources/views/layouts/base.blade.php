@@ -1,22 +1,16 @@
 <!doctype html>
 <html lang="en">
 @include('parts.head')
-
-
-
-
-
-
 <body>
 <div class="wrapper">
     <div class="content">
         @include('components.nav')
         <header>
-            <div class="header container-fluid p-0">
+{{--            <div class="">--}}
                 @section('header')
                 @endsection
                 @yield('header','here is header section')
-            </div>
+{{--            </div>--}}
         </header>
         <main>
             <div class="main container-fluid p-0">

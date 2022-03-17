@@ -1,11 +1,34 @@
 @section('nav')
     <nav class="navbar navbar-expand-md navbar__nav bg-white shadow-sm">
         <div class="container" >
+
+
+
+
+
             <div class="navbar-items-holder">
+                <div>
                 <a class="navbar-brand" id="bb-top-logo"  href="{{ url('/') }}">
-                   <div class="navbar__top-logo" id="bb-top-logo"> BoardBurg</div>
+                   <div class="navbar__top-logo" id="bb-top-logo">
+
+                       <img style="width: 110px" src="{{ asset('img/boardburg_logo_w.svg') }}" alt="">
+                   </div>
                 </a>
-                <div style="display: flex;align-items: center">
+                </div>
+
+                <div style="display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+            justify-content: flex-end;">
 
                     <div class="bb-search__container" id="bb-search__container">
                         <div class="bb-search__wrapper">
@@ -27,6 +50,14 @@
                     </button>
                 </div>
             </div>
+
+
+
+
+
+
+
+
             <div class="collapse navbar-collapse navbar-collapse-custom" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">
@@ -38,7 +69,7 @@
                         @if (Route::has('login'))
                             <li class="nav-item">
                                 <button class="login-inp-button" data-toggle="modal" data-target="#logineModalCenter">
-                                    Войти
+                                    <i class="bi bi-key" style="font-size: 22px"></i>
                                 </button>
                             </li>
                         @endif

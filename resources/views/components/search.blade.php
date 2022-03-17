@@ -4,9 +4,9 @@
           action="{{route('search.index')}}">
 
         <input type="text" class="live-input bb-search__input"
-               id="search_input_bb" name="search_input_bb" placeholder="Что ищем?"
+               id="search_input_bb" name="search_input_bb" placeholder="Круто! Что ищем?"
                value="{{request()->search_input_bb}}">
-        <button type="submit" class="btn bb-search__button" id="search_input_button">Найти</button>
+        <button type="submit" class="bb-search__button" id="search_input_button">Найти</button>
     </form>
 @endsection
 @yield('search')

@@ -1,24 +1,31 @@
 body, html {
-    background-color: #24181d !important;
+    background-color: #f5f5f6 !important;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 body.modal-open {
     overflow: hidden;
 }
 
-.header-bg {
-    -webkit-align-content: flex-end !important;
+.bb-header {
+    /*-webkit-align-content: flex-end !important;*/
     display: flex;
-    /*background-repeat: no-repeat;*/
-    background-position: bottom;
-    background-size: cover;
-    min-height: 300px;
+    /*background-position: center;*/
+    /*background-position-y: center;*/
+    background-position-x: center;
+    /*background-size: cover !important;*/
+    /*background-size: auto;*/
+    /*-moz-background-size: cover  !important;*/
+    background-repeat: no-repeat;
+    min-height: 200px;
     background-attachment: fixed !important;
+    background-image: url("../../img/lave.png");
 }
 
 .live-input {
     outline: none;
-    background-color: #716f75;
+    background-color: #58c963;
     transition: background-color .6s;
 }
 
@@ -364,19 +371,27 @@ body.modal-open {
 }
 
 .navbar-items-holder {
-    min-width: 100%;
+    /*min-width: 90%;*/
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: end;
+    -webkit-box-pack: space-between;
+    -ms-flex-pack: space-between;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
-    /*background-color: #bb2d3b;*/
-    position: relative;
+    /*position: relative;*/
 }
 
 .navbar__top-logo {
     display: flex;
     justify-self: left;
     align-self: start;
-    position: absolute;
+    /*position: absolute;*/
     top: 4px;
     left: 0px;
 }
