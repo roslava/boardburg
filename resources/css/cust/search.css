@@ -30,7 +30,7 @@
 
 @media (max-width: 500px) {
     .bb-search__container_opened {
-        width: 250px;
+        width: 100%;
     }
 }
 
@@ -43,7 +43,8 @@
     right: 0px;
     box-sizing: border-box;
     height: 40px;
-    padding: 0;
+
+    padding-left: 3px;
     box-sizing: border-box;
 }
 
@@ -54,7 +55,7 @@
 }
 
 .bb-search__icon_hiden {
-    display: none;
+    display: none !important;
 }
 
 .bb-search__close-icon {

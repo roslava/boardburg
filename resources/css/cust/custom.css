@@ -44,7 +44,7 @@ body.modal-open {
 .bb-filter {
     border: #198754 solid 1px;
     border-radius: 0.25rem;
-    background-color: #24181DFF
+    background-color: #24181DFF;
 }
 
 @media (max-width: 992px) {
@@ -455,7 +455,7 @@ button:focus,
 }
 
 .nav-item {
-    background: #187E4FFF !important;
+    /*background: #187E4FFF !important;*/
     display: flex;
     align-items: center;
     justify-content: center;

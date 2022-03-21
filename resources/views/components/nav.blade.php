@@ -1,16 +1,10 @@
 @section('nav')
     <nav class="navbar navbar-expand-md navbar__nav bg-white shadow-sm">
         <div class="container" >
-
-
-
-
-
             <div class="navbar-items-holder">
                 <div>
                 <a class="navbar-brand" id="bb-top-logo"  href="{{ url('/') }}">
                    <div class="navbar__top-logo" id="bb-top-logo">
-
                        <img style="width: 110px" src="{{ asset('img/boardburg_logo_w.svg') }}" alt="">
                    </div>
                 </a>
@@ -29,19 +23,6 @@
     -webkit-box-pack: end;
     -ms-flex-pack: end;
             justify-content: flex-end;">
-
-                    <div class="bb-search__container" id="bb-search__container">
-                        <div class="bb-search__wrapper">
-                            <i class="bi bi-x-circle bb-search__close-icon" id="bb-search__close-icon">
-                            </i>
-                            @include('components.search')
-                        </div>
-                    </div>
-
-                    <a class="navbar-brand bb-search__icon" id="bb-search__icon" href="{{ url('#') }}">
-                        <i class="bi bi-search"></i>
-                    </a>
-
                     <span style="margin-right: 1rem; color: rgba(255,255,255,0.6)">|</span>
                     <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -50,14 +31,6 @@
                     </button>
                 </div>
             </div>
-
-
-
-
-
-
-
-
             <div class="collapse navbar-collapse navbar-collapse-custom" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav me-auto">

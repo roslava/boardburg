@@ -4,7 +4,10 @@
 <body>
 <div class="wrapper">
     <div class="content">
-        @include('components.nav')
+        @include('components.nav.bb-nav-desc')
+        @include('components.nav.bb-nav-mob')
+        @include('components.catalog.bb-catalog')
+
         <header>
 {{--            <div class="">--}}
                 @section('header')

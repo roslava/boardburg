@@ -23,6 +23,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "@mdi/font": "^6.5.95",
         "bootstrap-icons": "^1.8.1"
     }
 }

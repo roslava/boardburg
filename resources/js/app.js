@@ -1,26 +1,97 @@
 require('./bootstrap');
 
-let searchContainer = document.querySelector('#bb-search__container');
-let searchIcon = document.querySelector('#bb-search__icon');
-let searchCloseIcon = document.querySelector('#bb-search__close-icon');
-let searchInputButton = document.querySelector('#search_input_button');
 
-searchIcon.addEventListener('click', expandSearchContainer)
-searchCloseIcon.addEventListener('click', closeSearchContainer)
+//search container open/close
+let searchContainer = document.querySelectorAll('.bb-search__container'); //контейнер
+let searchIcon = document.querySelectorAll('.bb-search-btn-icon'); //кнопка с увличительным стеклом е
+let searchCloseIcon = document.querySelectorAll('.bb-search__close-icon');
+let searchInputButton = document.querySelectorAll('#search_input_button');
 
-function expandSearchContainer() {
-    searchContainer.classList.add("bb-search__container_opened");
-    searchIcon.classList.add("bb-search__icon_hiden");
-    searchCloseIcon.classList.add("bb-search__close-icon-visible");
-    searchInputButton.classList.add("bb-search__button_show");
+searchIcon.forEach(item => {
+        item.addEventListener('click', event => {
+            item.classList.add("bb-nav-desc__round-icon_hiden");
+            searchContainer.forEach(item => item.classList.add("bb-search__container_opened"))
+            searchCloseIcon.forEach(item => item.classList.add("bb-search__close-icon-visible"))
+            searchInputButton.forEach(item => item.classList.add("bb-search__button_show"))
+        })
+    })
+
+searchCloseIcon.forEach(item => {
+    item.addEventListener('click', event => {
+        item.classList.remove("bb-search__close-icon-visible");
+        searchContainer.forEach(item => item.classList.remove("bb-search__container_opened"))
+        searchInputButton.forEach(item => item.classList.remove("bb-search__button_show"))
+        setTimeout(() => {
+            searchIcon.forEach(item => item.classList.remove("bb-nav-desc__round-icon_hiden"))
+        }, 200);
+    })
+})
+
+
+
+//if search input empty, search button disabled
+let search_input = document.getElementById('search_input_bb');
+let search_input_button = document.getElementById('search_input_button');
+
+window.onload = function () {
+    if (search_input.value.length == 0)
+        search_input_button.disabled = true
+};
+search_input.addEventListener('input', updateValue);
+
+function updateValue(e) {
+    function сheckSpaces(str) {
+        return str.trim() !== '';
+    }
+    if (!сheckSpaces(e.target.value)) {
+        search_input_button.disabled = true
+    } else {
+        search_input_button.disabled = false
+     }
 }
 
-function closeSearchContainer() {
-    searchContainer.classList.remove("bb-search__container_opened");
-    searchCloseIcon.classList.remove("bb-search__close-icon-visible");
-    searchInputButton.classList.remove("bb-search__button_show");
-    setTimeout(() => {
-        searchIcon.classList.remove("bb-search__icon_hiden")
-    }, 200);
+
+//colaps menu toggle
+let navMobBurger = document.querySelector('#bb-nav-mob__burger');
+let backgroundToggler = document.querySelector('.bb-nav-mob__background-toggler');
+let bbNavMob = document.querySelector('.bb-nav-mob');
+let bbNavNobClose = document.querySelector('.bb-nav-mob__close');
+navMobBurger.addEventListener('click', function(){
+    bbNavMobOpen()
+})
+
+backgroundToggler.addEventListener('click', function() {
+    bbNavMobClose()
+})
+
+bbNavNobClose.addEventListener('click', function() {
+    bbNavMobClose()
+})
+
+function bbNavMobOpen(){
+    backgroundToggler.classList.add("bb-nav-mob__background-toggler_opened")
+    bbNavMob.classList.add("bb-nav-mob_open")
+    bbNavNobClose.classList.add('bb-nav-mob__close_show')
+    navMobBurger.classList.add('bb-nav-mob__burger_hide')
 }
 
+function bbNavMobClose(){
+    bbNavMob.classList.remove("bb-nav-mob_open")
+    backgroundToggler.classList.remove("bb-nav-mob__background-toggler_opened")
+    bbNavNobClose.classList.remove('bb-nav-mob__close_show')
+    navMobBurger.classList.remove('bb-nav-mob__burger_hide')
+}
+
+
+
+
+//catalog
+let bbNavCatalogBtn = document.querySelectorAll('.bb-catalog-btn') //кнопка закрыть/открыть
+let bbCatalog = document.querySelectorAll('.bb-catalog')//каталог
+
+bbNavCatalogBtn.forEach(item => {
+    item.addEventListener('click', event => {
+        item.classList.toggle('bb-catalog-btn_close')
+        bbCatalog.forEach(item =>{item.classList.toggle('bb-catalog_show')})
+    })
+})

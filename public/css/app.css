@@ -162,7 +162,7 @@ body.modal-open {
 .bb-filter {
     border: #198754 solid 1px;
     border-radius: 0.25rem;
-    background-color: #24181DFF
+    background-color: #24181DFF;
 }
 
 @media (max-width: 992px) {
@@ -573,13 +573,14 @@ button:focus,
 }
 
 .nav-item {
-    background: #187E4FFF !important;
+    /*background: #187E4FFF !important;*/
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 19px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+
 }
 
 .ms-auto {
@@ -720,7 +721,7 @@ button:focus,
 
 @media (max-width: 500px) {
     .bb-search__container_opened {
-        width: 250px;
+        width: 100%;
     }
 }
 
@@ -733,7 +734,8 @@ button:focus,
     right: 0px;
     box-sizing: border-box;
     height: 40px;
-    padding: 0;
+
+    padding-left: 3px;
     box-sizing: border-box;
 }
 
@@ -744,7 +746,7 @@ button:focus,
 }
 
 .bb-search__icon_hiden {
-    display: none;
+    display: none !important;
 }
 
 .bb-search__close-icon {
