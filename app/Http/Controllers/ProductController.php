@@ -118,7 +118,9 @@ class ProductController extends Controller
             ImgUploadService::removeFolderFromUploads($baseImgNameWithoutExtension, false);
             $mediaItems = $product::query()->first()->getMedia('cover');
             $mediaItem = $mediaItems->where('file_name', '=', $shortImgName)->first();
-            if ($mediaItem) $mediaItem->delete();
+            if ($mediaItem) {
+                $mediaItem->delete();
+            }
             $product->delete();
             return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', 'Товар '. '"'.$product->name. '"'.' был удален.');
         }
