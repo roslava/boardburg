@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ContactUsFormController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
@@ -14,8 +14,8 @@ Route::get('/', function () {
     return redirect('products');
 });
 
-Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name('contact.store');
-Route::get('/reload-captcha', [ContactUsFormController::class, 'reloadCaptcha'])->name('reload-captcha');
+Route::post('/contact', [ContactUsController::class, 'index'])->name('contact.store');
+Route::get('/reload-captcha', [ContactUsController::class, 'reloadCaptcha'])->name('reload-captcha');
 Route::get('/products', [ProductController::class, 'index'])->name('products_base.index');//
 Route::get('/products/cat', [CategoryController::class, 'index'])->name('products_base.cat');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products_base.show');

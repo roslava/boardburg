@@ -9,14 +9,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\MessageBag;
 
-
-class ContactUsFormController extends Controller
+class ContactUsController extends Controller
 {
     /**
      * @param ContactUsRequest $request
      * @return RedirectResponse
      */
-    public function ContactUsForm(ContactUsRequest $request, MessageBag $errors): RedirectResponse
+    public function index(ContactUsRequest $request, MessageBag $errors): RedirectResponse
     {
         $contact = new Contact;
         $contact->fill($request->all());
