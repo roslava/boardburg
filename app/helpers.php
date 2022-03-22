@@ -2,6 +2,10 @@
 
 namespace App;
 
+use App\Models\TemporaryFile;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
+
 class Helpers
 {
     /**
@@ -50,5 +54,48 @@ class Helpers
     {
         $getExtension = explode('.', $shortImgName);
         return end($getExtension);
+    }
+
+    /**
+     * @param $items
+     * @return void
+     */
+    public static function unlink($items){
+        if (is_array($items) || is_object($items))
+        {
+            foreach ($items as $key => $item){
+                if ( is_string($item) ) continue;
+                $AllTmps = TemporaryFile::query();
+                $currenTmp = $AllTmps->where('folder','=', $key);
+                $currenTmp->delete();
+                unlink(Config::get('constants.TMP_FOLDER').$key.'/'.$item[0]);
+                Storage::disk('public')->deleteDirectory('/tmp/'.$key);
+            }
+        }
+    }
+
+    /**
+     * @param $dir
+     * @return array
+     */
+    public static function dirToArray($dir): array
+    {
+        $result = array();
+        $cdir = scandir($dir);
+        foreach ($cdir as $value)
+        {
+            if (!in_array($value,array(".","..")))
+            {
+                if (is_dir($dir . DIRECTORY_SEPARATOR . $value))
+                {
+                    $result[$value] = dirToArray($dir . DIRECTORY_SEPARATOR . $value);
+                }
+                else
+                {
+                    $result[] = $value;
+                }
+            }
+        }
+        return $result;
     }
 }
