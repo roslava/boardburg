@@ -2,6 +2,7 @@
 
 namespace App\Services\MediaLibrary;
 
+use App\Helpers;
 use Illuminate\Support\Facades\Config;
 use \Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator as BasePathGenerator;
@@ -18,7 +19,7 @@ class CustomPathGenerator implements BasePathGenerator
      */
     public function getPath(Media $media): string
     {
-        return 'uploads/'.extensionRemover($media->file_name) . '/';
+        return 'uploads/'.Helpers::removeExtension($media->file_name) . '/';
 
     }
 
@@ -31,7 +32,7 @@ class CustomPathGenerator implements BasePathGenerator
      */
     public function getPathForConversions(Media $media): string
     {
-        return 'uploads/'.extensionRemover($media->file_name) . '/conversions/';
+        return 'uploads/'.Helpers::removeExtension($media->file_name) . '/conversions/';
 
     }
 
@@ -44,7 +45,7 @@ class CustomPathGenerator implements BasePathGenerator
      */
     public function getPathForResponsiveImages(Media $media): string
     {
-        return 'uploads/'.extensionRemover($media->file_name) . '/responsive-images/';
+        return 'uploads/'.Helpers::removeExtension($media->file_name) . '/responsive-images/';
 
     }
 

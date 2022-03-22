@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Helpers;
 use App\Models\Product;
 use App\Models\TemporaryFile;
 use Illuminate\Support\Facades\Config;
@@ -17,7 +18,7 @@ class ImgUploadService
     public static function tmpFileAddToMediaLibrary($request, $product)
     {
        $temporaryFile = TemporaryFile::where('folder', $request['cover'])->first();
-        $baseFilename = cut_string_using_last('/', $product['img'], 'right', false);
+        $baseFilename = Helpers::cutString('/', $product['img'], 'right', false);
 
         if ($temporaryFile AND $temporaryFile != $baseFilename) {
             $folder = Config::get('constants.TMP_FOLDER') . $request->cover;
@@ -27,7 +28,7 @@ class ImgUploadService
             $media = $product->addMedia(storage_path($folder . '/' . $temporaryFile->filename))
                 ->usingFileName($singular_slug . '_' . $unic . '.jpg')
                 ->toMediaCollection('cover');
-            $product->img = extensionRemover($media->file_name) . '/' . $media->file_name;
+            $product->img = Helpers::removeExtension($media->file_name) . '/' . $media->file_name;
             $product->save();
             rmdir(storage_path($folder)); //tmp
             $temporaryFile->delete(); //tmp

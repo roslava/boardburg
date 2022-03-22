@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -95,7 +96,7 @@ class ProductController extends Controller
         $imgUploadService->tmpFileAddToMediaLibrary($request, $product);
         $product->fill($inputs);
         $product->save();
-        return redirect()->route('products_base.index', getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
+        return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
     public function show(Product $product, $id)
@@ -110,18 +111,24 @@ class ProductController extends Controller
             $productsFromBase = $product->all();
             $productFromBase = $productsFromBase->find($id);
             Gate::authorize('delete-product', [$productFromBase]);
-            $shortImgName = cut_string_using_last('/', $productFromBase['img'], 'right', false);
-            $baseImgNameWithoutExtension = extensionRemover($shortImgName);
-            ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)], '-thumb'); //converted file
+            $shortImgName = Helpers::cutString('/', $productFromBase['img'], 'right', false);
+            $baseImgNameWithoutExtension = Helpers::removeExtension($shortImgName);
+            ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, Helpers::getExtension($shortImgName)], '-thumb'); //converted file
             ImgUploadService::removeFolderFromUploads($baseImgNameWithoutExtension, true); //folder with converted file
-            ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, getExtension($shortImgName)]); //base file
+            ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, Helpers::getExtension($shortImgName)]); //base file
             ImgUploadService::removeFolderFromUploads($baseImgNameWithoutExtension, false);
             $mediaItems = $product::query()->first()->getMedia('cover');
             $mediaItem = $mediaItems->where('file_name', '=', $shortImgName)->first();
             if ($mediaItem) $mediaItem->delete();
             $productFromBase->delete();
-            return redirect()->route('products_base.index', getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
+            return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
         }
         return redirect()->back()->with('success', "Последний товар не может быть удален.");
+    }
+
+    private static function getOldQueryFromSession($session)
+    {
+        $value = $session::get('oldQuery');
+        return current($value);
     }
 }
