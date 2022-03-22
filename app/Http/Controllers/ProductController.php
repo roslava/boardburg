@@ -18,9 +18,14 @@ class ProductController extends Controller
 {
     public function index(Product $product, Request $request, Session $session)
     {
-        if ($session::has('oldQuery')) $session::forget('oldQuery');
-        if ($session::has('lastPageIs')) $session::forget('lastPageIs');
-        $session::put('oldQuery', $request->query);
+        if ($session::has('oldQuery')) {
+            $session::forget('oldQuery');
+        }
+
+        if ($session::has('lastPageIs')) {
+            $session::put('oldQuery', $request->query);
+        }
+        $session::forget('lastPageIs');
 
         if (User::isManager(auth()->user(), Auth::check())) {
             $productFromBase = $product::query()->where('user_id', '=', auth()->user()['id']);
@@ -90,7 +95,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-                return view('products.product', ['productFromBase' => $product, 'previous_url' => URL::previous()]);
+        return view('products.product', ['productFromBase' => $product, 'previous_url' => URL::previous()]);
     }
 
     public function destroy(Product $product, Session $session): RedirectResponse
@@ -109,7 +114,7 @@ class ProductController extends Controller
                 $mediaItem->delete();
             }
             $product->delete();
-            return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', 'Товар '. '"'.$product->name. '"'.' был удален.');
+            return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', 'Товар ' . '"' . $product->name . '"' . ' был удален.');
         }
         return redirect()->back()->with('success', "Последний товар не может быть удален.");
     }
