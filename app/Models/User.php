@@ -14,23 +14,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    function isAdmin(): bool
-    {
-        $admin_emails = config('settings.admin_emails');
-        if (in_array($this['email'], $admin_emails)) return true; else
-            return false;
-    }
-
-    /**
-     * @param $currentUser
-     * @param $authCheck
-     * @return bool
-     */
-    public static function isManager($currentUser, $authCheck): bool
-    {
-        return $authCheck && (isset($currentUser->role) && $currentUser->role === 'manager');
-    }
-
     /**
      * The attributes that are mass assignable.
      *
@@ -61,4 +44,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return bool
+     */
+    function isAdmin(): bool
+    {
+        $admin_emails = config('settings.admin_emails');
+        if (in_array($this['email'], $admin_emails)) return true; else
+            return false;
+    }
+
+    /**
+     * @param $currentUser
+     * @param $authCheck
+     * @return bool
+     */
+    public static function isManager($currentUser, $authCheck): bool
+    {
+        return $authCheck && (isset($currentUser->role) && $currentUser->role === 'manager');
+    }
 }
