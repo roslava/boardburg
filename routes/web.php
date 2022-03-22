@@ -29,7 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/update_all', [ProductsSyncController::class, 'updateAll'])->name('products_base.update_all');
     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products_base.edit');
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products_base.update');
-    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products_base.destroy');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products_base.destroy');
     Route::get('/registered-users', [RegisteredUserController::class, 'index'])->name('registered_users.index');
     Route::get('/registered-users/create-registered-user', [RegisteredUserController::class, 'create'])->name('registered_user.create');
     Route::get('/registered-users/store', [RegisteredUserController::class, 'store'])->name('registered_user.store');

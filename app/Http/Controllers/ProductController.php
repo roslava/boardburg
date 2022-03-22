@@ -104,13 +104,13 @@ class ProductController extends Controller
                 return view('products.product', ['productFromBase' => $product, 'previous_url' => URL::previous()]);
     }
 
-    public function destroy(Product $product, $id, Session $session): RedirectResponse
+    public function destroy(Product $product, Session $session): RedirectResponse
     {
         if ($product::query()->count() > 1) {
-            $productsFromBase = $product->all();
-            $productFromBase = $productsFromBase->find($id);
-            Gate::authorize('delete-product', [$productFromBase]);
-            $shortImgName = Helpers::cutString('/', $productFromBase['img'], 'right', false);
+//            $productsFromBase = $product->all();
+
+            Gate::authorize('delete-product', [$product]);
+            $shortImgName = Helpers::cutString('/', $product['img'], 'right', false);
             $baseImgNameWithoutExtension = Helpers::removeExtension($shortImgName);
             ImgUploadService::removeFileFromUploads([$baseImgNameWithoutExtension, Helpers::getExtension($shortImgName)], '-thumb'); //converted file
             ImgUploadService::removeFolderFromUploads($baseImgNameWithoutExtension, true); //folder with converted file
@@ -119,8 +119,8 @@ class ProductController extends Controller
             $mediaItems = $product::query()->first()->getMedia('cover');
             $mediaItem = $mediaItems->where('file_name', '=', $shortImgName)->first();
             if ($mediaItem) $mediaItem->delete();
-            $productFromBase->delete();
-            return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', "Товар с ID $id был удален");
+            $product->delete();
+            return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', 'Товар '. '"'.$product->name. '"'.' был удален.');
         }
         return redirect()->back()->with('success', "Последний товар не может быть удален.");
     }
