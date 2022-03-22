@@ -71,22 +71,18 @@
                             </form>
                         </div>
                     </div>
-
                 @endguest
-
-
                 <div class="bb-nav-mob__likes bb-nav-mob__round-icon">
-                    <i class="bi bi-heart-fill"></i>
+                    <span class="material-icons">favorite</span>
                     <div class="bb-nav-mob__count-index">15</div>
                 </div>
                 <div class="bb-nav-mob__shopping-cart bb-nav-mob__round-icon">
-                    <i class="bi bi-cart-fill"></i>
+                    <span class="material-icons">shopping_cart</span>
                     <div class="bb-nav-mob__count-index">2</div>
                 </div>
             </div>
         </div>
-
-    </div>
+     </div>
     <div style="background-color: #198754;  width: 100%; height: 1px; display: block; position: relative">
         <div class="bb-nav-mob__background-toggler"></div>
     </div>
@@ -349,18 +345,19 @@
     .bb-nav-mob__likes {
     }
 
-    .bb-nav-mob__likes > i {
-        margin: 3px 0 0 0;
-        font-size: 18px;
+    .bb-nav-mob__likes > span {
+        margin: 1px 0 0 0;
+        font-size: 22px;
         color: white;
     }
 
     .bb-nav-mob__shopping-cart {
     }
 
-    .bb-nav-mob__shopping-cart > i {
-        font-size: 20px;
+    .bb-nav-mob__shopping-cart > span {
+        font-size: 24px;
         color: white;
+        margin: 2px 0 0 0;
     }
 </style>
 

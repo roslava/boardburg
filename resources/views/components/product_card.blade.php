@@ -16,9 +16,19 @@
                         <h5 class="bb-card-title">{{$productFromBase->name}}</h5>
                         <p class="card-text">{{ substr($productFromBase->description, 0, strpos(wordwrap($productFromBase->description, 100), "\n")).'...'}}</p>
                         <div style=" display: flex; justify-content: space-between; align-items: center">
+
+                            <div style="display: flex; align-items: center">
+
                             <form action="{{ route('products_base.show', $productFromBase->id)}}">
-                                <button class="btn product-card__detailes">Подробнее</button>
+                                <button class="btn product-card__detailes">
+                                     <span class="material-icons">visibility</span>
+                                 </button>
                             </form>
+                            <div class="product-card__like"><span class="material-icons">favorite</span></div>
+                            <div class="product-card__shopping-cart"><span class="material-icons">shopping_cart</span></div>
+                            </div>
+
+
                             <div class="bb-product-card-price">{{$productFromBase->price}} <span class="rub">c</span>
                             </div>
                         </div>

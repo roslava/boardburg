@@ -63,11 +63,11 @@
 
 
                 <div class="bb-nav-desc__likes bb-nav-desc__round-icon">
-                    <i class="bi bi-heart-fill"></i>
+                    <span class="material-icons">favorite</span>
                     <div class="bb-nav-desc__count-index">15</div>
                 </div>
                 <div class="bb-nav-desc__shopping-cart bb-nav-desc__round-icon">
-                    <i class="bi bi-cart-fill"></i>
+                    <span class="material-icons">shopping_cart</span>
                     <div class="bb-nav-desc__count-index">2</div>
                 </div>
             </div>
@@ -197,12 +197,6 @@
         position: relative;
     }
 
-    /*.bb-nav-desc__login > i {*/
-    /*    font-size: 24px;*/
-    /*    color: white;*/
-    /*}*/
-
-
     .bb-nav-desc__login::before {
         font-family: "Material Icons";
         content: "\e7fd";
@@ -210,7 +204,6 @@
         font-size: 26px;
         /*margin-right: 4px;*/
     }
-
 
     .bb-nav-desc__count-index {
         display: flex;
@@ -232,18 +225,19 @@
     .bb-nav-desc__likes {
     }
 
-    .bb-nav-desc__likes > i {
-        margin: 3px 0 0 0;
-        font-size: 18px;
+    .bb-nav-desc__likes > span {
+        margin: 1px 0 0 0;
+        font-size: 22px;
         color: white;
     }
 
     .bb-nav-desc__shopping-cart {
     }
 
-    .bb-nav-desc__shopping-cart > i {
-        font-size: 20px;
+    .bb-nav-desc__shopping-cart > span {
+        font-size: 24px;
         color: white;
+        margin: 2px 0 0 0;
     }
 
     .bb-avatar {

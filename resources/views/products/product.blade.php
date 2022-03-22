@@ -6,7 +6,7 @@
 
 @section('main')
     <div class="container-md bg-light rounded">
-        <div class="row p-3 pb-3 pb-lg-5 pb-md-4 pb-sm-3   mb-0 mt-0  mt-lg-4 mb-lg-4 mt-md-3 mb-md-3  ">
+        <div class="row p-3 pb-3 pb-lg-5 pb-md-4 pb-sm-3   mb-0 mt-0  mt-lg-4 mb-lg-4 mt-md-3 mb-md-3  " style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
             {{--info--}}
             <div class="col-lg-8 col-md-12 col-sm-12 p-0">
                 <div class=" m-lg-5 m-md-4  m-sm-3">

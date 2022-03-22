@@ -319,27 +319,6 @@ body.modal-open {
     margin-left: 0 !important;
 }
 
-.bb-product-card-price {
-    box-sizing: border-box;
-    padding-left: 8px;
-    padding-right: 8px;
-    /*padding-bottom: 10px;*/
-    padding-top: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    height: 30px;
-    border-radius: 15px;
-    display: block;
-    background: rgb(254, 192, 47);
-    background: linear-gradient(162deg, rgba(254, 192, 47, 1) 0%, rgba(254, 161, 47, 1) 68%, rgba(254, 123, 47, 1) 100%);
-}
-
-.bb-product-title {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 600;
-    font-size: 2rem;
-}
-
 .modal__close-btn {
     color: #818181;
     transition: color .6s;

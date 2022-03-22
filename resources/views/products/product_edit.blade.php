@@ -4,7 +4,7 @@
 @endsection
 
 @section('main')
-    <div class="container-md bg-light mt-5 p-4 mb-5 rounded">
+    <div class="container-md bg-light mt-5 p-4 mb-5 rounded" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
         {{--    breadcrumb--}}
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
