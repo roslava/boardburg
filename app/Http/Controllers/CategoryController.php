@@ -18,7 +18,8 @@ class CategoryController extends Controller
         } else {
             $productQuery = $product::query();
         }
-        priceFilter($request, $productQuery);
+
+        Product::priceFilter($request, $productQuery);
         switch ($request->input('category')) {
             case 'category_1':
                 $productQuery->where('category_id', 1);
@@ -35,7 +36,7 @@ class CategoryController extends Controller
             case 'category_5':
                 $productQuery->where('category_id', '>', 0);
                 if ($request->filled('price_from') or $request->filled('price_to')) {
-                    priceFilter($request, $productQuery);
+                    Product::priceFilter($request, $productQuery);
                 } else {
                     return redirect()->route('products_base.index');
                 }

@@ -8,15 +8,15 @@ function getOldQueryFromSession($session)
 }
 
 //2 function calls
-function priceFilter($request, $productQuery)
-{
-    if ($request->filled('price_from')) {
-        $productQuery->where('price', '>=', $request['price_from']);
-    }
-    if ($request->filled('price_to')) {
-        $productQuery->where('price', '<=', $request['price_to']);
-    }
-}
+//function priceFilter($request, $productQuery)
+//{
+//    if ($request->filled('price_from')) {
+//        $productQuery->where('price', '>=', $request['price_from']);
+//    }
+//    if ($request->filled('price_to')) {
+//        $productQuery->where('price', '<=', $request['price_to']);
+//    }
+//}
 
 //2 function calls
 function cut_string_using_last($character, $string, $side, $keep_character = true)

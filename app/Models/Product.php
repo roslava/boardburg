@@ -48,4 +48,19 @@ class Product extends Model implements HasMedia
                 return 'bearings';
         }
     }
+
+    /**
+     * @param $request
+     * @param $productQuery
+     * @return void
+     */
+    public static function priceFilter($request, $productQuery)
+    {
+        if ($request->filled('price_from')) {
+            $productQuery->where('price', '>=', $request['price_from']);
+        }
+        if ($request->filled('price_to')) {
+            $productQuery->where('price', '<=', $request['price_to']);
+        }
+    }
 }
