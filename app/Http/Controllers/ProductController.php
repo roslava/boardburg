@@ -99,10 +99,9 @@ class ProductController extends Controller
         return redirect()->route('products_base.index', self::getOldQueryFromSession($session))->with('success', "Обновлен товар: {$request['name']}");
     }
 
-    public function show(Product $product, $id)
+    public function show(Product $product)
     {
-        $productFromBase = $product::all()->where('id', $id)->first();
-        return view('products.product', ['productFromBase' => $productFromBase, 'previous_url' => URL::previous()]);
+                return view('products.product', ['productFromBase' => $product, 'previous_url' => URL::previous()]);
     }
 
     public function destroy(Product $product, $id, Session $session): RedirectResponse

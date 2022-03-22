@@ -18,7 +18,7 @@ Route::post('/contact', [ContactUsFormController::class, 'ContactUsForm'])->name
 Route::get('/reload-captcha', [ContactUsFormController::class, 'reloadCaptcha'])->name('reload-captcha');
 Route::get('/products', [ProductController::class, 'index'])->name('products_base.index');//
 Route::get('/products/cat', [CategoryController::class, 'index'])->name('products_base.cat');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products_base.show');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products_base.show');
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 
 Route::middleware(['auth'])->group(function () {
