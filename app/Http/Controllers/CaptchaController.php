@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class CaptchaServiceController extends Controller
+class CaptchaController extends Controller
 {
     public function index()
     {
