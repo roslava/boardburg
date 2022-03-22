@@ -10,6 +10,8 @@ use Spatie\MediaLibrary\HasMedia;
 
 class Product extends Model implements HasMedia
 {
+    protected $fillable = ['external_id','name','description','img','price','category_id','user_id','slug'];
+
     use HasFactory, InteractsWithMedia;
 
     /**
@@ -46,6 +48,4 @@ class Product extends Model implements HasMedia
                 return 'bearings';
         }
     }
-
-    protected $fillable = ['external_id','name','description','img','price','category_id','user_id','slug'];
 }

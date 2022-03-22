@@ -1,8 +1,8 @@
 @section('product_card')
     @if(!count($productsFromBase)==0)
         @foreach($productsFromBase as $productFromBase)
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" style="display: flex; flex-direction: column">
-                <div class="card" style="height: 100%;">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4" style="display: flex; flex-direction: column;">
+                <div class="card" style="height: 100%; box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
                     <div class="row pt-3" style="justify-content: center; margin:0">
                         @if($productFromBase->img)
                             <a style="width: 100%; display: flex; justify-content: center; "
@@ -28,7 +28,8 @@
                             <div class="card-technical rounded bg-light mt-0 mb-4 p-2 shadow"
                                  style="font-size: 11px; min-width: 100%">
                                 <div>Менеджер: {{$productFromBase->user_id}}</div>
-                                <div>Категория товара: {{$productFromBase->category_id}} ({{$productFromBase->slug}})</div>
+                                <div>Категория товара: {{$productFromBase->category_id}} ({{$productFromBase->slug}})
+                                </div>
                                 <div>ID: {{$productFromBase->id}} / Внешний ID: {{$productFromBase->external_id}}</div>
                                 <div>Дата создания: {{$productFromBase->created_at}}</div>
                                 <div>Дата обновления: {{$productFromBase->updated_at}}</div>
@@ -41,8 +42,8 @@
                         @endif
                         <div class="row product-card__btn-holder">
                             @can(['update-product', 'delete-product'], $productFromBase)
-                                <a href="{{ route('products_base.edit', $productFromBase->id)}}" class=" btn btn-edit" >
-                                    <i class="bi bi-pencil-square" style="margin-top: 5px" ></i>
+                                <a href="{{ route('products_base.edit', $productFromBase->id)}}" class=" btn btn-edit">
+                                    <i class="bi bi-pencil-square" style="margin-top: 5px"></i>
                                 </a>
                                 <form class="p-0 m-0 float-end " style="display: inline; max-width: 30px"
                                       action="{{ route('products_base.destroy', $productFromBase->id)}}" method="post">
@@ -70,4 +71,3 @@
 
 @endsection
 @yield('product_card')
-
