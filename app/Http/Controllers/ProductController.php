@@ -66,18 +66,8 @@ class ProductController extends Controller
 
         $quantity = count($productsFromBase->all()) + 1;
 
-        function getLastPageFromSession($session, $quantity): array
-        {
-            if ($quantity % 8 === 1) {
-                $page = $session::get('lastPageIs') + 1;
-                return compact('page');
-            }
-            $page = $session::get('lastPageIs');
-            return compact('page');
-        }
-
         return redirect()->route('products_base.index',
-            getLastPageFromSession($session, $quantity))
+            self::getLastPageFromSession($session, $quantity))
             ->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
@@ -107,8 +97,6 @@ class ProductController extends Controller
     public function destroy(Product $product, Session $session): RedirectResponse
     {
         if ($product::query()->count() > 1) {
-//            $productsFromBase = $product->all();
-
             Gate::authorize('delete-product', [$product]);
             $shortImgName = Helpers::cutString('/', $product['img'], 'right', false);
             $baseImgNameWithoutExtension = Helpers::removeExtension($shortImgName);
@@ -131,5 +119,15 @@ class ProductController extends Controller
     {
         $value = $session::get('oldQuery');
         return current($value);
+    }
+
+    private static function getLastPageFromSession($session, $quantity): array
+    {
+        if ($quantity % 8 === 1) {
+            $page = $session::get('lastPageIs') + 1;
+            return compact('page');
+        }
+        $page = $session::get('lastPageIs');
+        return compact('page');
     }
 }
