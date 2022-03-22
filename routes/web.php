@@ -27,7 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/products-from-form/new_product', [ProductController::class, 'create'])->name('products_form.create');
     Route::post('/products-from-form/store', [ProductController::class, 'store'])->name('products_form.store');
     Route::get('/update_all', [ProductsSyncController::class, 'updateAll'])->name('products_base.update_all');
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products_base.edit');
+    Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products_base.edit');
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('products_base.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products_base.destroy');
     Route::get('/registered-users', [RegisteredUserController::class, 'index'])->name('registered_users.index');

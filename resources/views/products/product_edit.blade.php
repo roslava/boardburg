@@ -10,18 +10,18 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a style="color: rgb(30,152,95);" href="{{ route('products_base.index')}}">Каталог</a></li>
                 <li class="breadcrumb-item"><a style="color: rgb(30,152,95);"
-                        href="{{ route("products_base.index")}}/{{$productFromBase->id}}">{{$productFromBase->name}}</a></li>
+                        href="{{ route("products_base.index")}}/{{$product->id}}">{{$product->name}}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Редактирование товара</li>
             </ol>
         </nav>
         <h1>Редактировать</h1>
-        <form action="{{route('products_base.update', $productFromBase->id)}}" enctype="multipart/form-data"  method="POST" >
+        <form action="{{route('products_base.update', $product->id)}}" enctype="multipart/form-data"  method="POST" >
             @csrf
             @method("PUT")
             <div class="form-group mt-4">
                 <label class="mb-1" for="name">Название товара</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
-                       value="{{ $productFromBase->name }}">
+                       value="{{ $product->name }}">
                 @error('name')
                 <span
                     class="invalid-feedback"
@@ -33,7 +33,7 @@
             <div class="form-group mt-4">
                 <label class="mb-1" for="description">Описание товара</label>
                 <textarea name="description" class="form-control @error('description') is-invalid @enderror"
-                          id="description" rows="3">{{ $productFromBase->description }}</textarea>
+                          id="description" rows="3">{{ $product->description }}</textarea>
                 @error('description')
                 <span
                     class="invalid-feedback"
@@ -45,7 +45,7 @@
             <div class="form-group mt-4">
                 <label class="mb-1" for="price">Цена</label>
                 <input type="number" min="1" name="price" maxlength="6" class="form-control @error('price') is-invalid @enderror"
-                       id="price" value="{{ $productFromBase->price }}">
+                       id="price" value="{{ $product->price }}">
                 @error('price')
                 <span
                     class="invalid-feedback"
@@ -58,16 +58,16 @@
                 <label class="mb-1" for="">Категория товара</label>
                 <div class="bb-inputs-grupper input-group ">
 
-                    @foreach($products=[['Доски'],['Подвески'],['Колеса'],['Подшипники']] as $key => $product)
+                    @foreach($items=[['Доски'],['Подвески'],['Колеса'],['Подшипники']] as $key => $item)
                         <div class="bb-form-check">
                             <input
                                 class="form-check-input @if($key == 3)@error('category_id') is-invalid  @enderror @endif"
                                 type="radio" name="category_id"
-                                id={{"checkCategory".$key++}}   value="{{ $productFromBase->category_id}}" @if($productFromBase->category_id == $key) checked @endif>
+                                id={{"checkCategory".$key++}}   value="{{ $product->category_id}}" @if($product->category_id == $key) checked @endif>
                             <label class="form-check-label" for={{"checkCategory".$key}}>
-                                {{$product[0]}}
+                                {{$item[0]}}
                             </label>
-                            @if($key == count($products))
+                            @if($key == count($items))
                                 @error('category_id')
                                 <div style="display: flex; "
                                      class="invalid-feedback"
@@ -81,11 +81,7 @@
 
                 </div>
             </div>
-
             <label class="mb-1" for="image">Загрузка изображения товара</label>
-
-{{--            <input type="file" value="{{$article->article_cover}}"--}}
-
             <input type="file" id="cover" name="cover"  class="@error('cover') is-invalid @enderror">
             @error('cover')
             <span
@@ -126,11 +122,8 @@
                 }
             },
             files: [{
- {{--source: "http://boardburg.xx/storage/uploads/"+"{{$productFromBase->img}}"--}}
- source: "http://"+"{{request()->getHttpHost()}}"+"/storage/uploads/"+"{{$productFromBase->img}}"
+ source: "http://"+"{{request()->getHttpHost()}}"+"/storage/uploads/"+"{{$product->img}}"
             }]
         });
     </script>
 @endsection
-
-

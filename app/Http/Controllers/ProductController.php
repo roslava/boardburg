@@ -71,11 +71,10 @@ class ProductController extends Controller
             ->with('success', 'Был создан товар с названием: ' . $created_name);
     }
 
-    public function edit(Product $product, $id)
+    public function edit(Product $product)
     {
-        $productFromBase = $product::all()->find($id);
-        Gate::authorize('update-product', [$productFromBase]);
-        return view('products.product_edit', compact('productFromBase'));
+        Gate::authorize('update-product', [$product]);
+        return view('products.product_edit', compact('product'));
     }
 
     public function update(StoreProductRequest $request, Product $product, Session $session, ImgUploadService $imgUploadService): RedirectResponse
