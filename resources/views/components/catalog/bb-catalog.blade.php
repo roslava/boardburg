@@ -1,11 +1,12 @@
 @section('bb-catalog')
     <div class="bb-catalog">
         <div class="bb-catalog__container">
-{{--            @if(!count($productsFromBase)==0)--}}
-{{--                @foreach($productsFromBase as $product)--}}
-{{--                    {{$product->name}}--}}
-{{--                @endforeach--}}
-{{--            @endif--}}
+            <div id="bb-catalog__products">111</div>
+            {{--            @if(!count($productsFromBase)==0)--}}
+            {{--                @foreach($productsFromBase as $product)--}}
+            {{--                    {{$product->name}}--}}
+            {{--                @endforeach--}}
+            {{--            @endif--}}
         </div>
     </div>
 @endsection
@@ -34,8 +35,8 @@
 
     @media (max-width: 767px) {
         .bb-catalog_show {
-           padding-left: 1rem;
-           padding-right: 1rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     }
 
@@ -69,6 +70,21 @@
             min-width: 100%;
         }
     }
-
-
 </style>
+
+<script>
+    $(document).ready(function () {
+        fetchData()
+
+        function fetchData() {
+            $.ajax({
+                type: 'GET',
+                url: '/catalog',
+                success: function (data) {
+                    $(".bb-catalog__container").html(data[0].name);
+                    console.log(data[0].name);
+                }
+            })
+        }
+    })
+</script>

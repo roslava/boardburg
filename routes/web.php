@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
@@ -20,6 +21,7 @@ Route::get('/products', [ProductController::class, 'index'])->name('products_bas
 Route::get('/products/cat', [CategoryController::class, 'index'])->name('products_base.cat');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products_base.show');
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/upload-file', [UploadController::class, 'store'])->name('upload_file.store');

@@ -85,7 +85,7 @@ function bbNavMobClose(){
 
 
 
-//catalog
+//catalog open
 let bbNavCatalogBtn = document.querySelectorAll('.bb-catalog-btn') //кнопка закрыть/открыть
 let bbCatalog = document.querySelectorAll('.bb-catalog')//каталог
 
