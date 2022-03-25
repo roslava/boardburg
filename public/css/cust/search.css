@@ -90,33 +90,26 @@
     border: 0 !important;
 }
 
-#search_input_button{
+.search_input_button{
     color: rgba(255, 255, 255, 0.79);
     background-color: #24181DFF;
 }
-#search_input_button:hover{
+.search_input_button:hover{
 
     background-color: #24181DFF;
     color: rgb(255, 255, 255);
 }
 
-#search_input_button:disabled{
+.search_input_button:disabled{
     color: rgba(255, 255, 255, 0.79);
     background-color: #35ab72;
     border: #273320 solid 1px !important;
 }
-#search_input_button:disabled:hover{
+.search_input_button:disabled:hover{
     color: rgba(255, 255, 255, 0.79);
     background-color: #35ab72;
     border: #273320 solid 1px !important;
 }
-
-/*.bb-search__button_show:disabled {*/
-/*    background-color: rgba(35, 141, 90, 0.73); !important;*/
-/*    opacity: 100;*/
-/*}*/
-
-
 
 .bb-search__form {
     display: flex;

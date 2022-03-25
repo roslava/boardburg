@@ -22,6 +22,7 @@ Route::get('/products/cat', [CategoryController::class, 'index'])->name('product
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products_base.show');
 Route::get('/search', [SearchController::class, 'search'])->name('search.index');
 Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/catalog/{cat}', [CatalogController::class, 'show'])->name('catalog.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/upload-file', [UploadController::class, 'store'])->name('upload_file.store');

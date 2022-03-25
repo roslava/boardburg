@@ -5,7 +5,7 @@ require('./bootstrap');
 let searchContainer = document.querySelectorAll('.bb-search__container'); //контейнер
 let searchIcon = document.querySelectorAll('.bb-search-btn-icon'); //кнопка с увличительным стеклом е
 let searchCloseIcon = document.querySelectorAll('.bb-search__close-icon');
-let searchInputButton = document.querySelectorAll('#search_input_button');
+let searchInputButton = document.querySelectorAll('.search_input_button');
 
 searchIcon.forEach(item => {
         item.addEventListener('click', event => {
@@ -30,8 +30,8 @@ searchCloseIcon.forEach(item => {
 
 
 //if search input empty, search button disabled
-let search_input = document.getElementById('search_input_bb');
-let search_input_button = document.getElementById('search_input_button');
+let search_input = document.querySelector('.search_input_bb');
+let search_input_button = document.querySelector('.search_input_button');
 
 window.onload = function () {
     if (search_input.value.length == 0)
