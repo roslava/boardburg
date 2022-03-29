@@ -256,14 +256,4 @@
         position: relative;
         box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
     }
-
-    /*.bb-avatar > a {*/
-    /*    color: white;*/
-    /*}*/
-
-
 </style>
-
-
-<!-- Modal -->
-@include('components.bb-login-modal')

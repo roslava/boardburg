@@ -30,6 +30,18 @@
     @include('components.footer')
 @endsection
 
+<!-- Modal -->
 @include('components.modal_send_mail')
 
+@include('components.bb-login-modal')
 
+@if (session('isLoginForm'))
+    <script>
+        $(window).on('load', function () {
+            $('#logineModalCenter').modal('show');
+            $("#close_login_modal_btn").click(function () {
+                $('#logineModalCenter').modal('hide');
+            });
+        })
+    </script>
+@endif

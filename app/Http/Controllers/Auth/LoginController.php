@@ -21,6 +21,12 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    public function showLoginForm(){
+
+        return redirect()->route('products_base.index')->with('isLoginForm', true);
+
+    }
+
     /**
      * Where to redirect users after login.
      *

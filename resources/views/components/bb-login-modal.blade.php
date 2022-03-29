@@ -9,7 +9,7 @@
                  style="border: 0; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: start">
                 <h5 class="modal-title" id="exampleModalLongTitle">Вход</h5>
                 <div style="width: fit-content; padding: 0; margin-left: 10px ">
-                    <i style="font-size: 1.4rem; cursor: pointer; " class="bi bi-x-square modal__close-btn"
+                    <i style="font-size: 1.4rem; cursor: pointer; " class="bi bi-x-square modal__close-btn" id="close_login_modal_btn"
                        data-dismiss="modal" aria-label="Close"></i>
                 </div>
             </div>

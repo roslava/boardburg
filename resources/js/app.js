@@ -82,9 +82,6 @@ function bbNavMobClose(){
     navMobBurger.classList.remove('bb-nav-mob__burger_hide')
 }
 
-
-
-
 //catalog open
 let bbNavCatalogBtn = document.querySelectorAll('.bb-catalog-btn') //кнопка закрыть/открыть
 let bbCatalog = document.querySelectorAll('.bb-catalog')//каталог

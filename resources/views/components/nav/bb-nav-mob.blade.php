@@ -86,12 +86,12 @@
     <div style="background-color: #198754;  width: 100%; height: 1px; display: block; position: relative">
         <div class="bb-nav-mob__background-toggler"></div>
     </div>
-
 @endsection
 @yield('bb-nav-mob')
 
 
 <style>
+
     .bb-nav-mob {
         display: none;
     }
@@ -361,5 +361,4 @@
     }
 </style>
 
-<!-- Modal -->
-@include('components.bb-login-modal')
+
