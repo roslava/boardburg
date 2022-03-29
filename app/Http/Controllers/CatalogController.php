@@ -11,7 +11,7 @@ class CatalogController extends Controller
     {
         $cat = $category::all();
         $prod = $product::all();
-        return compact('cat', 'prod');
+       return compact('cat', 'prod');
     }
 
     public function show($cat, Category $category, Product $product)

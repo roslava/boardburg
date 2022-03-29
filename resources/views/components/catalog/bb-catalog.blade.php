@@ -6,25 +6,22 @@
                 </ul>
             </div>
             <div id="itemsInCategory">
-                <ul>
-
-                </ul>
+                <ul></ul>
             </div>
-
+            <div id="category_img"></div>
         </div>
     </div>
 @endsection
 @yield('bb-catalog')
+
+
 
 <style>
     .bb-catalog {
         display: none;
     }
 
-
-    .catalog-categories{
-
-    }
+    .catalog-categories {}
 
     .bb-catalog_show {
         padding-top: 30px;
@@ -77,26 +74,26 @@
         }
     }
 
-    .categories-list{
+    .categories-list {
         display: flex;
         flex-direction: column;
         list-style-type: none !important;
         line-height: 30px !important;
-        margin-left: 0px !important;
+        padding-left: 0px;
         justify-content: stretch;
         min-width: 100%;
-    }
+     }
 
-    .categories-list-item{
+    .categories-list-item {
         list-style-type: none;
         border-bottom: 1px dotted rgb(17, 26, 23);
         margin-left: 0px !important;
         display: flex;
         justify-content: stretch;
         min-width: 100%;
-
     }
-    .categories-list-item > a{
+
+    .categories-list-item > a {
         text-decoration: none !important;
         color: #a4a3a3 !important;
         margin-left: 0px !important;
@@ -106,23 +103,70 @@
         padding-right: 10px;
     }
 
-    .categories-list-item > a:hover{
+    .categories-list-item > a:hover {
         color: #ffffff !important;
         background-color: rgba(31, 56, 44, 0.71);
     }
 
-    .products-list-item{
+    .products-list-item {
         list-style-type: none;
         line-height: 30px !important;
+
     }
 
-    .products-list-item > a{
+    .products-list-item > a {
         text-decoration: none !important;
         color: #a4a3a3 !important;
     }
 
-    .products-list-item > a:hover{
+    .products-list-item > a:hover {
         color: #ffffff !important;
+    }
+
+    #category_img {
+        width: 250px;
+        height: 250px;
+        border-radius: 125px;
+        overflow: hidden;
+        background-color: white;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        opacity: 80%;
+    }
+
+    #category_img > img {
+        margin: 0 auto !important;
+    }
+
+    #itemsInCategory {
+        width: 320px;
+        margin-right: 10px;
+        display: flex;
+    }
+
+    #itemsInCategory li {
+        height: 31px;
+
+        display: flex;
+       justify-content: start;
+        flex-direction: column;
+    }
+
+    #itemsInCategory a {
+        width: 320px;
+        list-style-type: none;
+        text-decoration: none;
+        color: #a4a3a3;
+    }
+
+    #itemsInCategory a:hover {
+        color: #ffffff;
+    }
+
+    #itemsInCategory ul {
+        list-style-type: none;
+        margin-left: -10px;
     }
 
 </style>
@@ -149,7 +193,6 @@
                 })
             }
 
-
             function fetchCategoryItems(cat) {
                 $.ajax({
                     type: 'GET',
@@ -157,7 +200,16 @@
                     success: function (data) {
                         $result = ''
                         $.each(data['products'], function (index, value) {
-                            $("#itemsInCategory ul").html($result += '<li class="products-list-item"><a href="/products/' + value.id + '">' + value.name + '</a></li>')
+                            $("#itemsInCategory ul").html($result += `<li><a data-current_img = ${value.img} class="products-list-item" href="/products/` + value.id + '">' + value.name + '</a></li>');
+                            document.querySelectorAll('.products-list-item').forEach((item) => {
+                                  item.addEventListener('mouseenter', function () {
+                                    $('#category_img').css('display', 'flex');
+                                    $('#category_img').html('<img style="width: 200px" src="/storage/uploads/' + item.dataset.current_img + '" alt=""/>');
+                                })
+                                item.addEventListener('mouseleave', function () {
+                                    $('#category_img').hide();
+                                })
+                            })
                         });
                     }
                 })
