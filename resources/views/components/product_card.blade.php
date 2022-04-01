@@ -24,8 +24,16 @@
                                      <span class="material-icons">visibility</span>
                                  </button>
                             </form>
-                            <div class="product-card__like"><span class="material-icons">favorite</span></div>
-                            <div class="product-card__shopping-cart"><span class="material-icons">shopping_cart</span></div>
+                            <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like"><span class="material-icons">favorite</span></div>
+                            <div data-toggle="modal" data-target="#cart_add_confirm_modal" class="product-card__shopping-cart"><span class="material-icons">shopping_cart</span></div>
+
+{{--                                <form action="{{ route('cart-confirmation', $productFromBase->id)}}">--}}
+{{--                                    <button class="btn product-card__detailes">--}}
+{{--                                        <span class="material-icons">visibility</span>--}}
+{{--                                    </button>--}}
+{{--                                </form>--}}
+
+
                             </div>
 
 

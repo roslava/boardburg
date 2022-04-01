@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductsSyncController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,10 @@ Route::get('/', function () {
 
 Route::post('/contact', [ContactUsController::class, 'index'])->name('contact.store');
 Route::get('/reload-captcha', [ContactUsController::class, 'reloadCaptcha'])->name('reload-captcha');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::get('/cart/confirmation/{product}', [CartController::class, 'confirmation'])->name('cart-confirmation');
 Route::get('/products', [ProductController::class, 'index'])->name('products_base.index');//
 Route::get('/products/cat', [CategoryController::class, 'index'])->name('products_base.cat');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products_base.show');

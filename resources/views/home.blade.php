@@ -32,8 +32,9 @@
 
 <!-- Modal -->
 @include('components.modal_send_mail')
-
 @include('components.bb-login-modal')
+@include('components.shopping_cart.cart_add_confirm_modal')
+@include('components.favourites.favourites_modal')
 
 @if (session('isLoginForm'))
     <script>
