@@ -8,20 +8,27 @@
     <div class="container-md bg-light rounded">
         <div class="bb-cart">
             <h2>Моя корзина</h2>
+
+
+           @foreach($cart as $item)
+
+
             <div class="bb-cart-product">
                 <div class="bb-cart-product-details">
-                    <div class="bb-cart-product__img"> bb-cart-product__img</div>
+                    <div class="bb-cart-product__img">
+                        <img style="width: 100px; height: auto" src="{{asset('/storage/uploads/'.$item->attributes['image'])?? ''}}" alt="">
+                    </div>
                     <div class="bb-cart-product__info">
                         <div class="bb-cart-product__description">
                             <div class="bb-cart-product__title">
-                                Название товара
+                                {{$item->name}}
                             </div>
                         </div>
                         <div class="bb-cart-product__price">
-                            <div>1000 руб.</div>
+                            <div>{{$item->price}} руб.</div>
                             <div class="bb-cart-product__price-count">
                                 <div class="bb-cart-product__price-count-btn bb-cart-product__price-count-btn_left bb-cart-plus">+ </div>
-                                <input class="bb-cart-product__product-input" value="1" type="number"  min="1" max="100">
+                                <input id="bb-cart-quantity-input" class="bb-cart-product__product-input" value="{{$item->quantity}}" type="number"  min="1" max="100">
                                  <div class="bb-cart-product__price-count-btn bb-cart-product__price-count-btn_right bb-cart-minus">-</div>
                             </div>
                         </div>
@@ -29,6 +36,33 @@
                 </div>
                 <div class="bb-cart-product__receiving">Где и как вы хотите получить заказ?</div>
             </div>
+
+{{--                <form action="{{ route('remove_from_cart', $item->id)}}" method="post">--}}
+{{--                    @csrf--}}
+{{--                    @method("DELETE")--}}
+{{--                    <button >--}}
+{{--                        Удалить товар из корзины--}}
+{{--                    </button>--}}
+{{--                </form>--}}
+
+
+
+
+                <form action="{{ route('remove_from_cart') }}" method="POST">
+                    @csrf
+                    <input type="hidden" value="{{ $item->id }}" name="id">
+                    <button class="px-4 py-2 text-white bg-red-600">Удалить товар из корзины</button>
+                </form>
+
+
+
+
+
+
+
+            @endforeach
+
+Цена всех покупок: {{$sum}}
         </div>
     </div>
 
@@ -126,6 +160,7 @@
     }
 </style>
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
@@ -142,3 +177,7 @@
         });
     });
 </script>
+
+
+
+
