@@ -36,30 +36,11 @@
                 </div>
                 <div class="bb-cart-product__receiving">Где и как вы хотите получить заказ?</div>
             </div>
-
-{{--                <form action="{{ route('remove_from_cart', $item->id)}}" method="post">--}}
-{{--                    @csrf--}}
-{{--                    @method("DELETE")--}}
-{{--                    <button >--}}
-{{--                        Удалить товар из корзины--}}
-{{--                    </button>--}}
-{{--                </form>--}}
-
-
-
-
                 <form action="{{ route('remove_from_cart') }}" method="POST">
                     @csrf
                     <input type="hidden" value="{{ $item->id }}" name="id">
                     <button class="px-4 py-2 text-white bg-red-600">Удалить товар из корзины</button>
                 </form>
-
-
-
-
-
-
-
             @endforeach
 
 Цена всех покупок: {{$sum}}

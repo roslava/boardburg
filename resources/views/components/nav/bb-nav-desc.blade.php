@@ -69,7 +69,7 @@
 
                 <a style="text-decoration: none" href="{{ route('cart.index')}}"> <div class="bb-nav-desc__shopping-cart bb-nav-desc__round-icon">
                     <span class="material-icons">shopping_cart</span>
-                    <div class="bb-nav-desc__count-index">
+                    <div class="bb-nav-desc__count-index bb-cart-count">
                         {{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}
                     </div>
                 </div>

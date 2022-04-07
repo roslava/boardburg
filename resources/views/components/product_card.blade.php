@@ -27,35 +27,15 @@
                                 <button class="btn product-card__detailes">
                                      <span class="material-icons">visibility</span>
                                  </button>
+
+
+
+
+{{--                                shopping cart add button--}}
                             </form>
-
                                 <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like"><span class="material-icons">favorite</span></div>
-
-
-
-{{--                                <a data-id="{{$productFromBase->id}}" class="product-card__shopping-cart-btn"><div data-toggle="modal"  class="product-card__shopping-cart "><span class="material-icons">shopping_cart</span></div></a>--}}
-
-
-
-                                <a data-id="{{$productFromBase->id}}" href="{{ route('add_to_cart', ['id' => $productFromBase->id] )}}"><div data-toggle="modal"  class="product-card__shopping-cart product-card__shopping-cart-btn"><span class="material-icons">shopping_cart</span></div></a>
-
-
-
-
-
-
-{{--
-
-
-<div data-toggle="modal"  class="product-card__shopping-cart product-card__shopping-cart-btn"><span class="material-icons">shopping_cart</span></div>--}}
-{{--                            <div data-toggle="modal" data-target="#cart_add_confirm_modal" class="product-card__shopping-cart product-card__shopping-cart-btn"><span class="material-icons">shopping_cart</span></div>--}}
-
-
-
-
-                            </div>
-
-
+                                <div data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn" data-toggle="modal" data-target="#cart_add_confirm_modal"><span class="material-icons">shopping_cart</span></div>
+                           </div>
                             <div class="bb-product-card-price">{{$productFromBase->price}} <span class="rub">c</span>
                             </div>
                         </div>
@@ -95,6 +75,7 @@
                     </div>
                 </div>
             </div>
+
         @endforeach
     @endif
     @if(count($productsFromBase)==0)

@@ -6,7 +6,8 @@
             <div class="modal-content">
                 <div class="modal-header"
                      style="border: 0; padding-left: 1.5rem; padding-right: 1.5rem; display: flex; align-items: start">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Товар добавлен в корзину</h5>
+                    <h6 class="modal-title" id="cartAddConfirmTitle"></h6>
+
                     <div style="width: fit-content; padding: 0; margin-left: 10px ">
                         <i style="font-size: 1.4rem; cursor: pointer"
                            class="bi bi-x-square modal__close-btn modal_cl_btn"
@@ -19,8 +20,20 @@
                 <div class="card-body">
 
                     <button data-dismiss="modal" aria-label="Close"> Продолжить покупки</button>
-                    <button> Перейти в корзину</button>
-                    <button> Убрать из корзины</button>
+                    <a href="{{ route('cart.index')}}">Перейти в корзину</a>
+
+
+//подготовка кнопки для удаления без перезагрузки
+                    <button data-this_id="" class="shopping-cart__delete-btn_"> Убрать из корзины</button>
+
+
+
+
+                    <form action="{{ route('remove_from_cart') }}" method="POST">
+                        @csrf
+                        <input class="shopping-cart__delete-btn" type="hidden" value="" name="id">
+                        <button class="px-4 py-2 text-white bg-red-600">Удалить товар из корзины</button>
+                    </form>
 
                 </div>
 

@@ -92,3 +92,4 @@ bbNavCatalogBtn.forEach(item => {
         bbCatalog.forEach(item =>{item.classList.toggle('bb-catalog_show')})
     })
 })
+
