@@ -1,4 +1,19 @@
 @extends('layouts.base')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @section('header')
     @include('components.header')
 @endsection
@@ -33,7 +48,7 @@
 <!-- Modal -->
 @include('components.modal_send_mail')
 @include('components.bb-login-modal')
-@include('components.shopping_cart.cart_add_confirm_modal')
+{{--@include('components.shopping_cart.cart_add_confirm_modal')--}}
 @include('components.favourites.favourites_modal')
 
 @if (session('isLoginForm'))
@@ -49,46 +64,30 @@
 
 
 
-<script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        const btnAddToCartCollection = document.getElementsByClassName('shopping_cart_btn');
-        let btnAddToCart = Array.from(btnAddToCartCollection);
-        let cartCountHolder = Array.from(document.getElementsByClassName('bb-cart-count'));
-        let cartAddConfirmTitle = document.querySelector('#cartAddConfirmTitle');
-        let totalQuantity = {{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}};
-
-        function getTotalQuantity(cartCountHolder, totalQuantity) {
-            cartCountHolder.forEach(function (item) {
-                item.innerHTML = totalQuantity
-            })
-        }
-
-        getTotalQuantity(cartCountHolder, totalQuantity)
-        btnAddToCart.forEach(function (item) {
-            item.addEventListener('click', () => {
-                let id = item.dataset.id
-                fetch('{{ route('add_to_cart')}}?id=' + id)
-                    .then(data => {
-                        return data.json()
-                    })
-                    .then(data => {
-                        getTotalQuantity(cartCountHolder, data['totalQuantity']);
-                        cartAddConfirmTitle.innerHTML = data['isAddedToCartMessage']['isAddedToCartMessage'];
-                    })
-                    .then(() => {
-                        let shoppingCartDeleteBtn = document.querySelectorAll('.shopping-cart__delete-btn');
-                        shoppingCartDeleteBtn.forEach(item => {
-                            item.value = id
-
-                         let shoppingCartCeleteBtn_  = document.querySelectorAll('.shopping-cart__delete-btn_');
-                            shoppingCartCeleteBtn_.forEach(item => {
-                                item.dataset.this_id = id
-                                console.log('ID:', item.dataset.this_id)
-                            })
-                        })
-                    })
-
+@push('scripts')
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            $(function () {
+                let cart_gl = new ShoppingCartBB(
+                    "{{ route('cart.index')}}",
+                    "{{ route('cart.render')}}",
+                    "{{ route('add_to_cart')}}",
+                    "{{ route('cart.update')}}",
+                    "{{route('remove_from_cart')}}",
+                    "{{asset('/storage/uploads')}}",
+                    "{{csrf_token()}}"
+                );
+                cart_gl.showTotalQuantity('{{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}')
+                cart_gl.addProductToCart()
+                cart_gl.removeProductFromCart()
             })
         })
-    })
-</script>
+    </script>
+@endpush
+
+
+
+
+
+
+

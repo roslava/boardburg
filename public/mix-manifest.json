@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/cart.js": "/js/cart.js",
     "/css/app.css": "/css/app.css",
     "/css/cust/search.css": "/css/cust/search.css",
     "/css/cust/footer_to_bottom.css": "/css/cust/footer_to_bottom.css",

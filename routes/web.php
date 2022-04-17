@@ -20,7 +20,9 @@ Route::post('/contact', [ContactUsController::class, 'index'])->name('contact.st
 Route::get('/reload-captcha', [ContactUsController::class, 'reloadCaptcha'])->name('reload-captcha');
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart-render', [CartController::class, 'render'])->name('cart.render');
 Route::get('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
+Route::post('/cart-update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove-from-cart', [CartController::class, 'remove'])->name('remove_from_cart');
 
 Route::get('/cart/confirmation/{product}', [CartController::class, 'confirmation'])->name('cart-confirmation');

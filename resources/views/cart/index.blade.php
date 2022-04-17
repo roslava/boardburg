@@ -1,4 +1,5 @@
 @extends('layouts.base')
+
 @section('header')
     @include('components.header')
 @endsection
@@ -9,43 +10,35 @@
         <div class="bb-cart">
             <h2>Моя корзина</h2>
 
+            <div id="allCardsContainer"></div>
 
-           @foreach($cart as $item)
+            <div class="bb-cart-product__sum-out"></div>
 
-
-            <div class="bb-cart-product">
-                <div class="bb-cart-product-details">
-                    <div class="bb-cart-product__img">
-                        <img style="width: 100px; height: auto" src="{{asset('/storage/uploads/'.$item->attributes['image'])?? ''}}" alt="">
-                    </div>
-                    <div class="bb-cart-product__info">
-                        <div class="bb-cart-product__description">
-                            <div class="bb-cart-product__title">
-                                {{$item->name}}
-                            </div>
-                        </div>
-                        <div class="bb-cart-product__price">
-                            <div>{{$item->price}} руб.</div>
-                            <div class="bb-cart-product__price-count">
-                                <div class="bb-cart-product__price-count-btn bb-cart-product__price-count-btn_left bb-cart-plus">+ </div>
-                                <input id="bb-cart-quantity-input" class="bb-cart-product__product-input" value="{{$item->quantity}}" type="number"  min="1" max="100">
-                                 <div class="bb-cart-product__price-count-btn bb-cart-product__price-count-btn_right bb-cart-minus">-</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bb-cart-product__receiving">Где и как вы хотите получить заказ?</div>
-            </div>
-                <form action="{{ route('remove_from_cart') }}" method="POST">
-                    @csrf
-                    <input type="hidden" value="{{ $item->id }}" name="id">
-                    <button class="px-4 py-2 text-white bg-red-600">Удалить товар из корзины</button>
-                </form>
-            @endforeach
-
-Цена всех покупок: {{$sum}}
         </div>
     </div>
+
+
+    @push('scripts')
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                $(function () {
+                    let cart_gl = new ShoppingCartBB(
+                        "{{ route('cart.index')}}",
+                        "{{ route('cart.render')}}",
+                        "{{ route('add_to_cart')}}",
+                        "{{ route('cart.update')}}",
+                        "{{route('remove_from_cart')}}",
+                        "{{asset('/storage/uploads')}}",
+                        "{{csrf_token()}}"
+                    );
+
+                    cart_gl.showTotalQuantity('{{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}')
+                    cart_gl.addProductToCart()
+                    cart_gl.cartRender();
+                })
+            })
+        </script>
+    @endpush
 
 @endsection
 @section('footer')
@@ -53,11 +46,16 @@
 @endsection
 
 
+
+
+
+
 <style>
     .bb-cart-product {
         display: flex;
         flex-direction: column;
-        border: solid red 1px;
+        background-color: #ffe3e5;
+        margin-bottom: 20px;
     }
 
     .bb-cart-product-details {
@@ -69,28 +67,41 @@
     .bb-cart-product__description {
         display: flex;
         flex: 1 1 auto;
+        background-color: #ab2836;
     }
 
     .bb-cart-product__title {
         font-size: 20px;
     }
 
-    .bb-cart-product__img {
+    .bb-cart-product__img-holder {
         border: solid #214cda 2px;
+    }
+
+    .bb-cart-product__img {
+        width: 100px;
+        height: auto
     }
 
     .bb-cart-product__info {
         border: solid #7421da 2px;
         display: flex;
         flex: 1 1 auto;
+        background-color: #9525e1;
     }
 
-    .bb-cart-product__receiving {
+
+    .bb-cart-product__price-value {
+        font-size: 20px;
+    }
+
+    .bb-cart-product__footer {
         border: solid #d3b84e 2px;
     }
 
     .bb-cart-product__price-count {
         display: flex;
+        background-color: #58c963;
     }
 
     .bb-cart-product__price-count-btn {
@@ -129,6 +140,7 @@
         border-left: 0;
         border-right: 0;
     }
+
     input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
@@ -140,25 +152,3 @@
         -moz-appearance: textfield;
     }
 </style>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function(){
-        $('.bb-cart-product__product-input').prop('disabled', true);
-        $(document).on('click','.bb-cart-plus',function(){
-            $('.bb-cart-product__product-input').val(parseInt($('.bb-cart-product__product-input').val()) + 1 );
-        });
-        $(document).on('click','.bb-cart-minus',function(){
-            $('.bb-cart-product__product-input').val(parseInt($('.bb-cart-product__product-input').val()) - 1 );
-            if ($('.bb-cart-product__product-input').val() == 0) {
-                $('.bb-cart-product__product-input').val(1);
-            }
-        });
-    });
-</script>
-
-
-
-

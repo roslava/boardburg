@@ -32,13 +32,13 @@
     </footer>
 </div>
 
-
+@include('components.shopping_cart.cart_add_confirm_modal')
 
 
 
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
-
+<script src="/js/app.js"></script>
 @yield('fp_scripts')
 </body>
 </html>

@@ -22,6 +22,14 @@
                     <h1 class="mt-4 bb-product-title">{{$productFromBase['name'] ?? '0'}}</h1>
                     <p>{{$productFromBase['description'] ?? '0'}}</p>
                     <h4 style="color: rgb(30,152,95)"> {{$productFromBase['price'] ?? '0'}} руб.</h4>
+
+{{--//в корзину--}}
+                    <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like"><span class="material-icons">favorite</span></div>
+
+                    <div data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn" data-toggle="modal" data-target="#cart_add_confirm_modal"><span class="material-icons">shopping_cart</span></div>
+
+
+
                 </div>
             </div>
             {{--img--}}
@@ -107,3 +115,25 @@
 @section('footer')
     @include('components.footer')
 @endsection
+
+
+@push('scripts')
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            $(function () {
+                let cart_gl = new ShoppingCartBB(
+                    "{{ route('cart.index')}}",
+                    "{{ route('cart.render')}}",
+                    "{{ route('add_to_cart')}}",
+                    "{{ route('cart.update')}}",
+                    "{{route('remove_from_cart')}}",
+                    "{{asset('/storage/uploads')}}",
+                    "{{csrf_token()}}"
+                );
+                cart_gl.showTotalQuantity('{{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}')
+                cart_gl.addProductToCart()
+                cart_gl.removeProductFromCart()
+            })
+        })
+    </script>
+@endpush

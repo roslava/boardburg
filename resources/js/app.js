@@ -1,5 +1,10 @@
 require('./bootstrap');
 
+import ShoppingCartBB from './cart'; // depend on your folder structure & filename
+global.Wizard = ShoppingCartBB; // can be attached to window.ShoppingCartBB
+
+
+
 
 //search container open/close
 let searchContainer = document.querySelectorAll('.bb-search__container'); //контейнер
@@ -92,4 +97,13 @@ bbNavCatalogBtn.forEach(item => {
         bbCatalog.forEach(item =>{item.classList.toggle('bb-catalog_show')})
     })
 })
+
+
+
+
+
+
+
+
+
 

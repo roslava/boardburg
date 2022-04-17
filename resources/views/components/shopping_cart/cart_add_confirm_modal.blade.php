@@ -23,15 +23,14 @@
                     <a href="{{ route('cart.index')}}">Перейти в корзину</a>
 
 
-//подготовка кнопки для удаления без перезагрузки
-                    <button data-this_id="" class="shopping-cart__delete-btn_"> Убрать из корзины</button>
 
 
+                    <form class="shopping-cart__delete-btn-form" method="POST">
 
-
-                    <form action="{{ route('remove_from_cart') }}" method="POST">
                         @csrf
-                        <input class="shopping-cart__delete-btn" type="hidden" value="" name="id">
+                        @method("POST")
+                        <input id="id" class="shopping-cart__delete-btn-hid" type="hidden" value="" name="id" >
+                        <input class="shopping-cart__delete-btn-hid input-window-location" type="hidden" value="" name="window_location" >
                         <button class="px-4 py-2 text-white bg-red-600">Удалить товар из корзины</button>
                     </form>
 
