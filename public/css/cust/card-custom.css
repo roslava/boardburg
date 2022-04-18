@@ -131,6 +131,40 @@
 
 .product-card__shopping_active{}
 
+.bb-price-tag{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    height: 70px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    border-radius: 35px;
+    /*padding: 10px;*/
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    flex-direction: row;
+    padding-left: 25px;
+    padding-right: 22px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top: 20px;
+    margin-left: -6px;
 
+}
 
+.bb-price-tag-price{
+    color: rgb(30,152,95);
+    font-size: 20px;
+    margin-right: 16px;
+
+}
+
+.bb-price-tag-icon-container{
+  min-height: 100%;
+    /*background-color: #bb2d3b;*/
+    display: flex;
+    /*margin-right: 1px;*/
+}
 

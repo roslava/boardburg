@@ -21,13 +21,18 @@
                     </nav>
                     <h1 class="mt-4 bb-product-title">{{$productFromBase['name'] ?? '0'}}</h1>
                     <p>{{$productFromBase['description'] ?? '0'}}</p>
-                    <h4 style="color: rgb(30,152,95)"> {{$productFromBase['price'] ?? '0'}} руб.</h4>
+
+
+                    <div class="bb-price-tag">
+                        <div class="bb-price-tag-price"> {{$productFromBase['price'] ?? '0'}} руб.</div>
+                        <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like bb-price-tag-icon-container"><span class="material-icons">favorite</span></div>
+
+                        <div style="margin-top: 2px" data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn bb-price-tag-icon-container" data-toggle="modal" data-target="#cart_add_confirm_modal"><span class="material-icons">shopping_cart</span></div>
+                    </div>
+
+
 
 {{--//в корзину--}}
-                    <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like"><span class="material-icons">favorite</span></div>
-
-                    <div data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn" data-toggle="modal" data-target="#cart_add_confirm_modal"><span class="material-icons">shopping_cart</span></div>
-
 
 
                 </div>

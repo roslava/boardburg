@@ -23,7 +23,7 @@ class ShoppingCartBB {
         let bbCartProductSumOut = document.querySelectorAll('.bb-cart-product__sum-out');
         if (data > 0){
             bbCartProductSumOut.forEach(item => {
-                item.innerHTML = 'Общая стоимость покупок ' + data + ' руб.'
+                item.innerHTML = 'Общая стоимость покупок: <b> ' + data + ' руб.</b>'
             })
         }
         if (data == 0){
@@ -31,13 +31,7 @@ class ShoppingCartBB {
                 item.innerHTML = 'Ваша корзина пуста.'
             })
         }
-
-
     }
-
-    // showItemQuantity(){
-    //
-    // }
 
     addProductToCart() {
         let btnAddToCartCollection = document.getElementsByClassName('shopping_cart_btn');
@@ -62,7 +56,6 @@ class ShoppingCartBB {
                             let shoppingCartCeleteBtn_ = document.querySelectorAll('.shopping-cart__delete-btn_');
                             shoppingCartCeleteBtn_.forEach(item => {
                                 item.dataset.this_id = id
-                                // console.log('ID:', item.dataset.this_id)
                             })
                         })
                     })
@@ -72,7 +65,6 @@ class ShoppingCartBB {
 
     removeProductFromCart() {
         const ajaxSend = async (formData) => {
-            // await fetch('{{ route('remove_from_cart') }}', {
             await fetch(this.urlRemoveFromCard, {
                 method: 'POST',
                 credentials: "same-origin",
@@ -87,11 +79,10 @@ class ShoppingCartBB {
                 this.showTotalQuantity(data['totalQuantity'])
                 if (document.location.href == this.urlCardIndex) {
                                   this.cartRender()
-
                 }
             })
-
         };
+
         const forms = document.querySelectorAll('.shopping-cart__delete-btn-form');
         forms.forEach(form => {
             form.addEventListener('submit', function (e) {
@@ -103,10 +94,7 @@ class ShoppingCartBB {
         });
     }
 
-
-
     cartUpdate(sign, id, cartProductCounterClass){
-
             fetch(this.urlCartUpdate, {
                 headers: {
                     "Content-Type": "application/json",
@@ -118,7 +106,6 @@ class ShoppingCartBB {
                 credentials: "same-origin",
                 body: JSON.stringify({
                     sign: sign,
-                    // currentQuantity: currentQuantity,
                     id:id
                 })
             })
@@ -126,24 +113,19 @@ class ShoppingCartBB {
                     return data.json()
                 })
                 .then((data) => {
-
                     console.log('ответ от сервера — знак:', data['sign']);
                     console.log('ответ от сервера — количество:', data['itemQuantity']);
                     console.log('ответ от сервера — id:', data['id']);
                     console.log('ответ от сервера — общая цена:', data['priceSum']);
                     this.showTotalQuantity(data['totalQuantity']);
                     this.sowTotalSum(data['sum']);
-                    // console.log(document.getElementsByClassName(cartProductCounterClass))
                     document.getElementsByClassName(cartProductCounterClass)[2].value = data['itemQuantity']
                     document.getElementsByClassName(cartProductCounterClass)[0].innerHTML = data['priceSum'] + ' руб.'
-s
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
     }
-
-
 
 
     cartRender() {
@@ -152,37 +134,27 @@ s
                 return data.json()
             })
             .then(data => {
-
                 this.sowTotalSum(data['sum'])
-
                 this.cartIndex(data['cartItems'], this.csrf_token)
                 this.sowTotalSum('sum')
-
             })
     }
 
 
     cartIndex(cart, csrf_cur) {
-
         let allCardsContainer = document.querySelector('#allCardsContainer')
         if (allCardsContainer.hasChildNodes()) {
             allCardsContainer.innerHTML = '';
         }
         for (let key in cart) {
-
-
             function uniqueClassNameGenerator(){
                 function randomInteger(min, max) {
-                    // получить случайное число от (min-0.5) до (max+0.5)
                     let rand = min - 0.5 + Math.random() * (max - min + 1);
                     return Math.round(rand);
                 }
                 return randomInteger(1, 100) + "_" + cart[key].id;
             }
-
             let cartProductCounterClass = uniqueClassNameGenerator()
-
-
 
             //CREATE bbCartProduct
             let bbCartProduct = document.createElement('div');
@@ -240,23 +212,6 @@ s
             bbCartProductPriceCount.classList.add("bb-cart-product__price-count");
             bbCartProductPrice.append(bbCartProductPriceCount);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             //CREATE bbCartProductPriceCountBtnLeft
             let bbCartProductPriceCountBtnLeft = document.createElement('div');
             bbCartProductPriceCountBtnLeft.dataset.unic_data = cartProductCounterClass;
@@ -291,12 +246,6 @@ s
             }
             bbCartProductPriceCount.append(bbCartProductPriceCountBtnRight);
 
-
-
-
-
-
-
             //CREATE bbCartProductFooter
             let bbCartProductFooter = document.createElement('div');
             bbCartProductFooter.classList.add("bb-cart-product__footer");
@@ -327,39 +276,13 @@ s
             //CREATE shoppingCartDeleteBtn
             let shoppingCartDeleteBtn = document.createElement("button");
             shoppingCartDeleteBtn.classList.add("shopping-cart__delete-btn");
-            let bbCartButtonValue = document.createTextNode('Удлить');
+            let bbCartButtonValue = document.createTextNode('Убрать товар из корзины');
             shoppingCartDeleteBtn.appendChild(bbCartButtonValue);
             shoppingCartDeleteBtnForm.appendChild(shoppingCartDeleteBtn);
 
             this.removeProductFromCart();
-            // this.cartCounter();
-
         }
     }
-    // cartCounter(sign, cartProductCounterClass, id){
-    //     console.log(sign)
-    //     console.log(cartProductCounterClass)
-    //     let currentInput = document.getElementsByClassName(cartProductCounterClass);
-    //     console.log(currentInput);
-    //     // let currentQuantity = currentInput[1].value
-    //     // console.log(currentQuantity);
-    //
-    //     if(sign == '–' ){
-    //         if(currentQuantity >= 1){
-    //             return this.cartUpdate(currentQuantity, id)
-    //             currentInput[1].value = currentInput[1].value - 1
-    //         }else if (currentQuantity === 1)
-    //
-    //             currentInput[1].value = 1
-    //     }
-    //     if(sign == '+'){
-    //         return this.cartUpdate(currentQuantity, id)
-    //         currentInput[1].value = currentInput[1].value + 1
-    //     }
-    //     // console.log(currentQuantity);
-    //
-    // }
-
 }
 
 export default ShoppingCartBB;

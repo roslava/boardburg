@@ -148,6 +148,7 @@
 @endif
 
 @if(session()->has('success_mail_send'))
+
     <script>
         $(document).ready(function () {
             $('#successMailModal').modal('show');

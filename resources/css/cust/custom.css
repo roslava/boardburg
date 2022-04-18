@@ -174,7 +174,8 @@ body.modal-open {
     padding: 6px 12px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    margin: 0px;
+    /*margin: 0px;*/
+
 }
 
 @media (max-width: 1200px) {
@@ -525,7 +526,7 @@ button:focus,
     padding: 20px;
     border-radius: 5px;
     color: #a1907e;
-    background-color: #1a0606;
+    background-color: rgba(206, 206, 206, 0.46);
     margin-top: 1.5rem;
     display: flex;
     flex-direction: row;
@@ -548,3 +549,5 @@ button:focus,
 .intro-bb__format {
     display: inline;
 }
+
+

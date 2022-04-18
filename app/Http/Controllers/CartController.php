@@ -45,8 +45,6 @@ class CartController extends Controller
         } else {
             $isAddedToCartMessage = $this::confirmation(false, $currentProductName);
         }
-
-
         $totalQuantity = $cart::session($sessionId)->getTotalQuantity();
         return compact('cartItem', 'totalQuantity', 'isAddedToCartMessage');
     }
