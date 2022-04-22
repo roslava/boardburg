@@ -64,7 +64,7 @@
 
                 <div class="bb-nav-desc__likes bb-nav-desc__round-icon">
                     <span class="material-icons">favorite</span>
-                    <div class="bb-nav-desc__count-index">15</div>
+                    <div class="bb-nav-desc__count-index bb-like-count-out">likes</div>
                 </div>
 
                 <a style="text-decoration: none" href="{{ route('cart.index')}}"> <div class="bb-nav-desc__shopping-cart bb-nav-desc__round-icon">

@@ -25,9 +25,18 @@
 
                     <div class="bb-price-tag">
                         <div class="bb-price-tag-price"> {{$productFromBase['price'] ?? '0'}} руб.</div>
-                        <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like bb-price-tag-icon-container"><span class="material-icons">favorite</span></div>
+{{--                        <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like bb-price-tag-icon-container"><span class="material-icons">favorite</span></div>--}}
 
-                        <div style="margin-top: 2px" data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn bb-price-tag-icon-container" data-toggle="modal" data-target="#cart_add_confirm_modal"><span class="material-icons">shopping_cart</span></div>
+
+                        <div> <span class="product-card__like-icon-for-out material-icons product-card__like-icon " data-id="{{$productFromBase->id}}">favorite</span></div>
+
+
+                        <div style="margin-top: 2px" data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn bb-price-tag-icon-container shopping_cart_btn" ><span class="material-icons">shopping_cart</span></div>
+
+
+
+
+
                     </div>
 
 
@@ -132,13 +141,52 @@
                     "{{ route('add_to_cart')}}",
                     "{{ route('cart.update')}}",
                     "{{route('remove_from_cart')}}",
+                    "{{route('cart_icons_added')}}",
                     "{{asset('/storage/uploads')}}",
                     "{{csrf_token()}}"
                 );
                 cart_gl.showTotalQuantity('{{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}')
                 cart_gl.addProductToCart()
                 cart_gl.removeProductFromCart()
+                cart_gl.removeProductFromCartByModal()
+
+                let cart_likes = new LikesCartBB(
+                    "{{ route('like_active_icons')}}",
+                    "{{ route('likes_count_show')}}",
+                    "{{ route('like_add')}}",
+                    "{{ route('like_remove')}}");
+
+                cart_likes.likeAdd()
+                cart_likes.likeIndex()
+                cart_likes.likeCountClick()
+
             })
         })
     </script>
 @endpush
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function(){
+        $(".shopping_cart_btn").click(function(){
+            $("#cart_add_confirm_modal").modal('show');
+        });
+    });
+
+    $(document).ready(function(){
+        $("#cart_add_confirm_modal").submit(function(){
+            $("#cart_add_confirm_modal").modal('hide')
+        });
+    });
+
+    $(document).ready(function(){
+        $(".modalCloseConfirm-close-btn").click(function(){
+            $("#cart_add_confirm_modal").modal('hide')
+        });
+    });
+
+</script>
+
+
+

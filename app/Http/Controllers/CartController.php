@@ -72,6 +72,14 @@ class CartController extends Controller
     }
 
 
+    public function cartIconsAdded(\Cart $cart): array
+    {
+        $sessionId = Session::getId();
+        $cartItems = $cart::session($sessionId)->getContent()->pluck('id');
+        return compact('cartItems');
+    }
+
+
     private static function confirmation($isAdded, $currentProductName): array
     {
         if ($isAdded) {

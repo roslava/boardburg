@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProductController;
@@ -19,11 +20,18 @@ Route::get('/', function () {
 Route::post('/contact', [ContactUsController::class, 'index'])->name('contact.store');
 Route::get('/reload-captcha', [ContactUsController::class, 'reloadCaptcha'])->name('reload-captcha');
 
+Route::get('/cart-icons-added', [CartController::class, 'cartIconsAdded'])->name('cart_icons_added');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart-render', [CartController::class, 'render'])->name('cart.render');
 Route::get('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::post('/cart-update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove-from-cart', [CartController::class, 'remove'])->name('remove_from_cart');
+
+
+Route::get('/likes-active-icons', [LikeController::class, 'likeActiveIcons'])->name('like_active_icons');
+Route::get('/likes-count-show', [LikeController::class, 'likesCountShow'])->name('likes_count_show');
+Route::post('/like-add', [LikeController::class, 'addLike'])->name('like_add');
+Route::post('/like-remove', [LikeController::class, 'removeLike'])->name('like_remove');
 
 Route::get('/cart/confirmation/{product}', [CartController::class, 'confirmation'])->name('cart-confirmation');
 Route::get('/products', [ProductController::class, 'index'])->name('products_base.index');//
@@ -48,7 +56,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/registered-users/{id}/edit', [RegisteredUserController::class, 'edit'])->name('registered_user.edit');
     Route::put('/registered-users/{id}', [RegisteredUserController::class, 'update'])->name('registered_user.update');
     Route::delete('/registered-users/{id}', [RegisteredUserController::class, 'destroy'])->name('registered_user.destroy');
-
 });
 
 Route::fallback(function () {

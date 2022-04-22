@@ -28,6 +28,7 @@
                         "{{ route('add_to_cart')}}",
                         "{{ route('cart.update')}}",
                         "{{route('remove_from_cart')}}",
+                        "{{route('cart_icons_added')}}",
                         "{{asset('/storage/uploads')}}",
                         "{{csrf_token()}}"
                     );

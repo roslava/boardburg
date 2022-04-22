@@ -23,9 +23,11 @@
                                  </button>
 {{--                                shopping cart add button--}}
                             </form>
-                                <div data-toggle="modal" data-target="#favourites_modal" class="product-card__like"><span class="material-icons">favorite</span></div>
+                                <div> <span class="product-card__like-icon-for-out material-icons product-card__like-icon " data-id="{{$productFromBase->id}}">favorite</span></div>
 
-                                <div data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn" data-toggle="modal" data-target="#cart_add_confirm_modal"><span class="material-icons">shopping_cart</span></div>
+                               <div><span data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn material-icons ">shopping_cart</span></div>
+
+
 
                            </div>
                             <div class="bb-product-card-price">{{$productFromBase->price}} <span class="rub">c</span>
@@ -81,3 +83,7 @@
 
 @endsection
 @yield('product_card')
+
+
+
+

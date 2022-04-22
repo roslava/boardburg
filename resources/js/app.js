@@ -3,6 +3,9 @@ require('./bootstrap');
 import ShoppingCartBB from './cart'; // depend on your folder structure & filename
 global.Wizard = ShoppingCartBB; // can be attached to window.ShoppingCartBB
 
+import LikesCartBB from './likes'; // depend on your folder structure & filename
+global.Wizard = LikesCartBB; // can be attached to window.LikesCartBB
+
 
 
 
@@ -97,13 +100,6 @@ bbNavCatalogBtn.forEach(item => {
         bbCatalog.forEach(item =>{item.classList.toggle('bb-catalog_show')})
     })
 })
-
-
-
-
-
-
-
 
 
 
