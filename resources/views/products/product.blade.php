@@ -31,9 +31,9 @@
                         <div> <span class="product-card__like-icon-for-out material-icons product-card__like-icon " data-id="{{$productFromBase->id}}">favorite</span></div>
 
 
-                        <div style="margin-top: 2px" data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn bb-price-tag-icon-container shopping_cart_btn" ><span class="material-icons">shopping_cart</span></div>
+{{--                        <div style="margin-top: 2px" data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn bb-price-tag-icon-container shopping_cart_btn" ><span class="material-icons">shopping_cart</span></div>--}}
 
-
+                        <div><span data-id="{{$productFromBase->id}}" class="product-card__shopping-cart shopping_cart_btn material-icons ">shopping_cart</span></div>
 
 
 
@@ -148,7 +148,7 @@
                 cart_gl.showTotalQuantity('{{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}')
                 cart_gl.addProductToCart()
                 cart_gl.removeProductFromCart()
-                cart_gl.removeProductFromCartByModal()
+                cart_gl.removeProductByCartByModal()
 
                 let cart_likes = new LikesCartBB(
                     "{{ route('like_active_icons')}}",
