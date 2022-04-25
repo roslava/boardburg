@@ -42,3 +42,4 @@
 @yield('fp_scripts')
 </body>
 </html>
+

@@ -6,14 +6,17 @@
                 </ul>
             </div>
             <div id="itemsInCategory">
-                <ul></ul>
+                <ul>
+
+
+                </ul>
             </div>
             <div id="category_img"></div>
         </div>
     </div>
+    <div class="catalog_back_drop"></div>
 @endsection
 @yield('bb-catalog')
-
 
 
 <style>
@@ -21,7 +24,8 @@
         display: none;
     }
 
-    .catalog-categories {}
+    .catalog-categories {
+    }
 
     .bb-catalog_show {
         padding-top: 30px;
@@ -82,7 +86,7 @@
         padding-left: 0px;
         justify-content: stretch;
         min-width: 100%;
-     }
+    }
 
     .categories-list-item {
         list-style-type: none;
@@ -149,7 +153,7 @@
         height: 31px;
 
         display: flex;
-       justify-content: start;
+        justify-content: start;
         flex-direction: column;
     }
 
@@ -169,6 +173,22 @@
         margin-left: -10px;
     }
 
+
+    .catalog_back_drop {
+        /*display: none;*/
+        display: block;
+    }
+
+    .catalog_back_drop_show {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(171, 40, 54, 0.01);
+        cursor: pointer;
+        z-index: 1;
+    }
+
 </style>
 
 <script>
@@ -180,13 +200,18 @@
                     type: 'GET',
                     url: '/catalog',
                     success: function (data) {
-                        $result = ''
+                        let result = ''
                         $.each(data['cat'], function (index, value) {
-                            $("#catalog-categories ul").html($result += `<li data-cat_=${value.category_name_en} class="categories-list-item"> <a href="#">` + value.category_name_ru + '</a> </li>')
+                            $("#catalog-categories ul").html(result += `<li data-cat_=${value['category_name_en']} class="categories-list-item categories-list-item-fetch"> <a href="#">` + value.category_name_ru + '</a> </li>')
                         });
-                        document.querySelectorAll('.categories-list-item').forEach((item) => {
+                        $("#catalog-categories ul").html(result += '<li class="categories-list-item categories-list-item-all"><a href="/">Все товры</a></li>')
+                        document.querySelectorAll('.categories-list-item-fetch').forEach((item) => {
                             item.addEventListener('mouseenter', function () {
                                 fetchCategoryItems(item.dataset.cat_)
+                                let empty = document.querySelector('.categories-list-item-all')
+                                empty.addEventListener('mouseenter', function () {
+                                    document.querySelector('#itemsInCategory ul').innerHTML = ''
+                                })
                             })
                         })
                     }
@@ -202,7 +227,7 @@
                         $.each(data['products'], function (index, value) {
                             $("#itemsInCategory ul").html($result += `<li><a data-current_img = ${value.img} class="products-list-item" href="/products/` + value.id + '">' + value.name + '</a></li>');
                             document.querySelectorAll('.products-list-item').forEach((item) => {
-                                  item.addEventListener('mouseenter', function () {
+                                item.addEventListener('mouseenter', function () {
                                     $('#category_img').css('display', 'flex');
                                     $('#category_img').html('<img style="width: 200px" src="/storage/uploads/' + item.dataset.current_img + '" alt=""/>');
                                 })

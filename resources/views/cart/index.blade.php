@@ -18,9 +18,17 @@
     </div>
 
 
+
+
+
+
+
+
+
+
     @push('scripts')
         <script>
-            window.addEventListener('DOMContentLoaded', (event) => {
+            window.addEventListener('DOMContentLoaded', () => {
                 $(function () {
                     let cart_gl = new ShoppingCartBB(
                         "{{ route('cart.index')}}",
@@ -35,11 +43,34 @@
 
                     cart_gl.showTotalQuantity('{{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}')
                     cart_gl.addProductToCart()
+                    cart_gl.removeProductFromCart()
+                    // cart_gl.removeProductByCartByModal()
+                    cart_gl.cartIconsAdded()
                     cart_gl.cartRender();
+
+                    let cart_likes = new LikesCartBB(
+                        "{{ route('like_active_icons')}}",
+                        "{{ route('likes_count_show')}}",
+                        "{{ route('like_add')}}",
+                        "{{ route('like_remove')}}");
+
+                    cart_likes.likeAdd()
+                    cart_likes.likeIndex()
+                    cart_likes.likeCountClick()
+
                 })
             })
         </script>
     @endpush
+
+
+
+
+
+
+
+
+
 
 @endsection
 @section('footer')

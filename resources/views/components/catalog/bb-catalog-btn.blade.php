@@ -1,6 +1,6 @@
 @section('bb-catalog-btn')
     <div class="bb-catalog-btn">
-       <span class="bb-catalog-btn_text">Каталог</span>
+        <span class="bb-catalog-btn_text">Каталог</span>
     </div>
 @endsection
 @yield('bb-catalog-btn')
@@ -50,12 +50,12 @@
         margin-right: 4px;
     }
 
-      .bb-catalog-btn_text{
+    .bb-catalog-btn_text {
         display: inline;
     }
 
     @media (max-width: 991px) {
-        .bb-catalog-btn_text{
+        .bb-catalog-btn_text {
             display: none;
         }
 

@@ -4,9 +4,11 @@
         <div class="bb-nav-mob__header">
             <div class="bb-nav-mob__header-item">
                 {{-- container-item 1--}}
-                <div class="bb-nav-mob__logo">
-                    <img src="{{ asset('img/boardburg_logo_w.svg') }}" alt="">
-                </div>
+                <a class="navbar-brand" id="bb-top-logo" href="{{ url('/') }}">
+                    <div class="bb-nav-desc__logo">
+                        <img src="{{ asset('img/boardburg_logo_w.svg') }}" alt="">
+                    </div>
+                </a>
                 @include('components.catalog.bb-catalog-btn')
             </div>
 
@@ -72,14 +74,18 @@
                         </div>
                     </div>
                 @endguest
-                <div class="bb-nav-mob__likes bb-nav-mob__round-icon">
+                <div class="bb-nav-desc__likes bb-nav-desc__round-icon">
                     <span class="material-icons">favorite</span>
-                    <div class="bb-nav-mob__count-index">15</div>
+                    <div class="bb-nav-desc__count-index bb-like-count-out">likes</div>
                 </div>
-                <div class="bb-nav-mob__shopping-cart bb-nav-mob__round-icon">
-                    <span class="material-icons">shopping_cart</span>
-                    <div class="bb-nav-mob__count-index">2</div>
-                </div>
+
+                <a style="text-decoration: none" href="{{ route('cart.index')}}"> <div class="bb-nav-desc__shopping-cart bb-nav-desc__round-icon">
+                        <span class="material-icons">shopping_cart</span>
+                        <div class="bb-nav-desc__count-index bb-cart-count">
+                            {{\Cart::session(\Illuminate\Support\Facades\Session::getId())->getTotalQuantity()}}
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
      </div>
