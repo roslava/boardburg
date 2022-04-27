@@ -91,7 +91,7 @@ class LikesCartBB {
             .then(data => {
                 let likeCountOuts = document.querySelectorAll('.bb-like-count-out')
                 likeCountOuts.forEach(item => {
-                    item.innerHTML = data['likesCount'];
+                    item.innerHTML = data['likesQuantity'];
                 })
             })
     }

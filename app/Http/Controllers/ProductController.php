@@ -34,6 +34,7 @@ class ProductController extends Controller
         }
 
         $quantity = $productFromBase->count();
+
         $productsFromBase = $productFromBase->paginate(8);
         $session::put('lastPageIs', $productsFromBase->lastPage());
 

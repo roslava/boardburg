@@ -23,15 +23,16 @@ Route::get('/reload-captcha', [ContactUsController::class, 'reloadCaptcha'])->na
 Route::get('/cart-icons-added', [CartController::class, 'cartIconsAdded'])->name('cart_icons_added');
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart-render', [CartController::class, 'render'])->name('cart.render');
-Route::get('/add-to-cart', [CartController::class, 'addToCart'])->name('add_to_cart');
+Route::get('/cart-add', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::post('/cart-update', [CartController::class, 'update'])->name('cart.update');
 Route::post('/remove-from-cart', [CartController::class, 'remove'])->name('remove_from_cart');
 
 
-Route::get('/likes-active-icons', [LikeController::class, 'likeActiveIcons'])->name('like_active_icons');
-Route::get('/likes-count-show', [LikeController::class, 'likesCountShow'])->name('likes_count_show');
-Route::post('/like-add', [LikeController::class, 'addLike'])->name('like_add');
-Route::post('/like-remove', [LikeController::class, 'removeLike'])->name('like_remove');
+Route::get('/likes-index', [LikeController::class, 'index'])->name('likes.index');
+Route::get('/likes-active-icons', [LikeController::class, 'activeIcons'])->name('like_active_icons');
+Route::get('/likes-count-show', [LikeController::class, 'quantity'])->name('likes_count_show');
+Route::post('/like-add', [LikeController::class, 'add'])->name('like_add');
+Route::post('/like-remove', [LikeController::class, 'remove'])->name('like_remove');
 
 Route::get('/cart/confirmation/{product}', [CartController::class, 'confirmation'])->name('cart-confirmation');
 Route::get('/products', [ProductController::class, 'index'])->name('products_base.index');//

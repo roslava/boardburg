@@ -2,14 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class LikeController extends Controller
 {
 
 
- public function likeActiveIcons(Session $session){
+
+public function index(Session $session, Product $product){
+    $products = $product::all()->toArray();
+    $likes = $session::get('likesQuantity');
+$likedProducts=[];
+    foreach ($products as $product){
+
+        foreach ($likes as $like){
+            if ($like == $product['id']){
+                $likedProducts[] = (object) $product;
+            }
+        }
+    }
+
+    $quantity = count($likedProducts);
+    $productsFromBase = collect($likedProducts)->paginate(8);
+
+    if ($quantity>0){
+        return view('home', compact('productsFromBase', 'quantity'));
+    }
+    return redirect()->back();
+
+}
+
+
+ public function activeIcons(Session $session){
       if (empty($session::get('likesQuantity'))) {
          $likes = 1;
          return compact('likes');
@@ -18,13 +47,14 @@ class LikeController extends Controller
      return compact('likes' );
 }
 
-public function likesCountShow(Session $session){
+public function quantity(Session $session): array
+{
     $likes = $session::get('likesQuantity');
-    $likesCount = count($likes);
-    return compact('likesCount' );
+    $likesQuantity = count($likes);
+    return compact('likesQuantity' );
 }
 
-    public function addLike(Request $request){
+    public function add(Request $request){
         $id = $request->get('id');
         $likes = Session::get('likesQuantity');
         $isLike = $request->get('isLike');
@@ -34,7 +64,7 @@ public function likesCountShow(Session $session){
         return compact('id', 'isLike', 'likes');
     }
 
-    public function removeLike(Request $request){
+    public function remove(Request $request){
         $id = $request->get('id');
         $isLike = $request->get('isLike');
 
